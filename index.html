@@ -260,136 +260,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/27/%E5%AD%A6%E4%B9%A0%E6%AD%A5%E9%AA%A4/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="King">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="King">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/27/%E5%AD%A6%E4%B9%A0%E6%AD%A5%E9%AA%A4/" itemprop="url">学习步骤</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-27T18:22:33+08:00">
-                2020-04-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>阶段一：认知了解阶段（第一印象很重要）<br>1.该技术的概念和方向<br>2.该技术解决了什么问题<br>3.同类技术有哪些<br>4.该技术的主要组成部分<br>5.该技术为什么出现</p>
-<p>阶段二：学习语法，用法<br>途径进阶1.视频教程（效率低）<br>2.快速上手视频<br>3.入门博客<br>4.权威书籍，官方文档<br>阶段三：局部练习，小型实战，搭建环境（记录总结，写博客写博客写博客！！！）</p>
-<p>阶段四：上手实际项目或开源项目（先打牢基础）</p>
-<p>阶段五：（终极目标）造轮子，撸源码[微笑]</p>
-<p>搞懂一个开源项目的几个步骤</p>
-<ol>
-<li>了解本项目是干什么的，有没有兴趣学习，有哪些技术点（可以提前拆分了解）</li>
-<li>很重要的一步，把项目跑起来</li>
-<li>阅读项目源码并调试（可以结合某个运行起来的功能入手，一个组件一个组件弄熟，看报错、看日志、看打印变量）</li>
-<li>自己会改东西，加自己的功能模块</li>
-</ol>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/mysql/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -460,16 +330,138 @@
 
       
         
-          
-            <h1 id="mysql"><a href="#mysql" class="headerlink" title="mysql"></a>mysql</h1><h2 id="1-查看库的信息"><a href="#1-查看库的信息" class="headerlink" title="1. 查看库的信息"></a>1. 查看库的信息</h2><figure class="highlight plain"><figcaption><span>database databaseName```创建一个数据库</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line">&#96;&#96;&#96;user databaseName&#96;&#96;&#96;使用某个数据库</span><br><span class="line">&#96;&#96;&#96;show columns from tableName&#96;&#96;&#96;和&#96;&#96;&#96;desc tableName&#96;&#96;&#96;的作用都是查看表结构</span><br><span class="line">&#96;&#96;&#96;show status&#96;&#96;&#96;用于显示广泛的服务器状态信息</span><br><span class="line">&#96;&#96;&#96;show create database&#x2F;table databaseName&#x2F;tableName&#96;&#96;&#96;分别用来显示创建特定数据库或表的mysql语句</span><br><span class="line">&#96;&#96;&#96;show grants&#96;&#96;&#96;用来显示授权用户(所有用户或特定用户)的安全权限</span><br><span class="line">&#96;&#96;&#96;show errors&#x2F;warnings&#96;&#96;&#96;用来显示服务器错误或警告消息</span><br><span class="line">&#96;&#96;&#96;SELECT DISTINCT CONCAT(&#39;User: &#39;&#39;&#39;,user,&#39;&#39;&#39;@&#39;&#39;&#39;,host,&#39;&#39;&#39;;&#39;) AS query FROM mysql.user&#96;&#96;&#96;查看所有的用户对象</span><br><span class="line">&#96;&#96;&#96; show grants for &#39;root&#39;@&#39;localhost&#39;&#96;&#96;&#96;查看某一用户的权限</span><br><span class="line"></span><br><span class="line">## 2. 检索数据语法</span><br><span class="line">&#96;&#96;&#96;select *&#x2F;[columnName1,columnName2..] from tableName&#96;&#96;&#96;这是最简单的查询语句，无排序的，按照插入的顺序进行排序的数据</span><br><span class="line">&#96;&#96;&#96;distinct&#96;&#96;&#96;关键字用以去除相同的值，这个关键字必须放在列名的最前面</span><br><span class="line">&#96;&#96;&#96;select distinct username from user&#96;&#96;&#96;就是将user表中找到的所有username的重复值删去</span><br><span class="line">&#96;&#96;&#96;limit number&#96;&#96;&#96;限制显示的行数</span><br><span class="line">&#96;&#96;&#96;limit number1,number2 或 limit number2 offset number1&#96;&#96;&#96;显示从number1开始的number2行，number1默认0开始</span><br><span class="line">&#96;&#96;&#96;select tableName.columnName from tableName&#96;&#96;&#96;可以使用全限定名</span><br><span class="line"></span><br><span class="line">## 3. 对数据进行排序</span><br><span class="line">&#96;&#96;&#96;order by&#96;&#96;&#96;选择一个或者多个列，进行排序</span><br><span class="line">&#96;&#96;&#96;desc&#96;&#96;&#96;使用改关键字实现降序，一个desc只对其前面的关键字有效，若多列都想实现降序，每个排序的列后都需要添加desc关键字</span><br><span class="line"></span><br><span class="line">## 4.数据的过滤</span><br><span class="line">&#96;&#96;&#96;where&#96;&#96;&#96;我们在使用where时在from之后在order by之前</span><br><span class="line">&#96;&#96;&#96;&lt;&gt; !&#x3D; &#x3D; &lt; &gt; &lt;&#x3D; &gt;&#x3D; between&#96;&#96;&#96;这是where中所有的条件操作符</span><br><span class="line">&#96;&#96;&#96;where columnName is null&#96;&#96;&#96;在使用空值查询的时候使用的是is</span><br><span class="line">&#96;&#96;&#96;column1 &lt; 100 and&#x2F;or column2 &gt;200&#96;&#96;&#96;使用and或or进行组合查询，但是在大量的and和or操作组合的场景中，优先处理and关键字，为了避免出现预期之外的组合，建议使用圆括号对条件进行组合</span><br><span class="line">&#96;&#96;&#96;in&#96;&#96;&#96;在使用in关键字的时候非常灵活，执行的速度快于or，并且还可以进行子查询</span><br><span class="line">&#96;&#96;&#96;not&#96;&#96;&#96;否定后面条件的关键字</span><br><span class="line"></span><br><span class="line">### 4.1使用通配符过滤</span><br><span class="line">&#96;&#96;&#96;name like &#39;A%&#39;&#96;&#96;&#96;意味以A开头的所有名字，有一点需要注意的是&#39;%&#39;不能用于匹配null</span><br><span class="line">&#96;&#96;&#96;name like &#39;_A%&#39;&#96;&#96;&#96;&#96;&#96;&#96;_&#96;&#96;&#96;这个通配符标识一个位子，即第二位为A的所有名字</span><br><span class="line">有一点需要注意的是通配符在搜索的时候性能是会降低的，实际中可以不使用通配符尽量减少使用</span><br><span class="line"></span><br><span class="line">### 4.2正则表达式的使用</span><br><span class="line">正则表达式的作用是将正则表达式和文本串进行比较</span><br><span class="line">&#96;&#96;&#96;selecct columnName from tableName where columnName regexp &#39;正则表达式&#39;&#96;&#96;&#96;使用关键字 regexp，正常情况下是不区分大小写的可以使用&#96;&#96;&#96;regexp binary&#96;&#96;&#96;进行区分大小写</span><br><span class="line">&#96;&#96;&#96;&#39;number1|number2&#39;&#96;&#96;&#96;正则中使用or进行匹配的方式</span><br><span class="line">&#96;&#96;&#96;[123] Ton&#96;&#96;&#96;[]中的内容是或的意思，只取其中的一个字符，就是匹配1 Ton、2 Ton和3 Ton</span><br><span class="line">&#96;&#96;&#96;.&#96;&#96;&#96;是匹配任意值</span><br><span class="line">在正则表达式中特殊的字符可以用&#96;&#96;&#96;\\&#96;&#96;&#96;来进行表示</span><br><span class="line">&#96;&#96;&#96;\\f 换页、\\n 换行、\\r 回车、\\t 制表、\\v 纵向制表</span><br></pre></td></tr></table></figure>
-<p>还可以匹配字符类<code>[:alnum:]</code>等等</p>
-<h2 id="5-数据拼接"><a href="#5-数据拼接" class="headerlink" title="5.数据拼接"></a>5.数据拼接</h2><p><code>select concat(username,&#39;(&#39;,sex,&#39;)&#39;) as look from user</code>可以对自己想要查询的数据进行拼接<br>在mysql中也可以直接使用计算</p>
-<h2 id="6-函数"><a href="#6-函数" class="headerlink" title="6.函数"></a>6.函数</h2><h3 id="6-1文本处理函数"><a href="#6-1文本处理函数" class="headerlink" title="6.1文本处理函数"></a>6.1文本处理函数</h3><p><code>rtrim()</code>去除串尾空格<br><code>upper()</code>将文本转换为大写<br><code>left()</code>返回串左边的字符<br><code>length()</code>返回串的长度<br><code>locate()</code>找出串的一个子串<br><code>lower()</code>将串转换为小写<br><code>ltrim()</code>去掉串左边的空格<br><code>right()</code>返回串右边的字符<br><code>soundex()</code>返回串的soundex值<br><code>substring()</code>返回字串的字符</p>
-<h3 id="6-2日期和时间处理函数"><a href="#6-2日期和时间处理函数" class="headerlink" title="6.2日期和时间处理函数"></a>6.2日期和时间处理函数</h3><p><code>AddDate()</code>增加一个日期（天、周等）<br><code>AddTime ()</code>增加一个时间（时、分等）<br><code>CurDate ()</code>返回当前日期<br><code>CurTime ()</code>返回当前时间<br><code>Date()</code>返回日期时间的日期部分<br><code>DateDiff()</code>计算两个日期之差<br><code>Date_Add()</code>高度灵活的日期运算函数<br><code>Date_Format()</code>返回一个格式化的日期或时间串<br><code>Day()</code>返回一个日期的天数部分<br><code>DayOfWeek()</code>对于一个日期，返回对应的星期几<br><code>Hour()</code>返回一个时间的小时部分<br><code>Minute()</code>返回一个时间的分钟部分<br><code>Month()</code>返回一个日期的月份部分<br><code>Now()</code>返回当前日期和时间<br><code>Second()</code>返回一个时间的秒部分<br><code>Time()</code>返回一个日期时间的时间部分<br><code>Year()</code>返回一个日期的年份部分</p>
-<h3 id="6-3数值处理函数"><a href="#6-3数值处理函数" class="headerlink" title="6.3数值处理函数"></a>6.3数值处理函数</h3><p><code>Abs()</code>返回一个数的绝对值<br><code>Cos()</code>返回一个角度的余弦<br><code>Exp()</code>返回一个数的指数值<br><code>Mod()</code>返回除操作的余数<br><code>Pi()</code>返回圆周率<br><code>Rand()</code>返回一个随机数<br><code>sin()</code>返回一个角度的正弦<br><code>Sqrt()</code>返回一个数的平方根<br><code>Tan()</code>返回一个角度的正切</p>
-<h3 id="6-4聚集函数"><a href="#6-4聚集函数" class="headerlink" title="6.4聚集函数"></a>6.4聚集函数</h3><p><code>avg()</code>返回某列的平均值<br><code>count()</code>返回某列的行数<br><code>max()</code>返回某列的最大值<br><code>min()</code>返回某列的最小值<br><code>sum()</code>返回某列值之和<br><code>distinct</code>在计算值的时候使用distinct是使用不同的值</p>
+          <h1 id="mysql-语法"><a href="#mysql-语法" class="headerlink" title="mysql 语法"></a>mysql 语法</h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/25/mysql/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/25/%E5%AD%A6%E4%B9%A0%E6%AD%A5%E9%AA%A4/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="King">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/25/%E5%AD%A6%E4%B9%A0%E6%AD%A5%E9%AA%A4/" itemprop="url">learnStep</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-25T00:00:00+08:00">
+                2020-04-25
+              </time>
+            
+
+            
+
+            
+          </span>
 
           
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="学习步骤"><a href="#学习步骤" class="headerlink" title="学习步骤"></a>学习步骤</h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/25/%E5%AD%A6%E4%B9%A0%E6%AD%A5%E9%AA%A4/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
         
       
     </div>
@@ -590,6 +582,130 @@
           <!--noindex-->
           <div class="post-button text-center">
             <a class="btn" href="/2020/04/10/spring-1.spring%E6%A6%82%E8%BF%B0/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/uml-2.uml%E8%AF%A6%E8%A7%A3--%E9%9D%99%E6%80%81%E5%BB%BA%E6%A8%A1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="King">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/uploads/me.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="King">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2020/04/09/uml-2.uml%E8%AF%A6%E8%A7%A3--%E9%9D%99%E6%80%81%E5%BB%BA%E6%A8%A1/" itemprop="url">uml篇-2.uml详解--静态建模</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">
+                2020-04-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h1 id="UMl篇-2-uml详解–静态建模"><a href="#UMl篇-2-uml详解–静态建模" class="headerlink" title="UMl篇-2.uml详解–静态建模"></a>UMl篇-2.uml详解–静态建模</h1>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/2020/04/09/uml-2.uml%E8%AF%A6%E8%A7%A3--%E9%9D%99%E6%80%81%E5%BB%BA%E6%A8%A1/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -888,130 +1004,6 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/09/uml-2.uml%E8%AF%A6%E8%A7%A3--%E9%9D%99%E6%80%81%E5%BB%BA%E6%A8%A1/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="King">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/uploads/me.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="King">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2020/04/09/uml-2.uml%E8%AF%A6%E8%A7%A3--%E9%9D%99%E6%80%81%E5%BB%BA%E6%A8%A1/" itemprop="url">uml篇-2.uml详解--静态建模</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-04-09T00:00:00+08:00">
-                2020-04-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h1 id="UMl篇-2-uml详解–静态建模"><a href="#UMl篇-2-uml详解–静态建模" class="headerlink" title="UMl篇-2.uml详解–静态建模"></a>UMl篇-2.uml详解–静态建模</h1>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2020/04/09/uml-2.uml%E8%AF%A6%E8%A7%A3--%E9%9D%99%E6%80%81%E5%BB%BA%E6%A8%A1/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/08/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1186,7 +1178,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-count">5</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
