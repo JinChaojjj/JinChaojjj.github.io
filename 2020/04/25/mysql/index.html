@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="King">
 <meta property="og:description" content="mysql 语法">
 <meta property="article:published_time" content="2020-04-24T16:00:00.000Z">
-<meta property="article:modified_time" content="2020-04-30T03:27:54.618Z">
+<meta property="article:modified_time" content="2020-04-30T05:30:39.571Z">
 <meta property="article:author" content="King">
 <meta property="article:tag" content="mysql">
 <meta name="twitter:card" content="summary">
@@ -352,7 +352,8 @@
 <h3 id="联结"><a href="#联结" class="headerlink" title="联结"></a>联结</h3><p><code>table1,table2</code>这种联结的结果是返回笛卡儿积集<br>可以使用where语句进行限定<br><code>inner join,left join,right join,nature join</code>这四种join在使用的过程中可以通过<code>on</code>关键字进行限定，大多数情况下自然连接(nature join)数据库是未实现的，需要我们自己动手将重复的列去除</p>
 <p>内部联结<br>    内连接（等值连接）<br>    自然连接（特殊的内连接：去除进行比值的同一列）<br>外部联结（在使用外部连接的时候必须具有on语句）<br>    左外连接：右侧的表中的值可以为空<br>    右外连接：左侧的表中的值可以为空</p>
 <h2 id="9-组合查询"><a href="#9-组合查询" class="headerlink" title="9.组合查询"></a>9.组合查询</h2><p><code>union</code>在两个查询中间加上一个union<br>union连接的两个查询需要具有相同的列、表达式或聚集函数<br>union会自动删除重复的行<br>可以使用<code>union all</code>将所有的行（包含重复的）输出<br>在使用组合查询的语句中order by语句只能出现在最后一个查询语句中使得排序统一</p>
-<h2 id="10-全文本搜索"><a href="#10-全文本搜索" class="headerlink" title="10.全文本搜索"></a>10.全文本搜索</h2>
+<h2 id="10-全文本搜索"><a href="#10-全文本搜索" class="headerlink" title="10.全文本搜索"></a>10.全文本搜索</h2><p>在创建的表的时候添加<code>fulltext(columnName)</code>就可以为指定的列开启全文搜索</p>
+
       
     </div>
     
