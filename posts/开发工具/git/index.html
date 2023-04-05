@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Git | King&#39;s Blog</title>
+<meta name="keywords" content="Git">
+<meta name="description" content="Git">
+<meta name="author" content="King">
+<link rel="canonical" href="https://jinchaojjj.github.io/posts/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="apple-touch-icon" href="https://jinchaojjj.github.io/Q.gif">
+<link rel="mask-icon" href="https://jinchaojjj.github.io/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Git" />
+<meta property="og:description" content="Git" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinchaojjj.github.io/posts/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-05T00:18:23+08:00" />
+<meta property="article:modified_time" content="2023-04-05T00:18:23+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Git"/>
+<meta name="twitter:description" content="Git"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "https://jinchaojjj.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "Git",
+      "item": "https://jinchaojjj.github.io/posts/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Git",
+  "name": "Git",
+  "description": "Git",
+  "keywords": [
+    "Git"
+  ],
+  "articleBody": "git 1. Git 的三种状态 Git 有三种状态，你的文件可能处于其中之一：\n已提交（committed）：数据已经安全的保存在本地数据库中。 已修改（modified）：已修改表示修改了文件，但还没保存到数据库中。 已暂存（staged）：表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。 由此引入 Git 项目的三个工作区域的概念：Git 仓库(.git directory)、工作目录(Working Directory) 以及 暂存区域(Staging Area) 。\n基本的 Git 工作流程如下：\n在工作目录中修改文件。 暂存文件，将文件的快照放入暂存区域。 提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。 2. 获取 Git 仓库 有两种取得 Git 项目仓库的方法。\n在现有目录中初始化仓库: 进入项目目录运行 git init 命令,该命令将创建一个名为 .git 的子目录。 从一个服务器克隆一个现有的 Git 仓库: git clone [url] 自定义本地仓库的名字: git clone [url] directoryname 3. 记录每次更新到仓库 检测当前文件状态 : git status 提出更改（把它们添加到暂存区）：git add filename (针对特定文件)、git add *(所有文件)、git add *.txt（支持通配符，所有 .txt 文件） 忽略文件：.gitignore 文件 提交更新: git commit -m \"代码提交信息\" （每次准备提交前，先用 git status 看下，是不是都已暂存起来了， 然后再运行提交命令 git commit） 跳过使用暂存区域更新的方式 : git commit -a -m \"代码提交信息\"。 git commit 加上 -a 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 git add 步骤。 移除文件 ：git rm filename （从暂存区域移除，然后提交。） 对文件重命名 ：git mv README.md README(这个命令相当于mv README.md README、git rm README.md、git add README 这三条命令的集合) 4. 一个好的 Git 提交消息 一个好的 Git 提交消息如下：\n1 2 3 4 5 标题行：用这一行来描述和解释你的这次提交 主体部分可以是很少的几行，来加入更多的细节来解释提交，最好是能给出一些相关的背景或者解释这个提交能修复和解决什么问题。 主体部分当然也可以有几段，但是一定要注意换行和句子不要太长。因为这样在使用 \"git log\" 的时候会有缩进比较好看。 提交的标题行描述应该尽量的清晰和尽量的一句话概括。这样就方便相关的 Git 日志查看工具显示和其他人的阅读。\n推送改动到远程仓库 如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加：git remote add origin ,比如我们要让本地的一个仓库和 Github 上创建的一个仓库关联可以这样git remote add origin https://github.com/Snailclimb/test.git\n将这些改动提交到远端仓库：git push origin master (可以把 master 换成你想要推送的任何分支)\n如此你就能够将你的改动推送到所添加的服务器上去了。\n远程仓库的移除与重命名 将 test 重命名为 test1：git remote rename test test1 移除远程仓库 test1:git remote rm test1 查看提交历史 在提交了若干更新，又或者克隆了某个项目之后，你也许想回顾下提交历史。 完成这个任务最简单而又有效的工具是 git log 命令。git log 会按提交时间列出所有的更新，最近的更新排在最上面。\n可以添加一些参数来查看自己希望看到的内容：\n只看某个人的提交记录：\n1 git log --author=bob 撤销操作 有时候我们提交完了才发现漏掉了几个文件没有添加，或者提交信息写错了。 此时，可以运行带有 --amend 选项的提交命令尝试重新提交：\n1 git commit --amend 取消暂存的文件\n1 git reset filename 撤消对文件的修改:\n1 git checkout -- filename 假如你想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，并将你本地主分支指向它：\n1 2 git fetch origin git reset --hard origin/master 分支 分支是用来将特性开发绝缘开来的。在你创建仓库的时候，master 是“默认”的分支。在其他分支上进行开发，完成后再将它们合并到主分支上。\n我们通常在开发新功能、修复一个紧急 bug 等等时候会选择创建分支。单分支开发好还是多分支开发好，还是要看具体场景来说。\n创建一个名字叫做 test 的分支\n1 git branch test 切换当前分支到 test（当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上最后一次提交的样子。 Git 会自动添加、删除、修改文件以确保此时你的工作目录和这个分支最后一次提交时的样子一模一样）\n1 git checkout test 你也可以直接这样创建分支并切换过去(上面两条命令的合写)\n1 git checkout -b feature_x 切换到主分支\n1 git checkout master 合并分支(可能会有冲突)\n1 git merge test 把新建的分支删掉\n1 git branch -d feature_x 将分支推送到远端仓库（推送成功后其他人可见）：\n1 git push origin ",
+  "wordCount" : "1748",
+  "inLanguage": "en",
+  "datePublished": "2023-04-05T00:18:23+08:00",
+  "dateModified": "2023-04-05T00:18:23+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "King"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jinchaojjj.github.io/posts/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "King's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jinchaojjj.github.io/img/Q.gif"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jinchaojjj.github.io" accesskey="h" title="King&#39;s Blog (Alt + H)">
+                <img src="https:/jinchaojjj.github.io/Q.gif" alt="" aria-label="logo"
+                    height="35">King&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jinchaojjj.github.io/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jinchaojjj.github.io">Home</a>&nbsp;»&nbsp;<a href="https://jinchaojjj.github.io/posts/">📚文章</a></div>
+    <h1 class="post-title">
+      Git
+    </h1>
+    <div class="post-description">
+      Git
+    </div>
+    <div class="post-meta"><span title='2023-04-05 00:18:23 +0800 CST'>2023-04-05</span>&nbsp;·&nbsp;4 min&nbsp;·&nbsp;King
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#git" aria-label="git">git</a><ul>
+                        
+                <li>
+                    <a href="#1-git-%e7%9a%84%e4%b8%89%e7%a7%8d%e7%8a%b6%e6%80%81" aria-label="1. Git 的三种状态">1. Git 的三种状态</a></li>
+                <li>
+                    <a href="#2-%e8%8e%b7%e5%8f%96-git-%e4%bb%93%e5%ba%93" aria-label="2. 获取 Git 仓库">2. 获取 Git 仓库</a></li>
+                <li>
+                    <a href="#3-%e8%ae%b0%e5%bd%95%e6%af%8f%e6%ac%a1%e6%9b%b4%e6%96%b0%e5%88%b0%e4%bb%93%e5%ba%93" aria-label="3. 记录每次更新到仓库">3. 记录每次更新到仓库</a></li>
+                <li>
+                    <a href="#4-%e4%b8%80%e4%b8%aa%e5%a5%bd%e7%9a%84-git-%e6%8f%90%e4%ba%a4%e6%b6%88%e6%81%af" aria-label="4. 一个好的 Git 提交消息">4. 一个好的 Git 提交消息</a><ul>
+                        
+                <li>
+                    <a href="#%e6%8e%a8%e9%80%81%e6%94%b9%e5%8a%a8%e5%88%b0%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93" aria-label="推送改动到远程仓库">推送改动到远程仓库</a></li>
+                <li>
+                    <a href="#%e8%bf%9c%e7%a8%8b%e4%bb%93%e5%ba%93%e7%9a%84%e7%a7%bb%e9%99%a4%e4%b8%8e%e9%87%8d%e5%91%bd%e5%90%8d" aria-label="远程仓库的移除与重命名">远程仓库的移除与重命名</a></li>
+                <li>
+                    <a href="#%e6%9f%a5%e7%9c%8b%e6%8f%90%e4%ba%a4%e5%8e%86%e5%8f%b2" aria-label="查看提交历史">查看提交历史</a></li>
+                <li>
+                    <a href="#%e6%92%a4%e9%94%80%e6%93%8d%e4%bd%9c" aria-label="撤销操作">撤销操作</a></li>
+                <li>
+                    <a href="#%e5%88%86%e6%94%af" aria-label="分支">分支</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="git">git<a hidden class="anchor" aria-hidden="true" href="#git">#</a></h1>
+<h2 id="1-git-的三种状态">1. Git 的三种状态<a hidden class="anchor" aria-hidden="true" href="#1-git-的三种状态">#</a></h2>
+<p>Git 有三种状态，你的文件可能处于其中之一：</p>
+<ol>
+<li><strong>已提交（committed）</strong>：数据已经安全的保存在本地数据库中。</li>
+<li><strong>已修改（modified）</strong>：已修改表示修改了文件，但还没保存到数据库中。</li>
+<li><strong>已暂存（staged）</strong>：表示对一个已修改文件的当前版本做了标记，使之包含在下次提交的快照中。</li>
+</ol>
+<p>由此引入 Git 项目的三个工作区域的概念：<strong>Git 仓库(.git directory)</strong>、<strong>工作目录(Working Directory)</strong> 以及 <strong>暂存区域(Staging Area)</strong> 。</p>
+<img src="https://king-super.oss-cn-nanjing.aliyuncs.com/20230325225711.png" style="zoom:33%;" />
+<p><strong>基本的 Git 工作流程如下：</strong></p>
+<ol>
+<li>在工作目录中修改文件。</li>
+<li>暂存文件，将文件的快照放入暂存区域。</li>
+<li>提交更新，找到暂存区域的文件，将快照永久性存储到 Git 仓库目录。</li>
+</ol>
+<h2 id="2-获取-git-仓库">2. 获取 Git 仓库<a hidden class="anchor" aria-hidden="true" href="#2-获取-git-仓库">#</a></h2>
+<p>有两种取得 Git 项目仓库的方法。</p>
+<ol>
+<li>在现有目录中初始化仓库: 进入项目目录运行 <code>git init</code> 命令,该命令将创建一个名为 <code>.git</code> 的子目录。</li>
+<li>从一个服务器克隆一个现有的 Git 仓库: <code>git clone [url]</code> 自定义本地仓库的名字: <code>git clone [url] directoryname</code></li>
+</ol>
+<h2 id="3-记录每次更新到仓库">3. 记录每次更新到仓库<a hidden class="anchor" aria-hidden="true" href="#3-记录每次更新到仓库">#</a></h2>
+<ol>
+<li><strong>检测当前文件状态</strong> : <code>git status</code></li>
+<li><strong>提出更改（把它们添加到暂存区</strong>）：<code>git add filename</code> (针对特定文件)、<code>git add *</code>(所有文件)、<code>git add *.txt</code>（支持通配符，所有 .txt 文件）</li>
+<li><strong>忽略文件</strong>：<code>.gitignore</code> 文件</li>
+<li><strong>提交更新:</strong> <code>git commit -m &quot;代码提交信息&quot;</code> （每次准备提交前，先用 <code>git status</code> 看下，是不是都已暂存起来了， 然后再运行提交命令 <code>git commit</code>）</li>
+<li><strong>跳过使用暂存区域更新的方式</strong> : <code>git commit -a -m &quot;代码提交信息&quot;</code>。 <code>git commit</code> 加上 <code>-a</code> 选项，Git 就会自动把所有已经跟踪过的文件暂存起来一并提交，从而跳过 <code>git add</code> 步骤。</li>
+<li><strong>移除文件</strong> ：<code>git rm filename</code> （从暂存区域移除，然后提交。）</li>
+<li><strong>对文件重命名</strong> ：<code>git mv README.md README</code>(这个命令相当于<code>mv README.md README</code>、<code>git rm README.md</code>、<code>git add README</code> 这三条命令的集合)</li>
+</ol>
+<h2 id="4-一个好的-git-提交消息">4. 一个好的 Git 提交消息<a hidden class="anchor" aria-hidden="true" href="#4-一个好的-git-提交消息">#</a></h2>
+<p>一个好的 Git 提交消息如下：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">5
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>标题行：用这一行来描述和解释你的这次提交
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>主体部分可以是很少的几行，来加入更多的细节来解释提交，最好是能给出一些相关的背景或者解释这个提交能修复和解决什么问题。
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>主体部分当然也可以有几段，但是一定要注意换行和句子不要太长。因为这样在使用 &#34;git log&#34; 的时候会有缩进比较好看。
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>提交的标题行描述应该尽量的清晰和尽量的一句话概括。这样就方便相关的 Git 日志查看工具显示和其他人的阅读。</p>
+<h3 id="推送改动到远程仓库">推送改动到远程仓库<a hidden class="anchor" aria-hidden="true" href="#推送改动到远程仓库">#</a></h3>
+<ul>
+<li>
+<p>如果你还没有克隆现有仓库，并欲将你的仓库连接到某个远程服务器，你可以使用如下命令添加：<code>git remote add origin &lt;server&gt;</code> ,比如我们要让本地的一个仓库和 Github 上创建的一个仓库关联可以这样<code>git remote add origin https://github.com/Snailclimb/test.git</code></p>
+</li>
+<li>
+<p>将这些改动提交到远端仓库：<code>git push origin master</code> (可以把 <em>master</em> 换成你想要推送的任何分支)</p>
+<p>如此你就能够将你的改动推送到所添加的服务器上去了。</p>
+</li>
+</ul>
+<h3 id="远程仓库的移除与重命名">远程仓库的移除与重命名<a hidden class="anchor" aria-hidden="true" href="#远程仓库的移除与重命名">#</a></h3>
+<ul>
+<li>将 test 重命名为 test1：<code>git remote rename test test1</code></li>
+<li>移除远程仓库 test1:<code>git remote rm test1</code></li>
+</ul>
+<h3 id="查看提交历史">查看提交历史<a hidden class="anchor" aria-hidden="true" href="#查看提交历史">#</a></h3>
+<p>在提交了若干更新，又或者克隆了某个项目之后，你也许想回顾下提交历史。 完成这个任务最简单而又有效的工具是 <code>git log</code> 命令。<code>git log</code> 会按提交时间列出所有的更新，最近的更新排在最上面。</p>
+<p><strong>可以添加一些参数来查看自己希望看到的内容：</strong></p>
+<p>只看某个人的提交记录：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --author=bob
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="撤销操作">撤销操作<a hidden class="anchor" aria-hidden="true" href="#撤销操作">#</a></h3>
+<p>有时候我们提交完了才发现漏掉了几个文件没有添加，或者提交信息写错了。 此时，可以运行带有 <code>--amend</code> 选项的提交命令尝试重新提交：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit --amend
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>取消暂存的文件</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset filename
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>撤消对文件的修改:</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -- filename
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>假如你想丢弃你在本地的所有改动与提交，可以到服务器上获取最新的版本历史，并将你本地主分支指向它：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch origin
+</span></span><span style="display:flex;"><span>git reset --hard origin/master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="分支">分支<a hidden class="anchor" aria-hidden="true" href="#分支">#</a></h3>
+<p>分支是用来将特性开发绝缘开来的。在你创建仓库的时候，<em>master</em> 是“默认”的分支。在其他分支上进行开发，完成后再将它们合并到主分支上。</p>
+<p>我们通常在开发新功能、修复一个紧急 bug 等等时候会选择创建分支。单分支开发好还是多分支开发好，还是要看具体场景来说。</p>
+<p>创建一个名字叫做 test 的分支</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch <span style="color:#fff;font-weight:bold">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>切换当前分支到 test（当你切换分支的时候，Git 会重置你的工作目录，使其看起来像回到了你在那个分支上最后一次提交的样子。 Git 会自动添加、删除、修改文件以确保此时你的工作目录和这个分支最后一次提交时的样子一模一样）</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout <span style="color:#fff;font-weight:bold">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><img loading="lazy" src="https://my-blog-to-use.oss-cn-beijing.aliyuncs.com/2019-3%E5%88%87%E6%8D%A2%E5%88%86%E6%94%AF.png" alt="img"  />
+</p>
+<p>你也可以直接这样创建分支并切换过去(上面两条命令的合写)</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout -b feature_x
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>切换到主分支</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout master
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>合并分支(可能会有冲突)</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span> git merge <span style="color:#fff;font-weight:bold">test</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>把新建的分支删掉</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -d feature_x
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>将分支推送到远端仓库（推送成功后其他人可见）：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push origin
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jinchaojjj.github.io/tags/git/">Git</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jinchaojjj.github.io/posts/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/docker/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Docker</span>
+  </a>
+  <a class="next" href="https://jinchaojjj.github.io/posts/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Java基本提升</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://jinchaojjj.github.io">King&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

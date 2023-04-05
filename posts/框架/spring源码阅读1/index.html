@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Spring源码1 | King&#39;s Blog</title>
+<meta name="keywords" content="Spring源码">
+<meta name="description" content="Spring源码1">
+<meta name="author" content="King">
+<link rel="canonical" href="https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="apple-touch-icon" href="https://jinchaojjj.github.io/Q.gif">
+<link rel="mask-icon" href="https://jinchaojjj.github.io/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Spring源码1" />
+<meta property="og:description" content="Spring源码1" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-05T00:18:23+08:00" />
+<meta property="article:modified_time" content="2023-04-05T00:18:23+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring源码1"/>
+<meta name="twitter:description" content="Spring源码1"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "https://jinchaojjj.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "Spring源码1",
+      "item": "https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring源码1",
+  "name": "Spring源码1",
+  "description": "Spring源码1",
+  "keywords": [
+    "Spring源码"
+  ],
+  "articleBody": "Spring源码阅读（1） 1. ClassPathXmlApplicationContext 该类的主要作用是根据类路径下的XML文件创建ApplicationContext对象。\n该类的主要集成图如下：\n1.1 构造方法 在类内提供了不同类型的构造方法用于构造，主要的方法有两个：一个是ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)，一个是ClassPathXmlApplicationContext(String[] paths, Class\u003c?\u003e clazz, @Nullable ApplicationContext parent)。\n第一个方法中采用configLocation进行生成，方法内容如下：\n1 2 3 4 5 6 7 public ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)throws BeansException { super(parent); setConfigLocations(configLocations); if (refresh) { refresh(); } } 在通常的使用场景中parent属性为null，该属性的主要作用是设置父上下文环境（设置为null时就是没有父上下文） configLocations是用于创建上下文的XML文件的路径信息 refresh表示是否刷新应用上下文 下面逐步对构造方法中的内容进行分析，通常parent为null，并且super(parent)在null时进行初始化时并没有过多的设置操作，因此不过多深入。\nsetConfigLocations setConfigLocations方法在父类AbstractRefreshableConfigApplicationContext中实现，该方法中主要做的是判断configLocations中是否为空，在不为空时对路径信息处理后记录在变量configLocations中。处理逻辑为：this.configLocations[i] = resolvePath(locations[i]).trim();。\n其中resolvePath方法就是对路径信息进行解析，若路径中存在占位符则需要对占位符进行解析，并去除得到解析后的路径，将处理完成的路径路径信息存放在configLocations中。trim方法是删除字符串两端多余的空格。在处理完成路径信息（路径信息可以是一个数组，也就是存在多个配置文件）后，在刷新配置的情况下会调用refresh方法。\n其中关于Environment的信息可以查看这篇文章。 在resolvePath方法中首先会获取ConfigurableEnvironment对象，若该对象为空会进行初始化。初始化是创建的是ConfigurableEnvironment接口的实现类StandardEnvironment的对象。 ConfigurableEnvironment接口基础自Environment以及ConfigurablePropertyResolver，其中PropertyResolver接口的作用请看文章 refresh ",
+  "wordCount" : "1076",
+  "inLanguage": "en",
+  "datePublished": "2023-04-05T00:18:23+08:00",
+  "dateModified": "2023-04-05T00:18:23+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "King"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "King's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jinchaojjj.github.io/img/Q.gif"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jinchaojjj.github.io" accesskey="h" title="King&#39;s Blog (Alt + H)">
+                <img src="https:/jinchaojjj.github.io/Q.gif" alt="" aria-label="logo"
+                    height="35">King&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jinchaojjj.github.io/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jinchaojjj.github.io">Home</a>&nbsp;»&nbsp;<a href="https://jinchaojjj.github.io/posts/">📚文章</a></div>
+    <h1 class="post-title">
+      Spring源码1
+    </h1>
+    <div class="post-description">
+      Spring源码1
+    </div>
+    <div class="post-meta"><span title='2023-04-05 00:18:23 +0800 CST'>2023-04-05</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;King
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#spring%e6%ba%90%e7%a0%81%e9%98%85%e8%af%bb1" aria-label="Spring源码阅读（1）">Spring源码阅读（1）</a><ul>
+                        
+                <li>
+                    <a href="#1-classpathxmlapplicationcontext" aria-label="1. ClassPathXmlApplicationContext">1. ClassPathXmlApplicationContext</a><ul>
+                        
+                <li>
+                    <a href="#11-%e6%9e%84%e9%80%a0%e6%96%b9%e6%b3%95" aria-label="1.1 构造方法">1.1 构造方法</a><ul>
+                        
+                <li>
+                    <a href="#setconfiglocations" aria-label="setConfigLocations">setConfigLocations</a></li>
+                <li>
+                    <a href="#refresh" aria-label="refresh">refresh</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="spring源码阅读1">Spring源码阅读（1）<a hidden class="anchor" aria-hidden="true" href="#spring源码阅读1">#</a></h1>
+<h2 id="1-classpathxmlapplicationcontext">1. ClassPathXmlApplicationContext<a hidden class="anchor" aria-hidden="true" href="#1-classpathxmlapplicationcontext">#</a></h2>
+<p>该类的主要作用是根据类路径下的XML文件创建ApplicationContext对象。</p>
+<p>该类的主要集成图如下：</p>
+<h3 id="11-构造方法">1.1 构造方法<a hidden class="anchor" aria-hidden="true" href="#11-构造方法">#</a></h3>
+<p>在类内提供了不同类型的构造方法用于构造，主要的方法有两个：一个是<code>ClassPathXmlApplicationContext(String[] configLocations, boolean refresh, @Nullable ApplicationContext parent)</code>，一个是<code>ClassPathXmlApplicationContext(String[] paths, Class&lt;?&gt; clazz, @Nullable ApplicationContext parent)</code>。</p>
+<p>第一个方法中采用<code>configLocation</code>进行生成，方法内容如下：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> ClassPathXmlApplicationContext(String[] configLocations, <span style="color:#fff;font-weight:bold">boolean</span> refresh, @Nullable ApplicationContext parent)<span style="color:#fff;font-weight:bold">throws</span> BeansException {
+</span></span><span style="display:flex;"><span>   <span style="color:#fff;font-weight:bold">super</span>(parent);
+</span></span><span style="display:flex;"><span>   setConfigLocations(configLocations);
+</span></span><span style="display:flex;"><span>   <span style="color:#fff;font-weight:bold">if</span> (refresh) {
+</span></span><span style="display:flex;"><span>      refresh();
+</span></span><span style="display:flex;"><span>   }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在通常的使用场景中<code>parent</code>属性为<code>null</code>，该属性的主要作用是设置父上下文环境（设置为<code>null</code>时就是没有父上下文）</li>
+<li><code>configLocations</code>是用于创建上下文的<code>XML</code>文件的路径信息</li>
+<li><code>refresh</code>表示是否刷新应用上下文</li>
+</ul>
+<p>下面逐步对构造方法中的内容进行分析，通常<code>parent</code>为<code>null</code>，并且<code>super(parent)</code>在<code>null</code>时进行初始化时并没有过多的设置操作，因此不过多深入。</p>
+<h4 id="setconfiglocations">setConfigLocations<a hidden class="anchor" aria-hidden="true" href="#setconfiglocations">#</a></h4>
+<p><code>setConfigLocations</code>方法在父类<code>AbstractRefreshableConfigApplicationContext</code>中实现，该方法中主要做的是判断<code>configLocations</code>中是否为空，在不为空时对路径信息处理后记录在变量<code>configLocations</code>中。处理逻辑为：<code>this.configLocations[i] = resolvePath(locations[i]).trim();</code>。</p>
+<p>其中<code>resolvePath</code>方法就是对路径信息进行解析，若路径中存在占位符则需要对占位符进行解析，并去除得到解析后的路径，将处理完成的路径路径信息存放在<code>configLocations</code>中。<code>trim</code>方法是删除字符串两端多余的空格。在处理完成路径信息（路径信息可以是一个数组，也就是存在多个配置文件）后，在刷新配置的情况下会调用<code>refresh</code>方法。</p>
+<ul>
+<li>其中关于<code>Environment</code>的信息可以查看这篇<a href="https://blog.csdn.net/xby7437/article/details/114654912">文章</a>。 在<code>resolvePath</code>方法中首先会获取<code>ConfigurableEnvironment</code>对象，若该对象为空会进行初始化。初始化是创建的是<code>ConfigurableEnvironment</code>接口的实现类<code>StandardEnvironment</code>的对象。</li>
+<li>ConfigurableEnvironment接口基础自Environment以及ConfigurablePropertyResolver，其中PropertyResolver接口的作用请看<a href="https://blog.csdn.net/xby7437/article/details/114505063">文章</a></li>
+</ul>
+<h4 id="refresh">refresh<a hidden class="anchor" aria-hidden="true" href="#refresh">#</a></h4>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jinchaojjj.github.io/tags/spring%E6%BA%90%E7%A0%81/">Spring源码</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring-mvc/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Spring MVC</span>
+  </a>
+  <a class="next" href="https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Spring源码2</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://jinchaojjj.github.io">King&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>框架 on King&#39;s Blog</title>
+    <link>https://jinchaojjj.github.io/categories/%E6%A1%86%E6%9E%B6/</link>
+    <description>Recent content in 框架 on King&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Wed, 05 Apr 2023 00:18:23 +0800</lastBuildDate><atom:link href="https://jinchaojjj.github.io/categories/%E6%A1%86%E6%9E%B6/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>OpenApi</title>
+      <link>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/openapi/</link>
+      <pubDate>Wed, 05 Apr 2023 00:18:23 +0800</pubDate>
+      
+      <guid>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/openapi/</guid>
+      <description>OpenApi</description>
+    </item>
+    
+    <item>
+      <title>Servlet</title>
+      <link>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/servlet/</link>
+      <pubDate>Wed, 05 Apr 2023 00:18:23 +0800</pubDate>
+      
+      <guid>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/servlet/</guid>
+      <description>Servlet</description>
+    </item>
+    
+    <item>
+      <title>Spring</title>
+      <link>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring/</link>
+      <pubDate>Wed, 05 Apr 2023 00:18:23 +0800</pubDate>
+      
+      <guid>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring/</guid>
+      <description>Spring</description>
+    </item>
+    
+    <item>
+      <title>Spring MVC</title>
+      <link>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring-mvc/</link>
+      <pubDate>Wed, 05 Apr 2023 00:18:23 +0800</pubDate>
+      
+      <guid>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring-mvc/</guid>
+      <description>Spring MVC</description>
+    </item>
+    
+    <item>
+      <title>Spring源码1</title>
+      <link>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/</link>
+      <pubDate>Wed, 05 Apr 2023 00:18:23 +0800</pubDate>
+      
+      <guid>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/</guid>
+      <description>Spring源码1</description>
+    </item>
+    
+    <item>
+      <title>Spring源码2</title>
+      <link>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/</link>
+      <pubDate>Wed, 05 Apr 2023 00:18:23 +0800</pubDate>
+      
+      <guid>https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/</guid>
+      <description>Spring源码2</description>
+    </item>
+    
+  </channel>
+</rss>

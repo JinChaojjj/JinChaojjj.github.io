@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Spring源码2 | King&#39;s Blog</title>
+<meta name="keywords" content="Spring源码">
+<meta name="description" content="Spring源码2">
+<meta name="author" content="King">
+<link rel="canonical" href="https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="apple-touch-icon" href="https://jinchaojjj.github.io/Q.gif">
+<link rel="mask-icon" href="https://jinchaojjj.github.io/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Spring源码2" />
+<meta property="og:description" content="Spring源码2" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-05T00:18:23+08:00" />
+<meta property="article:modified_time" content="2023-04-05T00:18:23+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Spring源码2"/>
+<meta name="twitter:description" content="Spring源码2"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "https://jinchaojjj.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "Spring源码2",
+      "item": "https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Spring源码2",
+  "name": "Spring源码2",
+  "description": "Spring源码2",
+  "keywords": [
+    "Spring源码"
+  ],
+  "articleBody": "Spring源码阅读（2） 本章主要讲解在Spring中非常重要的底层接口、实现类\n1. PropertySource PropertySource是一个抽象类，实现了其中的基本方法，该类是对键值对的一次封装实现，相较于Java提供的简直对提供了自己使用的更多方法。提供了如下方法：\n方法名 作用 getName () 获得PropertySource中的键 getSource () 获得PropertySource中的值 getProperty (String name) 根据键获得PropertySource中的值 containsProperty (String name) 根据name判断该PropertySource是否存在值 2. PropertySources 包含一个或多个PropertySource对象的持有者，是一个接口并且继承了Iterable",
+  "wordCount" : "1349",
+  "inLanguage": "en",
+  "datePublished": "2023-04-05T00:18:23+08:00",
+  "dateModified": "2023-04-05T00:18:23+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "King"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB2/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "King's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jinchaojjj.github.io/img/Q.gif"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jinchaojjj.github.io" accesskey="h" title="King&#39;s Blog (Alt + H)">
+                <img src="https:/jinchaojjj.github.io/Q.gif" alt="" aria-label="logo"
+                    height="35">King&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jinchaojjj.github.io/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jinchaojjj.github.io">Home</a>&nbsp;»&nbsp;<a href="https://jinchaojjj.github.io/posts/">📚文章</a></div>
+    <h1 class="post-title">
+      Spring源码2
+    </h1>
+    <div class="post-description">
+      Spring源码2
+    </div>
+    <div class="post-meta"><span title='2023-04-05 00:18:23 +0800 CST'>2023-04-05</span>&nbsp;·&nbsp;3 min&nbsp;·&nbsp;King
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#spring%e6%ba%90%e7%a0%81%e9%98%85%e8%af%bb2" aria-label="Spring源码阅读（2）">Spring源码阅读（2）</a><ul>
+                        
+                <li>
+                    <a href="#1-propertysource" aria-label="1. PropertySource">1. PropertySource</a></li>
+                <li>
+                    <a href="#2-propertysources" aria-label="2. PropertySources">2. PropertySources</a></li>
+                <li>
+                    <a href="#3-propertyresolver" aria-label="3. PropertyResolver">3. PropertyResolver</a></li>
+                <li>
+                    <a href="#4-environment" aria-label="4. Environment">4. Environment</a></li>
+                <li>
+                    <a href="#5-configurablepropertyresolver" aria-label="5. ConfigurablePropertyResolver">5. ConfigurablePropertyResolver</a></li>
+                <li>
+                    <a href="#6-configurableenvironment" aria-label="6. ConfigurableEnvironment">6. ConfigurableEnvironment</a></li>
+                <li>
+                    <a href="#7-standardenvironment" aria-label="7. StandardEnvironment">7. StandardEnvironment</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="spring源码阅读2">Spring源码阅读（2）<a hidden class="anchor" aria-hidden="true" href="#spring源码阅读2">#</a></h1>
+<p>本章主要讲解在Spring中非常重要的底层接口、实现类</p>
+<h2 id="1-propertysource">1. PropertySource<a hidden class="anchor" aria-hidden="true" href="#1-propertysource">#</a></h2>
+<p><code>PropertySource</code>是一个抽象类，实现了其中的基本方法，该类是对键值对的一次封装实现，相较于Java提供的简直对提供了自己使用的更多方法。提供了如下方法：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">方法名</th>
+<th style="text-align:center">作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">getName ()</td>
+<td style="text-align:center">获得PropertySource中的键</td>
+</tr>
+<tr>
+<td style="text-align:center">getSource ()</td>
+<td style="text-align:center">获得PropertySource中的值</td>
+</tr>
+<tr>
+<td style="text-align:center">getProperty (String name)</td>
+<td style="text-align:center">根据键获得PropertySource中的值</td>
+</tr>
+<tr>
+<td style="text-align:center">containsProperty (String name)</td>
+<td style="text-align:center">根据name判断该PropertySource是否存在值</td>
+</tr>
+</tbody>
+</table>
+<h2 id="2-propertysources">2. PropertySources<a hidden class="anchor" aria-hidden="true" href="#2-propertysources">#</a></h2>
+<p>包含一个或多个<code>PropertySource</code>对象的持有者，是一个接口并且继承了<code>Iterable&lt;PropertySource&lt;?&gt;&gt;</code>可以使用<code>foreach</code>。</p>
+<p>接口中还定义了<code>contains(String name)</code>方法，用于判断持有的多个<code>PropertySource</code>中是否存在键为<code>name</code>的对象。</p>
+<h2 id="3-propertyresolver">3. PropertyResolver<a hidden class="anchor" aria-hidden="true" href="#3-propertyresolver">#</a></h2>
+<p>resolve指的是解析器，顾名思义指的是用于对Property进行解析的对象。在该接口中提供了四类方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getProperty</td>
+<td>返回与给定键关联的属性值，有多种实现的重载</td>
+</tr>
+<tr>
+<td>getRequiredProperty</td>
+<td>作用同上，但是不能为空</td>
+</tr>
+<tr>
+<td>resolvePlaceholders</td>
+<td>对形如<code>${}</code>占位符进行解析，无法解析则不做处理</td>
+</tr>
+<tr>
+<td>resolveRequiredPlaceholders</td>
+<td>作用同上，但会对每一个占位符处理，无法处理时抛出异常</td>
+</tr>
+</tbody>
+</table>
+<h2 id="4-environment">4. Environment<a hidden class="anchor" aria-hidden="true" href="#4-environment">#</a></h2>
+<p>该接口继承自<code>3:PropertyResolver</code>，定义了三个新方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>getActiveProfiles</td>
+<td>返回在此环境中被明确激活的配置文件的集合。配置文件用于创建有条件注册的bean定义的逻辑分组，例如基于部署环境</td>
+</tr>
+<tr>
+<td>getDefaultProfiles</td>
+<td>当没有明确设置激活的配置文件时，返回默认激活的配置文件集。</td>
+</tr>
+<tr>
+<td>acceptsProfiles</td>
+<td>返回一个或多个给定的配置文件是否处于活动状态，或者在没有明确的活动配置文件的情况下，返回一个或多个给定的配置文件是否包含在默认配置文件的集合中。如果一个配置文件以&rsquo;！&lsquo;开头，则逻辑相反，也就是说，如果给定的配置文件没有活动，该方法将返回真</td>
+</tr>
+</tbody>
+</table>
+<h2 id="5-configurablepropertyresolver">5. ConfigurablePropertyResolver<a hidden class="anchor" aria-hidden="true" href="#5-configurablepropertyresolver">#</a></h2>
+<p>该接口同样继承自<code>3:PropertyResolver</code>，Configurable指的是可配置的，是大多数（如果不是所有）PropertyResolver类型实现的配置接口。为访问和定制将属性值从一种类型转换为另一种类型时使用的转换服务提供便利。</p>
+<ul>
+<li>
+<p>ConversionService接口中提供的方法主要用于判断一个类是否转化为另一个类，以及将一种类型转化为另一种类型。</p>
+</li>
+<li>
+<p>ConverterRegistry接口中提供了添加转化器和删除转化器的方法。</p>
+</li>
+<li>
+<p>ConfigurableConversionService接口继承自上面两个接口，用于提供一个可以动态配置的转化器</p>
+</li>
+</ul>
+<p>本接口中提供了设置ConfigurableConversionService转化器的方法，同时提供了配置前后缀、间隔字符、必要属性、嵌套解析的忽略设置等。</p>
+<h2 id="6-configurableenvironment">6. ConfigurableEnvironment<a hidden class="anchor" aria-hidden="true" href="#6-configurableenvironment">#</a></h2>
+<p>提供了设置活动和默认配置文件以及操作底层属性源的方法，继承自<code>4、5</code>。允许客户通过<code>ConfigurablePropertyResolver</code>超接口来设置和验证所需的属性，定制转换服务等。</p>
+<p>属性源可以被删除、重新排序或替换；还可以使用从getPropertySources()返回的MutablePropertySources实例添加额外的属性源。</p>
+<h2 id="7-standardenvironment">7. StandardEnvironment<a hidden class="anchor" aria-hidden="true" href="#7-standardenvironment">#</a></h2>
+<p>是<code>6:ConfigurableEnvironment</code>的一种实现类，</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jinchaojjj.github.io/tags/spring%E6%BA%90%E7%A0%81/">Spring源码</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jinchaojjj.github.io/posts/%E6%A1%86%E6%9E%B6/spring%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB1/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Spring源码1</span>
+  </a>
+  <a class="next" href="https://jinchaojjj.github.io/posts/%E6%95%B0%E6%8D%AE%E5%BA%93/%E6%95%B0%E6%8D%AE%E5%BA%93/">
+    <span class="title">Next »</span>
+    <br>
+    <span>数据库基础</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://jinchaojjj.github.io">King&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
