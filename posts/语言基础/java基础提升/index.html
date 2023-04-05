@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>Java基本提升 | King&#39;s Blog</title>
+<meta name="keywords" content="基础">
+<meta name="description" content="Java基本提升">
+<meta name="author" content="King">
+<link rel="canonical" href="https://jinchaojjj.github.io/posts/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jinchaojjj.github.io/img/Q.gif">
+<link rel="apple-touch-icon" href="https://jinchaojjj.github.io/Q.gif">
+<link rel="mask-icon" href="https://jinchaojjj.github.io/Q.gif">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="Java基本提升" />
+<meta property="og:description" content="Java基本提升" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinchaojjj.github.io/posts/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-05T00:18:23+08:00" />
+<meta property="article:modified_time" content="2023-04-05T00:18:23+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Java基本提升"/>
+<meta name="twitter:description" content="Java基本提升"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "https://jinchaojjj.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "Java基本提升",
+      "item": "https://jinchaojjj.github.io/posts/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "Java基本提升",
+  "name": "Java基本提升",
+  "description": "Java基本提升",
+  "keywords": [
+    "基础"
+  ],
+  "articleBody": "1. Java语言的特点 简单易学，相较于python等语言具有较好的严谨性以及报错机制；\n面向对象（封装，继承，多态），Java中所有内容都是基于类进行扩展的，由类创建的实体称为对象，并且对象之间存在不同的关系，由此发展出了继承、多态等语言特性；\n平台无关性（ Java 虚拟机实现平台无关性），Java语言通过JVM运行字节码文件的方式解决了平台间迁移代码的问题。Java分为编译与运行两部分，编译时只将Java代码转化为.class字节码的过程（其他语言例如在安卓平台推广的Kotlin等，通过自己的编译器同样可以编译为字节码文件，满足JVM运行字节码文件的格式要求即可），然后JVM只需要运行字节码文件即可。但是在不同平台上运行的JVM是需要重新编写和编译的，但是这个步骤已经由oracle公司帮你完成了（当然也可以自己下载源码然后自己编译，并且可以修改JVM的内容，设计成你自己满意的虚拟机）\n支持多线程（ C++ 语言早期没有内置的多线程机制，因此必须调用操作系统的多线程功能来进行多线程程序设计，而 Java 语言却提供了多线程支持）；\n可靠性、安全性，Java语言提供了GC-垃圾收集器，极大的便利了程序员不必设计类似于cpp中的析构函数以及对象的释放了；\n支持网络编程并且很方便（ Java 语言诞生本身就是为简化网络编程设计的，因此 Java 语言不仅支持网络编程而且很方便）；\n编译与解释并存（java-\u003e.class是编译，.class-\u003e运行是解释），虚拟机在运行代码时首先由类加载器加载字节码文件（生成了Class对象），然后通过解释器一步步执行，虽然在字节码中已经比较偏向与底层了，但是由解释器转化为机器码仍然消耗时间，所以在执行效率上相较于cpp、go等还是稍显逊色。\n2. JVM、JDK、JRE三者的关系 JVM就是Java虚拟机，是运行字节码文件的虚拟机。但是虚拟机并不是只有一种，常用的是HotSpot（oracle的）还有J9、JRockit等都是其他公司设置的，不同的虚拟机中使用的垃圾收集器-GC的逻辑、内存模型等都有区别，我们在平时使用时使用oracle提供的就可以（最常用的）。 JRE - Java Runtime Environment，Java运行时环境，其中包含了JVM、Java类库、java命令和一些基础组件，可以直接运行字节码文件，但是不能对Java代码进行编译。 JDK - Java Development Kit，包含了JRE以及javac等命令，可以进行Java文件等编译等。 3. 注释 4. 标识符 和 关键字 7. continue、break、return的区别 三者的作用效果是不同的，continue是跳出本次循环，若循环没有满足结束条件则会继续下次循环，break是直接跳出循环，return是直接跳出方法，当return所在的方法返回值类型不为void时需要返回一个值。\n8. 成员变量与局部变量 成员变量属于类，可以使用static、final关键词进行修饰，使用static关键字修饰是变量存在于方法区，当没有采用static关键字进行修饰时，变量随对象的创建一同创建，对象存在于堆内，所以变量也存在于堆内。成员变量会由虚拟机进行一次初始化为默认值的过程，因此可以不进行初始化也能使用。\n局部变量属于方法，可以使用final进行修饰，局部变量在方法被调用时创建，同时局部变量也需要初始化后使用，因为调用方法并不会对局部变量进行默认的初始化。\n9. 静态变量 与 常量 静态变量值的是可以直接通过类进行访问的变量，与对象无关。\n当变量没有使用final进行修饰时，变量的值是可以改变的，可以通过类也可以通过对象。当使用final进行修饰后，该变量就被称为常量，因为这个变量是一个不会变化的变量，并且通过类就可以直接访问得到。\n10. 静态方法 静态方法中不可以使用非静态成员，因为静态成员在调用的时候可能还有类的对象被创建，但是非静态成员变量又存储在对象实例中，一个已经存在并且被调用的方法，是无法访问一个还没有被创造出来的对象的。\n11. 重载 与 重写 方法重写指得是将继承自父类的方向重新进行实现，而重载指的是同一个方法根据形参的不同设置不同的实现。\n1 2 3 4 5 6 7 8 9 10 11 public class A { public void method2 (){} // 重载 public void method1 (){} public void method1 (int a){} } public class B extends A{ // 重写 public void method2 (){} } 12. 可变长参数 可变长参数指的是调用方法时可以传入多个参数（参数的数量是不固定的），本质是数组是编译阶段的语法糖。\n并且一个方法只能有一个可变长参数，并且可变长参数必须是所有参数中的最后一点，可变长参数前面的参数在调用时不可省略。\n若遇到方法重载时，其中一种使用了可变长参数，两个方法同时满足调用要求时，在运行时实际调用的应该是哪个方法呢？ – 答案是 优先调用不含邮可变长参数的方法。\n1 2 3 4 5 6 7 public void method (String ... args){ } // 等价 public void method (String[] args){ } 13. 包装类 包装类是基本数据类型封装得到的引用类型对象，可以在范型中使用，同时每种包装类型都对一定范围中的数据进行了封装例如Integer封装了-128，127。\n虽然进行缓存封装，但是直接采用new关键字创建对象时还是会重写去创建一个新的对象，并不会直接使用缓存中的，若想使用缓存中的可以使用valueOf方法。\n同时引用类型若存在对象比较是否相同时，一定要采用equals方法。\n14. 自动拆箱、装箱 自动拆箱会在需要使用基本类型的地方自动将封装类的对象转化为基本类型，而在需要使用封装类的地方自动进行装箱。\n浮点值存在精度问题，因为在计算机中存储的是二进制，无法表示无限不得小数位的，若想避免这种问题可以使用BigDecimal和BigInteget。\n15. 面向对象 a) 面向对象与面向过程的区别 两者的区别是解决问题的思路不同：\n面向过程是将解决问题的过程分解为一个个方法，通过一个个的调用方法来解决问题\n面向对象是根据问题抽象出一个个对象，然后用对象执行方法的方式来解决问题\n根据这两种不同的设计思路，得到了大量不同的编程语言，例如c、js等是面向过程的，Java、cpp是面向对象的。那面向过程的语言运行效率一定比面向对象高？–并不一定，c与cpp的运行效率基本差不多没有很大的区别，让人感觉Java运行效率低的原因是Java是半编程语言，在编译阶段编译得到的只是字节码，并不是可以直接在计算机上运行的程序，在jvm运行时还有解释器存在，将字节码转化为机器码，很多解释型的面向过程的语言的执行效率还不如Java呢，因此语言的执行效率和语言语法的结构没有什么关系。\nb) 对象的创建 ClassTest classTest = new ClassTest()\n这是一个创建对象的语句，这句话可以分为两部分：ClassTest classTest和new ClassTest()。其中前半句话的作用是创建一个类对象的引用，若语句位于类内，则该引用会在对象创建的时候在堆内一同被创建，若语句位于方法内会在方法被调用时在虚拟机栈中创建方法的引用；后半句是使用new关键字进行对象的创建，会在堆中开辟一块区域用于存放对象，并将创建对象的位置作为引用赋予刚刚声明的引用。\nc) 对象的比较 同一个类的两个对象的比较建议使用重写后的equals方法，双等号直接比较内存中的地址，大多是情况下这是无效的（无法达到你预期的效果，除非你真多想直接比较两个对象是不是就是指向一个对象）。\nd) 构造方法 名字与类名相同。 没有返回值，但不能用 void 声明构造函数。 生成类的对象时自动执行，无需调用。 可以重载，不能重写，可以使用super调用父类的构造方法 16. 面向对象的三大特征 封装、继承、多态\n封装 封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性，通常指的是getset方法\n继承 子类拥有父类对象所有的属性和方法（包括私有属性和私有方法），但是父类中的私有属性和方法子类是无法访问，只是拥有，这点可以通过Class对象进行验证。 子类可以拥有自己属性和方法，即子类可以对父类进行扩展。 子类可以用自己的方式实现父类的方法（重写）。 Java只支持单继承、但可以实现多个接口 多态 表示一个对象具有多种的状态，具体表现为父类的引用指向子类的实例。\n多态的特点:\n对象类型和引用类型之间具有继承（类）/实现（接口）的关系； 引用类型变量发出的方法调用的到底是哪个类中的方法，必须在程序运行期间才能确定； 多态不能调用“只在子类存在但在父类不存在”的方法； 如果子类重写了父类的方法，真正执行的是子类覆盖的方法，如果子类没有覆盖父类的方法，执行的是父类的方法。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 public interface A{ public void method(); } public class B implements A{ public void method(){ System.out.println(\"B\"); } } public class C implements A{ public void method(){ System.out.println(\"C\"); } } // main函数 public static void main(String ... args){ A a = new B(); a.method();// 输出B } 接口和抽象类的共同点和区别 共同点 ：\n都不能被实例化。 都可以包含抽象方法。 都可以有默认实现的方法（Java 8 可以用 default 关键字在接口中定义默认方法）。 区别 ：\n接口主要用于对类的行为进行约束，你实现了某个接口就具有了对应的行为。抽象类主要用于代码复用，强调的是所属关系。（因此在各大开源框架中常用的结构都是通过接口定义较为底层的接口，然后采用抽象类继承接口提供一个基础的实现类，然后用户可以继承抽象类进行实现，通常此时用户只需要实现核心方法即可） 一个类只能继承一个类，但是可以实现多个接口。 接口中的成员变量只能是 public static final 类型的，不能被修改且必须有初始值，而抽象类的成员变量默认 default，可在子类中被重新定义，也可被重新赋值 17. 引用拷贝、浅拷贝、深拷贝 浅拷贝与深拷贝都需要实现Cloneable接口，区别在于clone方法的实现，深拷贝需要调用每一个引用类型对象的clone方法（都实现的情况下）\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 // Object的clone方法是protected修饰的，因此需要重写并且权限改为public才能调用clone方法 // 浅拷贝 为了代码的简洁使用了lombok @AllArgsConstructor @NoArgsConstructor @Getter @Setter class A implements Cloneable{ private int id; private String name; private B b; @Override public A clone() throws CloneNotSupportedException { A a = new A(); a.id = this.id; a.name = this.name; a.b = this.b; return a; } } @Getter @Setter @AllArgsConstructor class B { private int id; } public static void main(String[] args) throws CloneNotSupportedException { A a1 = new A(2, \"king\", new B(44)); A a2= a1.clone(); System.out.println(a1.getB().hashCode() == a2.getB().hashCode());// true System.out.println(a2.getB().getId());//44 a1.getB().setId(77); System.out.println(a2.getB().getId());//77 // 这个地方就是深浅拷贝的区别，浅拷贝中的引用类型都是指向的同一个对象，一个改变了另一个就改变了，String不用担心，因为String本身是不可变的不存在这个问题。 } // 深拷贝 @AllArgsConstructor @NoArgsConstructor @Getter @Setter class A implements Cloneable{ private int id; private String name; private B b; @Override public A clone() throws CloneNotSupportedException { A a = new A(); a.id = this.id; a.name = this.name; a.b = this.b.clone(); return a; } } @Getter @Setter @AllArgsConstructor class B implements Cloneable{ private int id; @Override public B clone() throws CloneNotSupportedException { B b = new B(this.id); return b; } } public static void main(String[] args) throws CloneNotSupportedException { A a1 = new A(2, \"king\", new B(44)); A a2= a1.clone(); System.out.println(a1.getB().hashCode() == a2.getB().hashCode());// false System.out.println(a2.getB().getId());//44 a1.getB().setId(77); System.out.println(a2.getB().getId());//44 } 18. String、StringBuffer、StringBuilder 可变性\nString 是不可变的（后面会详细分析原因）。\nStringBuilder 与 StringBuffer 是可变的，都继承自 AbstractStringBuilder 类，在 AbstractStringBuilder 中也是使用字符数组保存字符串，不过没有使用 final 和 private 关键字修饰。\n线程安全性\nString 中的对象是不可变的，也就可以理解为常量，线程安全。AbstractStringBuilder 是 StringBuilder 与 StringBuffer 的公共父类，定义了一些字符串的基本操作，如 expandCapacity、append、insert、indexOf 等公共方法。StringBuffer 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。StringBuilder 并没有对方法进行加同步锁，所以是非线程安全的。\n性能\n每次对 String 类型进行改变的时候，都会生成一个新的 String 对象，然后将指针指向新的 String 对象。StringBuffer 每次都会对 StringBuffer 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用 StringBuilder 相比使用 StringBuffer 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。\n对于三者使用的总结：\n操作少量的数据: 适用 String 单线程操作字符串缓冲区下操作大量数据: 适用 StringBuilder 多线程操作字符串缓冲区下操作大量数据: 适用 StringBuffer 我们知道被 final 关键字修饰的类不能被继承，修饰的方法不能被重写，修饰的变量是基本数据类型则值不能改变，修饰的变量是引用类型则不能再指向其他对象。因此，final 关键字修饰的数组保存字符串并不是 String不可变的根本原因，因为这个数组保存的字符串是可变的（final 修饰引用类型变量的情况）。\nString 真正不可变有下面几点原因：\n保存字符串的数组被 final 修饰且为私有的，并且String 类没有提供/暴露修改这个字符串的方法。 String 类被 final 修饰导致其不能被继承，进而避免了子类破坏 String 不可变。 JVM重载了+运算符，可以用于字符串的相加，本质上字符串的相加编译器还是会转化为StringBuffer调用append方法，但是在循环中不断使用+时，编译器并不会自动进行优化，创建一个StringBuffer进行相加，此时在循环中会不断创建新的StringBuffer，这时候自己创建StringBuffer进行优化是有必要的。\n19. Exception、Error 异常使用有哪些需要注意的地方？ 不要把异常定义为静态变量，因为这样会导致异常栈信息错乱。每次手动抛出异常，我们都需要手动 new 一个异常对象抛出。 抛出的异常信息一定要有意义。 建议抛出更加具体的异常比如字符串转换为数字格式错误的时候应该抛出NumberFormatException而不是其父类IllegalArgumentException。 使用日志打印异常之后就不要再抛出异常了（两者不要同时存在一段代码逻辑中）。 20. 泛型 21. 反射 22. 注解 何谓注解？ Annotation （注解） 是 Java5 开始引入的新特性，可以看作是一种特殊的注释，主要用于修饰类、方法或者变量，提供某些信息供程序在编译或者运行时使用。\n注解本质是一个继承了Annotation 的特殊接口：\n1 2 3 4 5 6 7 8 9 @Target(ElementType.METHOD) @Retention(RetentionPolicy.SOURCE) public @interface Override { } public interface Override extends Annotation{ } JDK 提供了很多内置的注解（比如 @Override 、@Deprecated），同时，我们还可以自定义注解。\n注解的解析方法有哪种？ 注解只有被解析之后才会生效，常见的解析方法有两种：\n编译期直接扫描 ：编译器在编译 Java 代码的时候扫描对应的注解并处理，比如某个方法使用@Override 注解，编译器在编译的时候就会检测当前的方法是否重写了父类对应的方法。 运行期通过反射处理 ：像框架中自带的注解(比如 Spring 框架的 @Value 、@Component)都是通过反射来进行处理的。 23. 值传递 在c++中存在值传递与引用传递，但是在Java中只存在值传递。\n概念 值传递：值传递指的是在方法调用时，实参中传递的是具体的值，在方法中得到的值是拷贝变量后得到的。 引用传递：与值传递不同的是，引用传递在实惨中传递的不是拷贝后的变量，而是将方法调用中的变量地址直接进行传递。 值传递的差异与引用传递的差异类似上图，以常见的引用类型为例，若是值传递，则在被调用方法中获取到的是指向对象的地址的一个副本，效果就是两个调用方法与被调用方法中的两个变量都指向了同一个对象，在被调用方法中更改对象的值，在调用方法指向的对象同样更改了。\n通常在编程语言中，创建一个引用都是在栈中开辟一块内存地址，该内存地址将会指向堆中的的一个对象。而上图中a1实际上就是一个名称，指向栈中的引用，而引用传递就是新设置一个名称同样适用的是这一个引用。\n上述两者的区别就是，指向堆内存的地址是拷贝一个新的还是公用同一个。\n24. Java序列化 25. 泛型、通配符 26. Java反射机制 27. BigDecimal 28. Maven maven项目最核心的就是pom文件，学习maven的使用就是学习pom的编写。\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 \u003c?xml version=\"1.0\" encoding=\"UTF-8\"?\u003e ",
+  "wordCount" : "12139",
+  "inLanguage": "en",
+  "datePublished": "2023-04-05T00:18:23+08:00",
+  "dateModified": "2023-04-05T00:18:23+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "King"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jinchaojjj.github.io/posts/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E6%8F%90%E5%8D%87/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "King's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jinchaojjj.github.io/img/Q.gif"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jinchaojjj.github.io" accesskey="h" title="King&#39;s Blog (Alt + H)">
+                <img src="https:/jinchaojjj.github.io/Q.gif" alt="" aria-label="logo"
+                    height="35">King&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jinchaojjj.github.io/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jinchaojjj.github.io">Home</a>&nbsp;»&nbsp;<a href="https://jinchaojjj.github.io/posts/">📚文章</a></div>
+    <h1 class="post-title">
+      Java基本提升
+    </h1>
+    <div class="post-description">
+      Java基本提升
+    </div>
+    <div class="post-meta"><span title='2023-04-05 00:18:23 +0800 CST'>2023-04-05</span>&nbsp;·&nbsp;25 min&nbsp;·&nbsp;King
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#1-java%e8%af%ad%e8%a8%80%e7%9a%84%e7%89%b9%e7%82%b9" aria-label="1. Java语言的特点">1. Java语言的特点</a></li>
+                <li>
+                    <a href="#2-jvmjdkjre%e4%b8%89%e8%80%85%e7%9a%84%e5%85%b3%e7%b3%bb" aria-label="2. JVM、JDK、JRE三者的关系">2. JVM、JDK、JRE三者的关系</a></li>
+                <li>
+                    <a href="#3-%e6%b3%a8%e9%87%8a" aria-label="3. 注释">3. 注释</a></li>
+                <li>
+                    <a href="#4-%e6%a0%87%e8%af%86%e7%ac%a6-%e5%92%8c-%e5%85%b3%e9%94%ae%e5%ad%97" aria-label="4. 标识符 和 关键字">4. 标识符 和 关键字</a></li>
+                <li>
+                    <a href="#7-continuebreakreturn%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="7. continue、break、return的区别">7. continue、break、return的区别</a></li>
+                <li>
+                    <a href="#8-%e6%88%90%e5%91%98%e5%8f%98%e9%87%8f%e4%b8%8e%e5%b1%80%e9%83%a8%e5%8f%98%e9%87%8f" aria-label="8. 成员变量与局部变量">8. 成员变量与局部变量</a></li>
+                <li>
+                    <a href="#9-%e9%9d%99%e6%80%81%e5%8f%98%e9%87%8f-%e4%b8%8e-%e5%b8%b8%e9%87%8f" aria-label="9. 静态变量 与 常量">9. 静态变量 与 常量</a></li>
+                <li>
+                    <a href="#10-%e9%9d%99%e6%80%81%e6%96%b9%e6%b3%95" aria-label="10. 静态方法">10. 静态方法</a></li>
+                <li>
+                    <a href="#11-%e9%87%8d%e8%bd%bd-%e4%b8%8e-%e9%87%8d%e5%86%99" aria-label="11. 重载 与 重写">11. 重载 与 重写</a></li>
+                <li>
+                    <a href="#12-%e5%8f%af%e5%8f%98%e9%95%bf%e5%8f%82%e6%95%b0" aria-label="12. 可变长参数">12. 可变长参数</a></li>
+                <li>
+                    <a href="#13-%e5%8c%85%e8%a3%85%e7%b1%bb" aria-label="13. 包装类">13. 包装类</a></li>
+                <li>
+                    <a href="#14-%e8%87%aa%e5%8a%a8%e6%8b%86%e7%ae%b1%e8%a3%85%e7%ae%b1" aria-label="14. 自动拆箱、装箱">14. 自动拆箱、装箱</a></li>
+                <li>
+                    <a href="#15-%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1" aria-label="15. 面向对象">15. 面向对象</a><ul>
+                        
+                <li>
+                    <a href="#a-%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e4%b8%8e%e9%9d%a2%e5%90%91%e8%bf%87%e7%a8%8b%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="a) 面向对象与面向过程的区别">a) 面向对象与面向过程的区别</a></li>
+                <li>
+                    <a href="#b-%e5%af%b9%e8%b1%a1%e7%9a%84%e5%88%9b%e5%bb%ba" aria-label="b) 对象的创建">b) 对象的创建</a></li>
+                <li>
+                    <a href="#c-%e5%af%b9%e8%b1%a1%e7%9a%84%e6%af%94%e8%be%83" aria-label="c) 对象的比较">c) 对象的比较</a></li>
+                <li>
+                    <a href="#d-%e6%9e%84%e9%80%a0%e6%96%b9%e6%b3%95" aria-label="d) 构造方法">d) 构造方法</a></li></ul>
+                </li>
+                <li>
+                    <a href="#16-%e9%9d%a2%e5%90%91%e5%af%b9%e8%b1%a1%e7%9a%84%e4%b8%89%e5%a4%a7%e7%89%b9%e5%be%81" aria-label="16. 面向对象的三大特征">16. 面向对象的三大特征</a><ul>
+                        
+                <li>
+                    <a href="#%e5%b0%81%e8%a3%85" aria-label="封装">封装</a></li>
+                <li>
+                    <a href="#%e7%bb%a7%e6%89%bf" aria-label="继承">继承</a></li>
+                <li>
+                    <a href="#%e5%a4%9a%e6%80%81" aria-label="多态">多态</a></li>
+                <li>
+                    <a href="#%e6%8e%a5%e5%8f%a3%e5%92%8c%e6%8a%bd%e8%b1%a1%e7%b1%bb%e7%9a%84%e5%85%b1%e5%90%8c%e7%82%b9%e5%92%8c%e5%8c%ba%e5%88%ab" aria-label="接口和抽象类的共同点和区别">接口和抽象类的共同点和区别</a></li></ul>
+                </li>
+                <li>
+                    <a href="#17-%e5%bc%95%e7%94%a8%e6%8b%b7%e8%b4%9d%e6%b5%85%e6%8b%b7%e8%b4%9d%e6%b7%b1%e6%8b%b7%e8%b4%9d" aria-label="17. 引用拷贝、浅拷贝、深拷贝">17. 引用拷贝、浅拷贝、深拷贝</a></li>
+                <li>
+                    <a href="#18-stringstringbufferstringbuilder" aria-label="18. String、StringBuffer、StringBuilder">18. String、StringBuffer、StringBuilder</a></li>
+                <li>
+                    <a href="#19-exceptionerror" aria-label="19. Exception、Error">19. Exception、Error</a><ul>
+                        
+                <li>
+                    <a href="#%e5%bc%82%e5%b8%b8%e4%bd%bf%e7%94%a8%e6%9c%89%e5%93%aa%e4%ba%9b%e9%9c%80%e8%a6%81%e6%b3%a8%e6%84%8f%e7%9a%84%e5%9c%b0%e6%96%b9" aria-label="异常使用有哪些需要注意的地方？">异常使用有哪些需要注意的地方？</a></li></ul>
+                </li>
+                <li>
+                    <a href="#20-%e6%b3%9b%e5%9e%8b" aria-label="20. 泛型">20. 泛型</a></li>
+                <li>
+                    <a href="#21-%e5%8f%8d%e5%b0%84" aria-label="21. 反射">21. 反射</a></li>
+                <li>
+                    <a href="#22-%e6%b3%a8%e8%a7%a3" aria-label="22. 注解">22. 注解</a><ul>
+                        
+                <li>
+                    <a href="#%e4%bd%95%e8%b0%93%e6%b3%a8%e8%a7%a3" aria-label="何谓注解？">何谓注解？</a></li>
+                <li>
+                    <a href="#%e6%b3%a8%e8%a7%a3%e7%9a%84%e8%a7%a3%e6%9e%90%e6%96%b9%e6%b3%95%e6%9c%89%e5%93%aa%e7%a7%8d" aria-label="注解的解析方法有哪种？">注解的解析方法有哪种？</a></li></ul>
+                </li>
+                <li>
+                    <a href="#23-%e5%80%bc%e4%bc%a0%e9%80%92" aria-label="23. 值传递">23. 值传递</a><ul>
+                        
+                <li>
+                    <a href="#%e6%a6%82%e5%bf%b5" aria-label="概念">概念</a></li></ul>
+                </li>
+                <li>
+                    <a href="#24-java%e5%ba%8f%e5%88%97%e5%8c%96" aria-label="24. Java序列化">24. Java序列化</a></li>
+                <li>
+                    <a href="#25-%e6%b3%9b%e5%9e%8b%e9%80%9a%e9%85%8d%e7%ac%a6" aria-label="25. 泛型、通配符">25. 泛型、通配符</a></li>
+                <li>
+                    <a href="#26-java%e5%8f%8d%e5%b0%84%e6%9c%ba%e5%88%b6" aria-label="26. Java反射机制">26. Java反射机制</a></li>
+                <li>
+                    <a href="#27-bigdecimal" aria-label="27. BigDecimal">27. BigDecimal</a></li>
+                <li>
+                    <a href="#28-maven" aria-label="28. Maven">28. Maven</a><ul>
+                        
+                <li>
+                    <a href="#%e4%be%9d%e8%b5%96%e5%af%bc%e5%85%a5" aria-label="依赖导入">依赖导入</a><ul>
+                        
+                <li>
+                    <a href="#maven%e5%8f%af%e9%80%89%e4%be%9d%e8%b5%96" aria-label="Maven可选依赖">Maven可选依赖</a></li>
+                <li>
+                    <a href="#maven%e6%8e%92%e9%99%a4%e4%be%9d%e8%b5%96" aria-label="Maven排除依赖">Maven排除依赖</a></li>
+                <li>
+                    <a href="#maven%e7%bb%a7%e6%89%bf%e5%85%b3%e7%b3%bb" aria-label="Maven继承关系">Maven继承关系</a></li></ul>
+                </li>
+                <li>
+                    <a href="#maven%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" aria-label="Maven常用命令">Maven常用命令</a></li>
+                <li>
+                    <a href="#maven%e6%b5%8b%e8%af%95%e9%a1%b9%e7%9b%ae" aria-label="Maven测试项目">Maven测试项目</a></li>
+                <li>
+                    <a href="#maven%e6%89%93%e5%8c%85%e9%a1%b9%e7%9b%ae" aria-label="Maven打包项目">Maven打包项目</a></li></ul>
+                </li>
+                <li>
+                    <a href="#29-spi-%e6%9c%ba%e5%88%b6" aria-label="29. SPI 机制">29. SPI 机制</a></li>
+                <li>
+                    <a href="#30-%e8%af%ad%e6%b3%95%e7%b3%96" aria-label="30. 语法糖">30. 语法糖</a></li>
+                <li>
+                    <a href="#31-%e9%9b%86%e5%90%88%e6%80%bb%e7%bb%93" aria-label="31. 集合总结">31. 集合总结</a><ul>
+                        
+                <li>
+                    <a href="#%e5%ba%95%e5%b1%82%e5%ae%9e%e7%8e%b0" aria-label="底层实现">底层实现</a><ul>
+                        
+                <li>
+                    <a href="#list" aria-label="List">List</a><ul>
+                        
+                <li>
+                    <a href="#arraylist-%e5%92%8c-vector-%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="ArrayList 和 Vector 的区别?">ArrayList 和 Vector 的区别?</a></li>
+                <li>
+                    <a href="#arraylist-%e4%b8%8e-linkedlist-%e5%8c%ba%e5%88%ab" aria-label="ArrayList 与 LinkedList 区别?">ArrayList 与 LinkedList 区别?</a></li>
+                <li>
+                    <a href="#%e8%a1%a5%e5%85%85%e5%86%85%e5%ae%b9randomaccess-%e6%8e%a5%e5%8f%a3" aria-label="补充内容:RandomAccess 接口">补充内容:RandomAccess 接口</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%af%b4%e4%b8%80%e8%af%b4-arraylist-%e7%9a%84%e6%89%a9%e5%ae%b9%e6%9c%ba%e5%88%b6%e5%90%a7" aria-label="说一说 ArrayList 的扩容机制吧">说一说 ArrayList 的扩容机制吧</a></li>
+                <li>
+                    <a href="#set" aria-label="Set">Set</a><ul>
+                        
+                <li>
+                    <a href="#comparable-%e5%92%8c-comparator-%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="Comparable 和 Comparator 的区别">Comparable 和 Comparator 的区别</a></li>
+                <li>
+                    <a href="#%e6%af%94%e8%be%83-hashsetlinkedhashset-%e5%92%8c-treeset-%e4%b8%89%e8%80%85%e7%9a%84%e5%bc%82%e5%90%8c" aria-label="比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同">比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同</a></li></ul>
+                </li>
+                <li>
+                    <a href="#queue" aria-label="Queue">Queue</a><ul>
+                        
+                <li>
+                    <a href="#queue-%e4%b8%8e-deque-%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="Queue 与 Deque 的区别">Queue 与 Deque 的区别</a></li>
+                <li>
+                    <a href="#arraydeque-%e4%b8%8e-linkedlist-%e7%9a%84%e5%8c%ba%e5%88%ab" aria-label="ArrayDeque 与 LinkedList 的区别">ArrayDeque 与 LinkedList 的区别</a></li>
+                <li>
+                    <a href="#priorityqueue" aria-label="PriorityQueue">PriorityQueue</a></li></ul>
+                </li>
+                <li>
+                    <a href="#map" aria-label="Map">Map</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="1-java语言的特点">1. Java语言的特点<a hidden class="anchor" aria-hidden="true" href="#1-java语言的特点">#</a></h1>
+<ol>
+<li>
+<p>简单易学，相较于python等语言具有较好的严谨性以及报错机制；</p>
+</li>
+<li>
+<p>面向对象（封装，继承，多态），Java中所有内容都是基于类进行扩展的，由类创建的实体称为对象，并且对象之间存在不同的关系，由此发展出了继承、多态等语言特性；</p>
+</li>
+<li>
+<p>平台无关性（ Java 虚拟机实现平台无关性），Java语言通过JVM运行字节码文件的方式解决了平台间迁移代码的问题。Java分为编译与运行两部分，编译时只将Java代码转化为<code>.class</code>字节码的过程（其他语言例如在安卓平台推广的Kotlin等，通过自己的编译器同样可以编译为字节码文件，满足JVM运行字节码文件的格式要求即可），然后JVM只需要运行字节码文件即可。但是在不同平台上运行的JVM是需要重新编写和编译的，但是这个步骤已经由oracle公司帮你完成了（当然也可以自己下载源码然后自己编译，并且可以修改JVM的内容，设计成你自己满意的虚拟机）</p>
+</li>
+<li>
+<p>支持多线程（ C++ 语言早期没有内置的多线程机制，因此必须调用操作系统的多线程功能来进行多线程程序设计，而 Java 语言却提供了多线程支持）；</p>
+</li>
+<li>
+<p>可靠性、安全性，Java语言提供了GC-垃圾收集器，极大的便利了程序员不必设计类似于cpp中的析构函数以及对象的释放了；</p>
+</li>
+<li>
+<p>支持网络编程并且很方便（ Java 语言诞生本身就是为简化网络编程设计的，因此 Java 语言不仅支持网络编程而且很方便）；</p>
+</li>
+<li>
+<p>编译与解释并存（java-&gt;.class是编译，.class-&gt;运行是解释），虚拟机在运行代码时首先由类加载器加载字节码文件（生成了Class对象），然后通过解释器一步步执行，虽然在字节码中已经比较偏向与底层了，但是由解释器转化为机器码仍然消耗时间，所以在执行效率上相较于cpp、go等还是稍显逊色。</p>
+</li>
+</ol>
+<h1 id="2-jvmjdkjre三者的关系">2. JVM、JDK、JRE三者的关系<a hidden class="anchor" aria-hidden="true" href="#2-jvmjdkjre三者的关系">#</a></h1>
+<ul>
+<li>JVM就是Java虚拟机，是运行字节码文件的虚拟机。但是虚拟机并不是只有一种，常用的是HotSpot（oracle的）还有J9、JRockit等都是其他公司设置的，不同的虚拟机中使用的垃圾收集器-GC的逻辑、内存模型等都有区别，我们在平时使用时使用oracle提供的就可以（最常用的）。</li>
+<li>JRE - Java Runtime Environment，Java运行时环境，其中包含了JVM、Java类库、java命令和一些基础组件，可以直接运行字节码文件，但是不能对Java代码进行编译。</li>
+<li>JDK - Java Development Kit，包含了JRE以及javac等命令，可以进行Java文件等编译等。</li>
+</ul>
+<h1 id="3-注释">3. 注释<a hidden class="anchor" aria-hidden="true" href="#3-注释">#</a></h1>
+<h1 id="4-标识符-和-关键字">4. 标识符 和 关键字<a hidden class="anchor" aria-hidden="true" href="#4-标识符-和-关键字">#</a></h1>
+<h1 id="7-continuebreakreturn的区别">7. continue、break、return的区别<a hidden class="anchor" aria-hidden="true" href="#7-continuebreakreturn的区别">#</a></h1>
+<p>三者的作用效果是不同的，continue是跳出本次循环，若循环没有满足结束条件则会继续下次循环，break是直接跳出循环，return是直接跳出方法，当return所在的方法返回值类型不为void时需要返回一个值。</p>
+<h1 id="8-成员变量与局部变量">8. 成员变量与局部变量<a hidden class="anchor" aria-hidden="true" href="#8-成员变量与局部变量">#</a></h1>
+<p>成员变量属于类，可以使用static、final关键词进行修饰，使用static关键字修饰是变量存在于方法区，当没有采用static关键字进行修饰时，变量随对象的创建一同创建，对象存在于堆内，所以变量也存在于堆内。成员变量会由虚拟机进行一次初始化为默认值的过程，因此可以不进行初始化也能使用。</p>
+<p>局部变量属于方法，可以使用final进行修饰，局部变量在方法被调用时创建，同时局部变量也需要初始化后使用，因为调用方法并不会对局部变量进行默认的初始化。</p>
+<h1 id="9-静态变量-与-常量">9. 静态变量 与 常量<a hidden class="anchor" aria-hidden="true" href="#9-静态变量-与-常量">#</a></h1>
+<p>静态变量值的是可以直接通过类进行访问的变量，与对象无关。</p>
+<p>当变量没有使用final进行修饰时，变量的值是可以改变的，可以通过类也可以通过对象。当使用final进行修饰后，该变量就被称为常量，因为这个变量是一个不会变化的变量，并且通过类就可以直接访问得到。</p>
+<h1 id="10-静态方法">10. 静态方法<a hidden class="anchor" aria-hidden="true" href="#10-静态方法">#</a></h1>
+<p>静态方法中不可以使用非静态成员，因为静态成员在调用的时候可能还有类的对象被创建，但是非静态成员变量又存储在对象实例中，一个已经存在并且被调用的方法，是无法访问一个还没有被创造出来的对象的。</p>
+<h1 id="11-重载-与-重写">11. 重载 与 重写<a hidden class="anchor" aria-hidden="true" href="#11-重载-与-重写">#</a></h1>
+<p>方法重写指得是将继承自父类的方向重新进行实现，而重载指的是同一个方法根据形参的不同设置不同的实现。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> A {
+</span></span><span style="display:flex;"><span>  	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method2 (){}
+</span></span><span style="display:flex;"><span>  	<span style="color:#007f7f">// 重载
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>  	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method1 (){}
+</span></span><span style="display:flex;"><span>  	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method1 (<span style="color:#fff;font-weight:bold">int</span> a){}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> B <span style="color:#fff;font-weight:bold">extends</span> A{
+</span></span><span style="display:flex;"><span>  	<span style="color:#007f7f">// 重写
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>  	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method2 (){}
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="12-可变长参数">12. 可变长参数<a hidden class="anchor" aria-hidden="true" href="#12-可变长参数">#</a></h1>
+<p>可变长参数指的是调用方法时可以传入多个参数（参数的数量是不固定的），本质是数组是编译阶段的语法糖。</p>
+<p>并且一个方法只能有一个可变长参数，并且可变长参数必须是所有参数中的最后一点，可变长参数前面的参数在调用时不可省略。</p>
+<p>若遇到方法重载时，其中一种使用了可变长参数，两个方法同时满足调用要求时，在运行时实际调用的应该是哪个方法呢？ &ndash; 答案是 优先调用不含邮可变长参数的方法。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method (String ... args){
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#007f7f">// 等价
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method (String[] args){
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="13-包装类">13. 包装类<a hidden class="anchor" aria-hidden="true" href="#13-包装类">#</a></h1>
+<p>包装类是基本数据类型封装得到的引用类型对象，可以在范型中使用，同时每种包装类型都对一定范围中的数据进行了封装例如Integer封装了-128，127。</p>
+<p>虽然进行缓存封装，但是直接采用new关键字创建对象时还是会重写去创建一个新的对象，并不会直接使用缓存中的，若想使用缓存中的可以使用valueOf方法。</p>
+<p>同时引用类型若存在对象比较是否相同时，一定要采用equals方法。</p>
+<h1 id="14-自动拆箱装箱">14. 自动拆箱、装箱<a hidden class="anchor" aria-hidden="true" href="#14-自动拆箱装箱">#</a></h1>
+<p>自动拆箱会在需要使用基本类型的地方自动将封装类的对象转化为基本类型，而在需要使用封装类的地方自动进行装箱。</p>
+<p>浮点值存在精度问题，因为在计算机中存储的是二进制，无法表示无限不得小数位的，若想避免这种问题可以使用BigDecimal和BigInteget。</p>
+<h1 id="15-面向对象">15. 面向对象<a hidden class="anchor" aria-hidden="true" href="#15-面向对象">#</a></h1>
+<h2 id="a-面向对象与面向过程的区别">a) 面向对象与面向过程的区别<a hidden class="anchor" aria-hidden="true" href="#a-面向对象与面向过程的区别">#</a></h2>
+<p>两者的区别是解决问题的思路不同：</p>
+<ul>
+<li>
+<p>面向过程是将解决问题的过程分解为一个个方法，通过一个个的调用方法来解决问题</p>
+</li>
+<li>
+<p>面向对象是根据问题抽象出一个个对象，然后用对象执行方法的方式来解决问题</p>
+</li>
+</ul>
+<p>根据这两种不同的设计思路，得到了大量不同的编程语言，例如c、js等是面向过程的，Java、cpp是面向对象的。那面向过程的语言运行效率一定比面向对象高？&ndash;并不一定，c与cpp的运行效率基本差不多没有很大的区别，让人感觉Java运行效率低的原因是Java是半编程语言，在编译阶段编译得到的只是字节码，并不是可以直接在计算机上运行的程序，在jvm运行时还有解释器存在，将字节码转化为机器码，很多解释型的面向过程的语言的执行效率还不如Java呢，因此语言的执行效率和语言语法的结构没有什么关系。</p>
+<h2 id="b-对象的创建">b) 对象的创建<a hidden class="anchor" aria-hidden="true" href="#b-对象的创建">#</a></h2>
+<p><code>ClassTest classTest = new ClassTest()</code></p>
+<p>这是一个创建对象的语句，这句话可以分为两部分：<code>ClassTest classTest</code>和<code>new ClassTest()</code>。其中前半句话的作用是创建一个类对象的引用，若语句位于类内，则该引用会在对象创建的时候在堆内一同被创建，若语句位于方法内会在方法被调用时在虚拟机栈中创建方法的引用；后半句是使用new关键字进行对象的创建，会在堆中开辟一块区域用于存放对象，并将创建对象的位置作为引用赋予刚刚声明的引用。</p>
+<h2 id="c-对象的比较">c) 对象的比较<a hidden class="anchor" aria-hidden="true" href="#c-对象的比较">#</a></h2>
+<p>同一个类的两个对象的比较建议使用重写后的equals方法，双等号直接比较内存中的地址，大多是情况下这是无效的（无法达到你预期的效果，除非你真多想直接比较两个对象是不是就是指向一个对象）。</p>
+<h2 id="d-构造方法">d) 构造方法<a hidden class="anchor" aria-hidden="true" href="#d-构造方法">#</a></h2>
+<ul>
+<li>名字与类名相同。</li>
+<li>没有返回值，但不能用 void 声明构造函数。</li>
+<li>生成类的对象时自动执行，无需调用。</li>
+<li>可以重载，不能重写，可以使用super调用父类的构造方法</li>
+</ul>
+<h1 id="16-面向对象的三大特征">16. 面向对象的三大特征<a hidden class="anchor" aria-hidden="true" href="#16-面向对象的三大特征">#</a></h1>
+<p>封装、继承、多态</p>
+<h2 id="封装">封装<a hidden class="anchor" aria-hidden="true" href="#封装">#</a></h2>
+<p>封装是指把一个对象的状态信息（也就是属性）隐藏在对象内部，不允许外部对象直接访问对象的内部信息。但是可以提供一些可以被外界访问的方法来操作属性，通常指的是getset方法</p>
+<h2 id="继承">继承<a hidden class="anchor" aria-hidden="true" href="#继承">#</a></h2>
+<ul>
+<li>子类拥有父类对象所有的属性和方法（包括私有属性和私有方法），但是父类中的私有属性和方法子类是无法访问，<strong>只是拥有</strong>，这点可以通过Class对象进行验证。</li>
+<li>子类可以拥有自己属性和方法，即子类可以对父类进行扩展。</li>
+<li>子类可以用自己的方式实现父类的方法（重写）。</li>
+<li>Java只支持单继承、但可以实现多个接口</li>
+</ul>
+<h2 id="多态">多态<a hidden class="anchor" aria-hidden="true" href="#多态">#</a></h2>
+<p>表示一个对象具有多种的状态，具体表现为父类的引用指向子类的实例。</p>
+<p><strong>多态的特点:</strong></p>
+<ul>
+<li>对象类型和引用类型之间具有继承（类）/实现（接口）的关系；</li>
+<li>引用类型变量发出的方法调用的到底是哪个类中的方法，必须在程序运行期间才能确定；</li>
+<li>多态不能调用“只在子类存在但在父类不存在”的方法；</li>
+<li>如果子类重写了父类的方法，真正执行的是子类覆盖的方法，如果子类没有覆盖父类的方法，执行的是父类的方法。</li>
+</ul>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">20
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">interface</span> A{
+</span></span><span style="display:flex;"><span>  	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> B <span style="color:#fff;font-weight:bold">implements</span> A{
+</span></span><span style="display:flex;"><span>  	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method(){
+</span></span><span style="display:flex;"><span>      	System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(<span style="color:#0ff;font-weight:bold">&#34;B&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">class</span> C <span style="color:#fff;font-weight:bold">implements</span> A{
+</span></span><span style="display:flex;"><span>  	<span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">void</span> method(){
+</span></span><span style="display:flex;"><span>      	System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(<span style="color:#0ff;font-weight:bold">&#34;C&#34;</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#007f7f">// main函数
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> main(String ... args){
+</span></span><span style="display:flex;"><span>    A a = <span style="color:#fff;font-weight:bold">new</span> B();
+</span></span><span style="display:flex;"><span>  	a.<span style="color:#007f7f">method</span>();<span style="color:#007f7f">// 输出B
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="接口和抽象类的共同点和区别">接口和抽象类的共同点和区别<a hidden class="anchor" aria-hidden="true" href="#接口和抽象类的共同点和区别">#</a></h2>
+<p><strong>共同点</strong> ：</p>
+<ul>
+<li>都不能被实例化。</li>
+<li>都可以包含抽象方法。</li>
+<li>都可以有默认实现的方法（Java 8 可以用 <code>default</code> 关键字在接口中定义默认方法）。</li>
+</ul>
+<p><strong>区别</strong> ：</p>
+<ul>
+<li>接口主要用于对类的行为进行约束，你实现了某个接口就具有了对应的行为。抽象类主要用于代码复用，强调的是所属关系。（因此在各大开源框架中常用的结构都是通过接口定义较为底层的接口，然后采用抽象类继承接口提供一个基础的实现类，然后用户可以继承抽象类进行实现，通常此时用户只需要实现核心方法即可）</li>
+<li>一个类只能继承一个类，但是可以实现多个接口。</li>
+<li>接口中的成员变量只能是 <code>public static final</code> 类型的，不能被修改且必须有初始值，而抽象类的成员变量默认 default，可在子类中被重新定义，也可被重新赋值</li>
+</ul>
+<h1 id="17-引用拷贝浅拷贝深拷贝">17. 引用拷贝、浅拷贝、深拷贝<a hidden class="anchor" aria-hidden="true" href="#17-引用拷贝浅拷贝深拷贝">#</a></h1>
+<p><img loading="lazy" src="https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/github/javaguide/java/basis/shallow&amp;deep-copy.png" alt="浅拷贝、深拷贝、引用拷贝示意图"  />
+</p>
+<p>浅拷贝与深拷贝都需要实现<code>Cloneable</code>接口，区别在于clone方法的实现，深拷贝需要调用每一个引用类型对象的clone方法（都实现的情况下）</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">15
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">16
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">17
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">18
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">19
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">20
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">21
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">22
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">23
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">24
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">25
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">26
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">27
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">28
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">29
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">30
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">31
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">32
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">33
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">34
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">35
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">36
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">37
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">38
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">39
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">40
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">41
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">42
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">43
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">44
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">45
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">46
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">47
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">48
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">49
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">50
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">51
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">52
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">53
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">54
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">55
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">56
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">57
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">58
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">59
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">60
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">61
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">62
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">63
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">64
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">65
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">66
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">67
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">68
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">69
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">70
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">71
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">72
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">73
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">74
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">75
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">76
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">77
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">78
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">79
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#007f7f">// Object的clone方法是protected修饰的，因此需要重写并且权限改为public才能调用clone方法
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f">// 浅拷贝 为了代码的简洁使用了lombok
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>@AllArgsConstructor
+</span></span><span style="display:flex;"><span>@NoArgsConstructor
+</span></span><span style="display:flex;"><span>@Getter
+</span></span><span style="display:flex;"><span>@Setter
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> A <span style="color:#fff;font-weight:bold">implements</span> Cloneable{
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> <span style="color:#fff;font-weight:bold">int</span> id;
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> String name;
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> B b;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @Override
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">public</span> A clone() <span style="color:#fff;font-weight:bold">throws</span> CloneNotSupportedException {
+</span></span><span style="display:flex;"><span>        A a = <span style="color:#fff;font-weight:bold">new</span> A();
+</span></span><span style="display:flex;"><span>        a.<span style="color:#007f7f">id</span> = <span style="color:#fff;font-weight:bold">this</span>.<span style="color:#007f7f">id</span>;
+</span></span><span style="display:flex;"><span>        a.<span style="color:#007f7f">name</span> = <span style="color:#fff;font-weight:bold">this</span>.<span style="color:#007f7f">name</span>;
+</span></span><span style="display:flex;"><span>        a.<span style="color:#007f7f">b</span> = <span style="color:#fff;font-weight:bold">this</span>.<span style="color:#007f7f">b</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> a;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@Getter
+</span></span><span style="display:flex;"><span>@Setter
+</span></span><span style="display:flex;"><span>@AllArgsConstructor
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> B {
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> <span style="color:#fff;font-weight:bold">int</span> id;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> main(String[] args) <span style="color:#fff;font-weight:bold">throws</span> CloneNotSupportedException {
+</span></span><span style="display:flex;"><span>  	A a1 = <span style="color:#fff;font-weight:bold">new</span> A(<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#0ff;font-weight:bold">&#34;king&#34;</span>, <span style="color:#fff;font-weight:bold">new</span> B(<span style="color:#ff0;font-weight:bold">44</span>));
+</span></span><span style="display:flex;"><span>    A a2= a1.<span style="color:#007f7f">clone</span>();
+</span></span><span style="display:flex;"><span>    System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(a1.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">hashCode</span>() == a2.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">hashCode</span>());<span style="color:#007f7f">// true
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>    System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(a2.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">getId</span>());<span style="color:#007f7f">//44
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>    a1.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">setId</span>(<span style="color:#ff0;font-weight:bold">77</span>);
+</span></span><span style="display:flex;"><span>    System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(a2.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">getId</span>());<span style="color:#007f7f">//77
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>  	<span style="color:#007f7f">// 这个地方就是深浅拷贝的区别，浅拷贝中的引用类型都是指向的同一个对象，一个改变了另一个就改变了，String不用担心，因为String本身是不可变的不存在这个问题。
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#007f7f">// 深拷贝
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>@AllArgsConstructor
+</span></span><span style="display:flex;"><span>@NoArgsConstructor
+</span></span><span style="display:flex;"><span>@Getter
+</span></span><span style="display:flex;"><span>@Setter
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> A <span style="color:#fff;font-weight:bold">implements</span> Cloneable{
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> <span style="color:#fff;font-weight:bold">int</span> id;
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> String name;
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> B b;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @Override
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">public</span> A clone() <span style="color:#fff;font-weight:bold">throws</span> CloneNotSupportedException {
+</span></span><span style="display:flex;"><span>        A a = <span style="color:#fff;font-weight:bold">new</span> A();
+</span></span><span style="display:flex;"><span>        a.<span style="color:#007f7f">id</span> = <span style="color:#fff;font-weight:bold">this</span>.<span style="color:#007f7f">id</span>;
+</span></span><span style="display:flex;"><span>        a.<span style="color:#007f7f">name</span> = <span style="color:#fff;font-weight:bold">this</span>.<span style="color:#007f7f">name</span>;
+</span></span><span style="display:flex;"><span>        a.<span style="color:#007f7f">b</span> = <span style="color:#fff;font-weight:bold">this</span>.<span style="color:#007f7f">b</span>.<span style="color:#007f7f">clone</span>();
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> a;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>@Getter
+</span></span><span style="display:flex;"><span>@Setter
+</span></span><span style="display:flex;"><span>@AllArgsConstructor
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">class</span> B <span style="color:#fff;font-weight:bold">implements</span> Cloneable{
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">private</span> <span style="color:#fff;font-weight:bold">int</span> id;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    @Override
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">public</span> B clone() <span style="color:#fff;font-weight:bold">throws</span> CloneNotSupportedException {
+</span></span><span style="display:flex;"><span>        B b = <span style="color:#fff;font-weight:bold">new</span> B(<span style="color:#fff;font-weight:bold">this</span>.<span style="color:#007f7f">id</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">return</span> b;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">static</span> <span style="color:#fff;font-weight:bold">void</span> main(String[] args) <span style="color:#fff;font-weight:bold">throws</span> CloneNotSupportedException {
+</span></span><span style="display:flex;"><span>  	A a1 = <span style="color:#fff;font-weight:bold">new</span> A(<span style="color:#ff0;font-weight:bold">2</span>, <span style="color:#0ff;font-weight:bold">&#34;king&#34;</span>, <span style="color:#fff;font-weight:bold">new</span> B(<span style="color:#ff0;font-weight:bold">44</span>));
+</span></span><span style="display:flex;"><span>    A a2= a1.<span style="color:#007f7f">clone</span>();
+</span></span><span style="display:flex;"><span>    System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(a1.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">hashCode</span>() == a2.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">hashCode</span>());<span style="color:#007f7f">// false
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>    System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(a2.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">getId</span>());<span style="color:#007f7f">//44
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>    a1.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">setId</span>(<span style="color:#ff0;font-weight:bold">77</span>);
+</span></span><span style="display:flex;"><span>    System.<span style="color:#007f7f">out</span>.<span style="color:#007f7f">println</span>(a2.<span style="color:#007f7f">getB</span>().<span style="color:#007f7f">getId</span>());<span style="color:#007f7f">//44
+</span></span></span><span style="display:flex;"><span><span style="color:#007f7f"></span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h1 id="18-stringstringbufferstringbuilder">18. String、StringBuffer、StringBuilder<a hidden class="anchor" aria-hidden="true" href="#18-stringstringbufferstringbuilder">#</a></h1>
+<p><strong>可变性</strong></p>
+<p><code>String</code> 是不可变的（后面会详细分析原因）。</p>
+<p><code>StringBuilder</code> 与 <code>StringBuffer</code> 是可变的，都继承自 <code>AbstractStringBuilder</code> 类，在 <code>AbstractStringBuilder</code> 中也是使用字符数组保存字符串，不过没有使用 <code>final</code> 和 <code>private</code> 关键字修饰。</p>
+<p><strong>线程安全性</strong></p>
+<p><code>String</code> 中的对象是不可变的，也就可以理解为常量，线程安全。<code>AbstractStringBuilder</code> 是 <code>StringBuilder</code> 与 <code>StringBuffer</code> 的公共父类，定义了一些字符串的基本操作，如 <code>expandCapacity</code>、<code>append</code>、<code>insert</code>、<code>indexOf</code> 等公共方法。<code>StringBuffer</code> 对方法加了同步锁或者对调用的方法加了同步锁，所以是线程安全的。<code>StringBuilder</code> 并没有对方法进行加同步锁，所以是非线程安全的。</p>
+<p><strong>性能</strong></p>
+<p>每次对 <code>String</code> 类型进行改变的时候，都会生成一个新的 <code>String</code> 对象，然后将指针指向新的 <code>String</code> 对象。<code>StringBuffer</code> 每次都会对 <code>StringBuffer</code> 对象本身进行操作，而不是生成新的对象并改变对象引用。相同情况下使用 <code>StringBuilder</code> 相比使用 <code>StringBuffer</code> 仅能获得 10%~15% 左右的性能提升，但却要冒多线程不安全的风险。</p>
+<p><strong>对于三者使用的总结：</strong></p>
+<ol>
+<li>操作少量的数据: 适用 <code>String</code></li>
+<li>单线程操作字符串缓冲区下操作大量数据: 适用 <code>StringBuilder</code></li>
+<li>多线程操作字符串缓冲区下操作大量数据: 适用 <code>StringBuffer</code></li>
+</ol>
+<p>我们知道被 <code>final</code> 关键字修饰的类不能被继承，修饰的方法不能被重写，修饰的变量是基本数据类型则值不能改变，修饰的变量是引用类型则不能再指向其他对象。因此，<code>final</code> 关键字修饰的数组保存字符串并不是 <code>String</code>不可变的根本原因，因为这个数组保存的字符串是可变的（<code>final</code> 修饰引用类型变量的情况）。</p>
+<p><code>String</code> 真正不可变有下面几点原因：</p>
+<ol>
+<li>保存字符串的数组被 <code>final</code> 修饰且为私有的，并且<code>String</code> 类没有提供/暴露修改这个字符串的方法。</li>
+<li><code>String</code> 类被 <code>final</code> 修饰导致其不能被继承，进而避免了子类破坏 <code>String</code> 不可变。</li>
+</ol>
+<p>JVM重载了+运算符，可以用于字符串的相加，本质上字符串的相加编译器还是会转化为StringBuffer调用append方法，但是在循环中不断使用+时，编译器并不会自动进行优化，创建一个StringBuffer进行相加，此时在循环中会不断创建新的StringBuffer，这时候自己创建StringBuffer进行优化是有必要的。</p>
+<h1 id="19-exceptionerror">19. Exception、Error<a hidden class="anchor" aria-hidden="true" href="#19-exceptionerror">#</a></h1>
+<h2 id="异常使用有哪些需要注意的地方">异常使用有哪些需要注意的地方？<a hidden class="anchor" aria-hidden="true" href="#异常使用有哪些需要注意的地方">#</a></h2>
+<ul>
+<li>不要把异常定义为静态变量，因为这样会导致异常栈信息错乱。每次手动抛出异常，我们都需要手动 new 一个异常对象抛出。</li>
+<li>抛出的异常信息一定要有意义。</li>
+<li>建议抛出更加具体的异常比如字符串转换为数字格式错误的时候应该抛出<code>NumberFormatException</code>而不是其父类<code>IllegalArgumentException</code>。</li>
+<li>使用日志打印异常之后就不要再抛出异常了（两者不要同时存在一段代码逻辑中）。</li>
+</ul>
+<h1 id="20-泛型">20. 泛型<a hidden class="anchor" aria-hidden="true" href="#20-泛型">#</a></h1>
+<h1 id="21-反射">21. 反射<a hidden class="anchor" aria-hidden="true" href="#21-反射">#</a></h1>
+<h1 id="22-注解">22. 注解<a hidden class="anchor" aria-hidden="true" href="#22-注解">#</a></h1>
+<h2 id="何谓注解">何谓注解？<a hidden class="anchor" aria-hidden="true" href="#何谓注解">#</a></h2>
+<p><code>Annotation</code> （注解） 是 Java5 开始引入的新特性，可以看作是一种特殊的注释，主要用于修饰类、方法或者变量，提供某些信息供程序在编译或者运行时使用。</p>
+<p>注解本质是一个继承了<code>Annotation</code> 的特殊接口：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">9
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>@Target(ElementType.<span style="color:#007f7f">METHOD</span>)
+</span></span><span style="display:flex;"><span>@Retention(RetentionPolicy.<span style="color:#007f7f">SOURCE</span>)
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> @interface Override {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">interface</span> Override <span style="color:#fff;font-weight:bold">extends</span> Annotation{
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>JDK 提供了很多内置的注解（比如 <code>@Override</code> 、<code>@Deprecated</code>），同时，我们还可以自定义注解。</p>
+<h2 id="注解的解析方法有哪种">注解的解析方法有哪种？<a hidden class="anchor" aria-hidden="true" href="#注解的解析方法有哪种">#</a></h2>
+<p>注解只有被解析之后才会生效，常见的解析方法有两种：</p>
+<ul>
+<li><strong>编译期直接扫描</strong> ：编译器在编译 Java 代码的时候扫描对应的注解并处理，比如某个方法使用<code>@Override</code> 注解，编译器在编译的时候就会检测当前的方法是否重写了父类对应的方法。</li>
+<li><strong>运行期通过反射处理</strong> ：像框架中自带的注解(比如 Spring 框架的 <code>@Value</code> 、<code>@Component</code>)都是通过反射来进行处理的。</li>
+</ul>
+<h1 id="23-值传递">23. 值传递<a hidden class="anchor" aria-hidden="true" href="#23-值传递">#</a></h1>
+<p>在c++中存在值传递与引用传递，但是在Java中只存在值传递。</p>
+<h2 id="概念">概念<a hidden class="anchor" aria-hidden="true" href="#概念">#</a></h2>
+<ul>
+<li><strong>值传递</strong>：值传递指的是在方法调用时，实参中传递的是具体的值，在方法中得到的值是拷贝变量后得到的。</li>
+<li><strong>引用传递</strong>：与值传递不同的是，引用传递在实惨中传递的不是拷贝后的变量，而是将方法调用中的变量地址直接进行传递。</li>
+</ul>
+<p><img loading="lazy" src="https://king-super.oss-cn-nanjing.aliyuncs.com/%e5%80%bc%e4%bc%a0%e9%80%92%e4%b8%8e%e5%bc%95%e7%94%a8%e4%bc%a0%e9%80%92.png" alt="值传递与引用传递"  />
+</p>
+<p>值传递的差异与引用传递的差异类似上图，以常见的引用类型为例，若是值传递，则在被调用方法中获取到的是指向对象的地址的一个副本，效果就是两个调用方法与被调用方法中的两个变量都指向了同一个对象，在被调用方法中更改对象的值，在调用方法指向的对象同样更改了。</p>
+<p>通常在编程语言中，创建一个引用都是在栈中开辟一块内存地址，该内存地址将会指向堆中的的一个对象。而上图中a1实际上就是一个名称，指向栈中的引用，而引用传递就是新设置一个名称同样适用的是这一个引用。</p>
+<p>上述两者的区别就是，指向堆内存的地址是拷贝一个新的还是公用同一个。</p>
+<h1 id="24-java序列化">24. Java序列化<a hidden class="anchor" aria-hidden="true" href="#24-java序列化">#</a></h1>
+<h1 id="25-泛型通配符">25. 泛型、通配符<a hidden class="anchor" aria-hidden="true" href="#25-泛型通配符">#</a></h1>
+<h1 id="26-java反射机制">26. Java反射机制<a hidden class="anchor" aria-hidden="true" href="#26-java反射机制">#</a></h1>
+<h1 id="27-bigdecimal">27. BigDecimal<a hidden class="anchor" aria-hidden="true" href="#27-bigdecimal">#</a></h1>
+<h1 id="28-maven">28. Maven<a hidden class="anchor" aria-hidden="true" href="#28-maven">#</a></h1>
+<p><code>maven</code>项目最核心的就是<code>pom</code>文件，学习<code>maven</code>的使用就是学习<code>pom</code>的编写。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">12
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">13
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">14
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">15
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#0f0;font-weight:bold">&lt;?xml version=&#34;1.0&#34; encoding=&#34;UTF-8&#34;?&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;project</span> <span style="color:#007f7f">xmlns=</span><span style="color:#0ff;font-weight:bold">&#34;http://maven.apache.org/POM/4.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#007f7f">xmlns:xsi=</span><span style="color:#0ff;font-weight:bold">&#34;http://www.w3.org/2001/XMLSchema-instance&#34;</span>
+</span></span><span style="display:flex;"><span>         <span style="color:#007f7f">xsi:schemaLocation=</span><span style="color:#0ff;font-weight:bold">&#34;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&#34;</span><span style="font-weight:bold">&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;modelVersion&gt;</span>4.0.0<span style="font-weight:bold">&lt;/modelVersion&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;groupId&gt;</span>org.example<span style="font-weight:bold">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;artifactId&gt;</span>MavenTest<span style="font-weight:bold">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;version&gt;</span>1.0-SNAPSHOT<span style="font-weight:bold">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;properties&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&lt;maven.compiler.source&gt;</span>8<span style="font-weight:bold">&lt;/maven.compiler.source&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&lt;maven.compiler.target&gt;</span>8<span style="font-weight:bold">&lt;/maven.compiler.target&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;/properties&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;/project&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>groupId</code>、<code>artifactId</code>、<code>version</code>这三个元素合在一起，用于唯一区别每个项目，别人如果需要将我们编写的代码作为依赖，那么就必须通过这三个元素来定位我们的项目，我们称为一个项目的基本坐标，所有的项目一般都有自己的<code>Maven</code>坐标，因此我们通过Maven导入其他的依赖只需要填写这三个基本元素就可以了，无需再下载<code>Jar</code>文件，而是<code>Maven</code>自动帮助我们下载依赖并导入。</p>
+<ul>
+<li>
+<p><code>groupId</code> 一般用于指定组名称，命名规则一般和包名一致，比如我们这里使用的是<code>org.example</code>，一个组下面可以有很多个项目。</p>
+</li>
+<li>
+<p><code>artifactId</code> 一般用于指定项目在当前组中的唯一名称，也就是说在组中用于区分于其他项目的标记。</p>
+</li>
+<li>
+<p><code>version</code> 代表项目版本，随着我们项目的开发和改进，版本号也会不断更新，就像LOL一样，每次赛季更新都会有一个大版本更新，我们的Maven项目也是这样，我们可以手动指定当前项目的版本号，其他人使用我们的项目作为依赖时，也可以根本版本号进行选择（这里的SNAPSHOT代表快照，一般表示这是一个处于开发中的项目，正式发布项目一般只带版本号）</p>
+</li>
+</ul>
+<p><code>properties</code>中一般都是一些变量和选项的配置，我们这里指定了JDK的源代码和编译版本为1.8，无需进行修改。</p>
+<h2 id="依赖导入">依赖导入<a hidden class="anchor" aria-hidden="true" href="#依赖导入">#</a></h2>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="font-weight:bold">&lt;dependencies&gt;</span>
+</span></span><span style="display:flex;"><span>  	//里面填写的就是所有的依赖
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;/dependencies&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在dependencies中填写需要使用到的依赖，例如：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">6
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="font-weight:bold">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;groupId&gt;</span>org.projectlombok<span style="font-weight:bold">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;artifactId&gt;</span>lombok<span style="font-weight:bold">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;version&gt;</span>1.18.22<span style="font-weight:bold">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;scope&gt;</span>provided<span style="font-weight:bold">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;/dependency&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在<code>dependency</code>中除了三个基本的属性用于定位坐标外，依赖还可以添加以下属性：</p>
+<ul>
+<li>
+<p><strong>type</strong>：依赖的类型，对于项目坐标定义的packaging。大部分情况下，该元素不必声明，其默认值为jar</p>
+</li>
+<li>
+<p><strong>scope</strong>：依赖的范围（作用域，着重讲解）</p>
+</li>
+<li>
+<p><strong>optional</strong>：标记依赖是否可选</p>
+</li>
+<li>
+<p><strong>exclusions</strong>：用来排除传递性依赖（一个项目有可能依赖于其他项目，就像我们的项目，如果别人要用我们的项目作为依赖，那么就需要一起下载我们项目的依赖，如Lombok）</p>
+</li>
+</ul>
+<p>我们着重来讲解一下<code>scope</code>属性，它决定了依赖的作用域范围：</p>
+<ul>
+<li>
+<p><strong>compile</strong> ：为默认的依赖有效范围。如果在定义依赖关系的时候，没有明确指定依赖有效范围的话，则默认采用该依赖有效范围。此种依赖，在编译、运行、测试时均有效。</p>
+</li>
+<li>
+<p><strong>provided</strong> ：在编译、测试时有效，但是在运行时无效，也就是说，项目在运行时，不需要此依赖，比如我们上面的Lombok，我们只需要在编译阶段使用它，编译完成后，实际上已经转换为对应的代码了，因此Lombok不需要在项目运行时也存在。</p>
+</li>
+<li>
+<p><strong>runtime</strong> ：在运行、测试时有效，但是在编译代码时无效。比如我们如果需要自己写一个JDBC实现，那么肯定要用到JDK为我们指定的接口，但是实际上在运行时是不用自带JDK的依赖，因此只保留我们自己写的内容即可。</p>
+</li>
+<li>
+<p><strong>test</strong> ：只在测试时有效，例如：JUnit，我们一般只会在测试阶段使用JUnit，而实际项目运行时，我们就用不到测试了，那么我们来看看，导入JUnit的依赖：</p>
+</li>
+</ul>
+<p>那么就有人提问了，如果我需要的依赖没有上传的远程仓库，而是只有一个Jar怎么办呢？我们可以使用第四种作用域：</p>
+<ul>
+<li><strong>system</strong>：作用域和provided是一样的，但是它不是从远程仓库获取，而是直接导入本地Jar包：</li>
+</ul>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="font-weight:bold">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="font-weight:bold">&lt;groupId&gt;</span>javax.jntm<span style="font-weight:bold">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="font-weight:bold">&lt;artifactId&gt;</span>lbwnb<span style="font-weight:bold">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="font-weight:bold">&lt;version&gt;</span>2.0<span style="font-weight:bold">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="font-weight:bold">&lt;scope&gt;</span>system<span style="font-weight:bold">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span>     <span style="font-weight:bold">&lt;systemPath&gt;</span>C://学习资料/4K高清无码/test.jar<span style="font-weight:bold">&lt;/systemPath&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;/dependency&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="maven可选依赖">Maven可选依赖<a hidden class="anchor" aria-hidden="true" href="#maven可选依赖">#</a></h3>
+<p>当项目中的某些依赖不希望被使用此项目作为依赖的项目使用时，我们可以给依赖添加optional标签表示此依赖是可选的，默认在导入依赖时，不会导入可选的依赖：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-XML" data-lang="XML"><span style="display:flex;"><span><span style="font-weight:bold">&lt;optional&gt;</span>true<span style="font-weight:bold">&lt;/optional&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="maven排除依赖">Maven排除依赖<a hidden class="anchor" aria-hidden="true" href="#maven排除依赖">#</a></h3>
+<p>我们了解了可选依赖，现在我们可以让使用此项目作为依赖的项目默认不使用可选依赖，但是如果存在那种不是可选依赖，但是我们导入此项目有不希望使用此依赖该怎么办呢，这个时候我们就可以通过排除依赖来防止添加不必要的依赖：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">11
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">12
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="font-weight:bold">&lt;dependency&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;groupId&gt;</span>org.junit.jupiter<span style="font-weight:bold">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;artifactId&gt;</span>junit-jupiter<span style="font-weight:bold">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;version&gt;</span>5.8.1<span style="font-weight:bold">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;scope&gt;</span>test<span style="font-weight:bold">&lt;/scope&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;exclusions&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&lt;exclusion&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">&lt;groupId&gt;</span>org.junit.jupiter<span style="font-weight:bold">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>            <span style="font-weight:bold">&lt;artifactId&gt;</span>junit-jupiter-engine<span style="font-weight:bold">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>        <span style="font-weight:bold">&lt;/exclusion&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;/exclusions&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;/dependency&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="maven继承关系">Maven继承关系<a hidden class="anchor" aria-hidden="true" href="#maven继承关系">#</a></h3>
+<p>在idea中可以通过新建模块来创建子模块，父子模块的pom文件均会发生变化：</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 7
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 8
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272"> 9
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">10
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">11
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-xml" data-lang="xml"><span style="display:flex;"><span><span style="color:#007f7f">&lt;!-- 父 --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;modules&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;module&gt;</span>ChildModel<span style="font-weight:bold">&lt;/module&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;/modules&gt;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#007f7f">&lt;!-- 子 --&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;parent&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;artifactId&gt;</span>MavenTest<span style="font-weight:bold">&lt;/artifactId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;groupId&gt;</span>org.example<span style="font-weight:bold">&lt;/groupId&gt;</span>
+</span></span><span style="display:flex;"><span>    <span style="font-weight:bold">&lt;version&gt;</span>1.0-SNAPSHOT<span style="font-weight:bold">&lt;/version&gt;</span>
+</span></span><span style="display:flex;"><span><span style="font-weight:bold">&lt;/parent&gt;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>子模块会之间继承父模块的<code>dependencies</code>部分。</p>
+<h2 id="maven常用命令">Maven常用命令<a hidden class="anchor" aria-hidden="true" href="#maven常用命令">#</a></h2>
+<p>我们可以看到在IDEA右上角Maven板块中，每个Maven项目都有一个生命周期，实际上这些是Maven的一些插件，每个插件都有各自的功能，比如：</p>
+<ul>
+<li>
+<p><code>clean</code>命令，执行后会清理整个<code>target</code>文件夹，在之后编写Springboot项目时可以解决一些缓存没更新的问题。</p>
+</li>
+<li>
+<p><code>validate</code>命令可以验证项目的可用性。</p>
+</li>
+<li>
+<p><code>compile</code>命令可以将项目编译为.class文件。</p>
+</li>
+<li>
+<p><code>install</code>命令可以将当前项目安装到本地仓库，以供其他项目导入作为依赖使用</p>
+</li>
+<li>
+<p><code>verify</code>命令可以按顺序执行每个默认生命周期阶段（<code>validate</code>，<code>compile</code>，<code>package</code>等）</p>
+</li>
+</ul>
+<h2 id="maven测试项目">Maven测试项目<a hidden class="anchor" aria-hidden="true" href="#maven测试项目">#</a></h2>
+<p>通过使用<code>test</code>命令，可以一键测试所有位于test目录下的测试案例，请注意有以下要求：</p>
+<ul>
+<li>
+<p>测试类的名称必须是以<code>Test</code>结尾，比如<code>MainTest</code></p>
+</li>
+<li>
+<p>测试方法上必须标注<code>@Test</code>注解，实测<code>@RepeatedTest</code>无效</p>
+</li>
+</ul>
+<h2 id="maven打包项目">Maven打包项目<a hidden class="anchor" aria-hidden="true" href="#maven打包项目">#</a></h2>
+<p>我们的项目在编写完成之后，要么作为Jar依赖，供其他模型使用，要么就作为一个可以执行的程序，在控制台运行，我们只需要直接执行<code>package</code>命令就可以直接对项目的代码进行打包，生成jar文件。</p>
+<h1 id="29-spi-机制">29. SPI 机制<a hidden class="anchor" aria-hidden="true" href="#29-spi-机制">#</a></h1>
+<h1 id="30-语法糖">30. 语法糖<a hidden class="anchor" aria-hidden="true" href="#30-语法糖">#</a></h1>
+<p>语法糖的本质是简化开发人员代码书写的，并且在编译阶段就会被编译器转化为普通的语法，我们平时使用的例如foreach、可变长参数、使用String的swatch、枚举类等等，都是通过语法糖实现的。</p>
+<h1 id="31-集合总结">31. 集合总结<a hidden class="anchor" aria-hidden="true" href="#31-集合总结">#</a></h1>
+<h2 id="底层实现">底层实现<a hidden class="anchor" aria-hidden="true" href="#底层实现">#</a></h2>
+<h3 id="list">List<a hidden class="anchor" aria-hidden="true" href="#list">#</a></h3>
+<ul>
+<li><code>ArrayList</code>： <code>Object[]</code> 数组</li>
+<li><code>Vector</code>：<code>Object[]</code> 数组</li>
+<li><code>LinkedList</code>： 双向链表(JDK1.6 之前为循环链表，JDK1.7 取消了循环)</li>
+</ul>
+<h4 id="arraylist-和-vector-的区别">ArrayList 和 Vector 的区别?<a hidden class="anchor" aria-hidden="true" href="#arraylist-和-vector-的区别">#</a></h4>
+<ul>
+<li><code>ArrayList</code> 是 <code>List</code> 的主要实现类，底层使用 <code>Object[]</code>存储，适用于频繁的查找工作，线程不安全 ；</li>
+<li><code>Vector</code> 是 <code>List</code> 的古老实现类，底层使用<code>Object[]</code> 存储，线程安全的</li>
+</ul>
+<h4 id="arraylist-与-linkedlist-区别">ArrayList 与 LinkedList 区别?<a hidden class="anchor" aria-hidden="true" href="#arraylist-与-linkedlist-区别">#</a></h4>
+<ul>
+<li><strong>是否保证线程安全：</strong> <code>ArrayList</code> 和 <code>LinkedList</code> 都是不同步的，也就是不保证线程安全；</li>
+<li><strong>底层数据结构：</strong> <code>ArrayList</code> 底层使用的是 <strong><code>Object</code> 数组</strong>；<code>LinkedList</code> 底层使用的是 <strong>双向链表</strong> 数据结构（JDK1.6 之前为循环链表，JDK1.7 取消了循环。）</li>
+<li>插入和删除是否受元素位置的影响：
+<ul>
+<li><code>ArrayList</code> 采用数组存储，所以插入和删除元素的时间复杂度受元素位置的影响。 比如：执行<code>add(E e)</code>方法的时候， <code>ArrayList</code> 会默认在将指定的元素追加到此列表的末尾，这种情况时间复杂度就是 O(1)。但是如果要在指定位置 i 插入和删除元素的话（<code>add(int index, E element)</code>）时间复杂度就为 O(n-i)。因为在进行上述操作的时候集合中第 i 和第 i 个元素之后的(n-i)个元素都要执行向后位/向前移一位的操作。</li>
+<li><code>LinkedList</code> 采用链表存储，所以，如果是在头尾插入或者删除元素不受元素位置的影响（<code>add(E e)</code>、<code>addFirst(E e)</code>、<code>addLast(E e)</code>、<code>removeFirst()</code> 、 <code>removeLast()</code>），时间复杂度为 O(1)，如果是要在指定位置 <code>i</code> 插入和删除元素的话（<code>add(int index, E element)</code>，<code>remove(Object o)</code>）， 时间复杂度为 O(n) ，因为需要先移动到指定位置再插入。</li>
+</ul>
+</li>
+<li><strong>是否支持快速随机访问：</strong> <code>LinkedList</code> 不支持高效的随机元素访问，而 <code>ArrayList</code>（实现了RandomAccess接口） 支持。快速随机访问就是通过元素的序号快速获取元素对象(对应于<code>get(int index)</code>方法)。</li>
+<li><strong>内存空间占用：</strong> <code>ArrayList</code> 的空 间浪费主要体现在在 list 列表的结尾会预留一定的容量空间，而 LinkedList 的空间花费则体现在它的每一个元素都需要消耗比 ArrayList 更多的空间（因为要存放直接后继和直接前驱以及数据）。</li>
+</ul>
+<p>我们在项目中一般是不会使用到 <code>LinkedList</code> 的，需要用到 <code>LinkedList</code> 的场景几乎都可以使用 <code>ArrayList</code> 来代替，并且，性能通常会更好！就连 <code>LinkedList</code> 的作者约书亚 · 布洛克（Josh Bloch）自己都说从来不会使用 <code>LinkedList</code> 。</p>
+<p><img loading="lazy" src="https://guide-blog-images.oss-cn-shenzhen.aliyuncs.com/github/javaguide/redisimage-20220412110853807.png" alt="img"  />
+</p>
+<p>另外，不要下意识地认为 <code>LinkedList</code> 作为链表就最适合元素增删的场景。我在上面也说了，<code>LinkedList</code> 仅仅在头尾插入或者删除元素的时候时间复杂度近似 O(1)，其他情况增删元素的时间复杂度都是 O(n) 。</p>
+<h4 id="补充内容randomaccess-接口">补充内容:RandomAccess 接口<a hidden class="anchor" aria-hidden="true" href="#补充内容randomaccess-接口">#</a></h4>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">interface</span> RandomAccess {
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>查看源码我们发现实际上 <code>RandomAccess</code> 接口中什么都没有定义。所以，在我看来 <code>RandomAccess</code> 接口不过是一个标识罢了。标识什么？ 标识实现这个接口的类具有随机访问功能。</p>
+<p>在 <code>binarySearch()</code> 方法中，它要判断传入的 list 是否 <code>RandomAccess</code> 的实例，如果是，调用<code>indexedBinarySearch()</code>方法，如果不是，那么调用<code>iteratorBinarySearch()</code>方法</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">3
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">4
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">5
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">6
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">7
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">public</span> <span style="color:#fff;font-weight:bold">static</span> &lt;T&gt;
+</span></span><span style="display:flex;"><span>    <span style="color:#fff;font-weight:bold">int</span> binarySearch(List&lt;? <span style="color:#fff;font-weight:bold">extends</span> Comparable&lt;? <span style="color:#fff;font-weight:bold">super</span> T&gt;&gt; list, T key) {
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">if</span> (list <span style="color:#fff;font-weight:bold">instanceof</span> RandomAccess || list.<span style="color:#007f7f">size</span>()&lt;BINARYSEARCH_THRESHOLD)
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">return</span> Collections.<span style="color:#007f7f">indexedBinarySearch</span>(list, key);
+</span></span><span style="display:flex;"><span>        <span style="color:#fff;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>            <span style="color:#fff;font-weight:bold">return</span> Collections.<span style="color:#007f7f">iteratorBinarySearch</span>(list, key);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口， 而 <code>LinkedList</code> 没有实现。为什么呢？我觉得还是和底层数据结构有关！<code>ArrayList</code> 底层是数组，而 <code>LinkedList</code> 底层是链表。数组天然支持随机访问，时间复杂度为 O(1)，所以称为快速随机访问。链表需要遍历到特定位置才能访问特定位置的元素，时间复杂度为 O(n)，所以不支持快速随机访问。，<code>ArrayList</code> 实现了 <code>RandomAccess</code> 接口，就表明了他具有快速随机访问功能。 <code>RandomAccess</code> 接口只是标识，并不是说 <code>ArrayList</code> 实现 <code>RandomAccess</code> 接口才具有快速随机访问功能的！</p>
+<h3 id="说一说-arraylist-的扩容机制吧">说一说 ArrayList 的扩容机制吧<a hidden class="anchor" aria-hidden="true" href="#说一说-arraylist-的扩容机制吧">#</a></h3>
+<p>见这篇文章:<a href="https://javaguide.cn/java/collection/arraylist-source-code.html#_3-1-%E5%85%88%E4%BB%8E-arraylist-%E7%9A%84%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0%E8%AF%B4%E8%B5%B7">ArrayList 扩容机制分析open in new window</a></p>
+<h3 id="set">Set<a hidden class="anchor" aria-hidden="true" href="#set">#</a></h3>
+<ul>
+<li><code>HashSet</code>(无序，唯一): 基于 <code>HashMap</code> 实现的，底层采用 <code>HashMap</code> 来保存元素</li>
+<li><code>LinkedHashSet</code>: <code>LinkedHashSet</code> 是 <code>HashSet</code> 的子类，并且其内部是通过 <code>LinkedHashMap</code> 来实现的。有点类似于我们之前说的 <code>LinkedHashMap</code> 其内部是基于 <code>HashMap</code> 实现一样，不过还是有一点点区别的</li>
+<li><code>TreeSet</code>(有序，唯一): 红黑树(自平衡的排序二叉树)</li>
+</ul>
+<h4 id="comparable-和-comparator-的区别">Comparable 和 Comparator 的区别<a hidden class="anchor" aria-hidden="true" href="#comparable-和-comparator-的区别">#</a></h4>
+<ul>
+<li><code>comparable</code>接口实际上是出自<code>java.lang</code>包,它有一个<code>compareTo(Object obj)</code>方法用来排序</li>
+<li><code>comparator</code>接口实际上是出自<code>java.util</code>包,它有一个<code>compare(Object obj1, Object obj2)</code>方法用来排序</li>
+</ul>
+<p>以<code>Arrays.sort</code>方法对两种方法对使用为例，在对一般的Ojbect[]进行排序的时候，可以直接使用<code>sort</code>方法，在方法中会去判断时候是<code>Comparable</code>类型子类，若不是该类型的子类时会报<code>ClassCastException</code>错，此时就需要实现该接口，并且实现<code>compareTo</code>方法用于排序。有时候需要进行排序但是类又是别人实现好的不方便再去实现<code>Comparable</code>接口，此时<code>Comparator</code>接口就派上了用处。</p>
+<p>在<code>Arrays</code>中还有一种<code>sort</code>方法的实现：<code>&lt;T&gt; void sort(T[] a, Comparator&lt;? super T&gt; c)</code>，使用时可以再传入一个<code>Comparator</code>实现类的对象用于排队（一般都是直接用匿名内部实现了，不会专门去定义一个真正的类），在方法中就会调用这个实现类的<code>compare</code>方法进行排序。</p>
+<h4 id="比较-hashsetlinkedhashset-和-treeset-三者的异同">比较 HashSet、LinkedHashSet 和 TreeSet 三者的异同<a hidden class="anchor" aria-hidden="true" href="#比较-hashsetlinkedhashset-和-treeset-三者的异同">#</a></h4>
+<ul>
+<li><code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code> 都是 <code>Set</code> 接口的实现类，都能保证元素唯一，并且都不是线程安全的。</li>
+<li><code>HashSet</code>、<code>LinkedHashSet</code> 和 <code>TreeSet</code> 的主要区别在于底层数据结构不同。<code>HashSet</code> 的底层数据结构是哈希表（基于 <code>HashMap</code> 实现）。<code>LinkedHashSet</code> 的底层数据结构是链表和哈希表，元素的插入和取出顺序满足 FIFO。<code>TreeSet</code> 底层数据结构是红黑树，元素是有序的，排序的方式有自然排序和定制排序。</li>
+<li>底层数据结构不同又导致这三者的应用场景不同。<code>HashSet</code> 用于不需要保证元素插入和取出顺序的场景，<code>LinkedHashSet</code> 用于保证元素的插入和取出顺序满足 FIFO 的场景，<code>TreeSet</code> 用于支持对元素自定义排序规则的场景。</li>
+</ul>
+<h3 id="queue">Queue<a hidden class="anchor" aria-hidden="true" href="#queue">#</a></h3>
+<ul>
+<li><code>PriorityQueue</code>: <code>Object[]</code> 数组来实现二叉堆</li>
+<li><code>ArrayQueue</code>: <code>Object[]</code> 数组 + 双指针</li>
+</ul>
+<h4 id="queue-与-deque-的区别">Queue 与 Deque 的区别<a hidden class="anchor" aria-hidden="true" href="#queue-与-deque-的区别">#</a></h4>
+<p><code>Queue</code> 是单端队列，只能从一端插入元素，另一端删除元素，实现上一般遵循 <strong>先进先出（FIFO）</strong> 规则。</p>
+<p><code>Queue</code> 扩展了 <code>Collection</code> 的接口，根据 <strong>因为容量问题而导致操作失败后处理方式的不同</strong> 可以分为两类方法: 一种在操作失败后会抛出异常，另一种则会返回特殊值。</p>
+<table>
+<thead>
+<tr>
+<th><code>Queue</code> 接口</th>
+<th>抛出异常</th>
+<th>返回特殊值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>插入队尾</td>
+<td>add(E e)</td>
+<td>offer(E e)</td>
+</tr>
+<tr>
+<td>删除队首</td>
+<td>remove()</td>
+<td>poll()</td>
+</tr>
+<tr>
+<td>查询队首元素</td>
+<td>element()</td>
+<td>peek()</td>
+</tr>
+</tbody>
+</table>
+<p><code>Deque</code> 是双端队列，在队列的两端均可以插入或删除元素。</p>
+<p><code>Deque</code> 扩展了 <code>Queue</code> 的接口, 增加了在队首和队尾进行插入和删除的方法，同样根据失败后处理方式的不同分为两类：</p>
+<table>
+<thead>
+<tr>
+<th><code>Deque</code> 接口</th>
+<th>抛出异常</th>
+<th>返回特殊值</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>插入队首</td>
+<td>addFirst(E e)</td>
+<td>offerFirst(E e)</td>
+</tr>
+<tr>
+<td>插入队尾</td>
+<td>addLast(E e)</td>
+<td>offerLast(E e)</td>
+</tr>
+<tr>
+<td>删除队首</td>
+<td>removeFirst()</td>
+<td>pollFirst()</td>
+</tr>
+<tr>
+<td>删除队尾</td>
+<td>removeLast()</td>
+<td>pollLast()</td>
+</tr>
+<tr>
+<td>查询队首元素</td>
+<td>getFirst()</td>
+<td>peekFirst()</td>
+</tr>
+<tr>
+<td>查询队尾元素</td>
+<td>getLast()</td>
+<td>peekLast()</td>
+</tr>
+</tbody>
+</table>
+<p>事实上，<code>Deque</code> 还提供有 <code>push()</code> 和 <code>pop()</code> 等其他方法，可用于模拟栈。</p>
+<h4 id="arraydeque-与-linkedlist-的区别">ArrayDeque 与 LinkedList 的区别<a hidden class="anchor" aria-hidden="true" href="#arraydeque-与-linkedlist-的区别">#</a></h4>
+<p><code>ArrayDeque</code> 和 <code>LinkedList</code> 都实现了 <code>Deque</code> 接口，两者都具有队列的功能，但两者有什么区别呢？</p>
+<ul>
+<li><code>ArrayDeque</code> 是基于可变长的数组和双指针来实现，而 <code>LinkedList</code> 则通过链表来实现。</li>
+<li><code>ArrayDeque</code> 不支持存储 <code>NULL</code> 数据，但 <code>LinkedList</code> 支持。</li>
+<li><code>ArrayDeque</code> 是在 JDK1.6 才被引入的，而<code>LinkedList</code> 早在 JDK1.2 时就已经存在。</li>
+<li><code>ArrayDeque</code> 插入时可能存在扩容过程, 不过均摊后的插入操作依然为 O(1)。虽然 <code>LinkedList</code> 不需要扩容，但是每次插入数据时均需要申请新的堆空间，均摊性能相比更慢。</li>
+</ul>
+<p>从性能的角度上，选用 <code>ArrayDeque</code> 来实现队列要比 <code>LinkedList</code> 更好。此外，<code>ArrayDeque</code> 也可以用于实现栈。</p>
+<h4 id="priorityqueue">PriorityQueue<a hidden class="anchor" aria-hidden="true" href="#priorityqueue">#</a></h4>
+<p><code>PriorityQueue</code> 是在 JDK1.5 中被引入的, 其与 <code>Queue</code> 的区别在于元素出队顺序是与优先级相关的，即总是优先级最高的元素先出队。</p>
+<p>这里列举其相关的一些要点：</p>
+<ul>
+<li><code>PriorityQueue</code> 利用了二叉堆的数据结构来实现的，底层使用可变长的数组来存储数据</li>
+<li><code>PriorityQueue</code> 通过堆元素的上浮和下沉，实现了在 O(logn) 的时间复杂度内插入元素和删除堆顶元素。</li>
+<li><code>PriorityQueue</code> 是非线程安全的，且不支持存储 <code>NULL</code> 和 <code>non-comparable</code> 的对象。</li>
+<li><code>PriorityQueue</code> 默认是小顶堆，但可以接收一个 <code>Comparator</code> 作为构造参数，从而来自定义元素优先级的先后。</li>
+</ul>
+<p><code>PriorityQueue</code> 在面试中可能更多的会出现在手撕算法的时候，典型例题包括堆排序、求第K大的数、带权图的遍历等，所以需要会熟练使用才行。</p>
+<h3 id="map">Map<a hidden class="anchor" aria-hidden="true" href="#map">#</a></h3>
+<ul>
+<li><code>HashMap</code>： JDK1.8 之前 <code>HashMap</code> 由数组+链表组成的，数组是 <code>HashMap</code> 的主体，链表则是主要为了解决哈希冲突而存在的（“拉链法”解决冲突）。JDK1.8 以后在解决哈希冲突时有了较大的变化，当链表长度大于阈值（默认为 8）（将链表转换成红黑树前会判断，如果当前数组的长度小于 64，那么会选择先进行数组扩容，而不是转换为红黑树）时，将链表转化为红黑树，以减少搜索时间</li>
+<li><code>LinkedHashMap</code>： <code>LinkedHashMap</code> 继承自 <code>HashMap</code>，所以它的底层仍然是基于拉链式散列结构即由数组和链表或红黑树组成。另外，<code>LinkedHashMap</code> 在上面结构的基础上，增加了一条双向链表，使得上面的结构可以保持键值对的插入顺序。同时通过对链表进行相应的操作，实现了访问顺序相关逻辑。详细可以查看：<a href="https://www.imooc.com/article/22931">《LinkedHashMap 源码详细分析（JDK1.8）》open in new window</a></li>
+<li><code>Hashtable</code>： 数组+链表组成的，数组是 <code>Hashtable</code> 的主体，链表则是主要为了解决哈希冲突而存在的</li>
+<li><code>TreeMap</code>： 红黑树（自平衡的排序二叉树）</li>
+</ul>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jinchaojjj.github.io/tags/%E5%9F%BA%E7%A1%80/">基础</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jinchaojjj.github.io/posts/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Java基本语法</span>
+  </a>
+  <a class="next" href="https://jinchaojjj.github.io/posts/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/">
+    <span class="title">Next »</span>
+    <br>
+    <span>设计模式</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://jinchaojjj.github.io">King&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
