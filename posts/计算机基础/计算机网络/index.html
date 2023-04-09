@@ -70,8 +70,8 @@
   "keywords": [
     "基本"
   ],
-  "articleBody": "计算机网络 作用：在不同设备之间进行通信，为了在不同类型的设备间都可以通行就定义了一套网络协议\n与OSI的七层模型相比，在现实中使用更多的是TCP/IP的四层模型\n下图中描述了在不同层级中常用的协议、数据格式、作用等。\n下图介绍了HTTP请求过程中不同层级涉及到的协议的格式，上层内容作为下层的数据。 一、HTTP协议 应用层协议 Hyper Text Transfer Protocol 超文本传输协议，通过传输文本的方式（文本中包含了超链接等非文本类型的数据）传输网页 作用：在浏览器中显示网页；当然该协议也可以传输非HTTP格式的数据（例如JSON、XML、txt等格式），此时获取数据后的使用交由客户端决定。 下面首先对HTTP协议的消息结构进行讲解；HTTP是基于客户端/服务端（C/S）架构的，通过可靠的链接（TCP）来交换信息，是一个无状态的请求/响应协议。\n无连接的：限制每次连接只处理一个请求，服务器处理完客户的请求并收到客户的应答后，即断开连接 无状态的：指的是协议对于事务没有记忆能力，若后面的处理需要前面的信息必须重传 媒体独立的：任何类型的数据都可以通过HTTP发送，只要客户端和服务端知道如何处理数据内容 HTTP消息结构 HTTP请求由客户端发出，客户端通常是一个应用程序（浏览器或者其他应用程序） HTTP的服务器同样是应用程序（通常是一个Web服务器），用于处理用户发出的请求，并向客户端发送响应 HTTP使用统一资源标识符（URL）来传输数据和建立连接 ",
-  "wordCount" : "603",
+  "articleBody": "计算机网络 作用：在不同设备之间进行通信，为了在不同类型的设备间都可以通行就定义了一套网络协议\n与OSI的七层模型相比，在现实中使用更多的是TCP/IP的四层模型\n下图中描述了在不同层级中常用的协议、数据格式、作用等。\n下图介绍了HTTP请求过程中不同层级涉及到的协议的格式，上层内容作为下层的数据。 一、HTTP协议 应用层协议 Hyper Text Transfer Protocol 超文本传输协议，通过传输文本的方式（文本中包含了超链接等非文本类型的数据）传输网页 作用：在浏览器中显示网页；当然该协议也可以传输非HTTP格式的数据（例如JSON、XML、txt等格式），此时获取数据后的使用交由客户端决定。 下面首先对HTTP协议的消息结构进行讲解；HTTP是基于客户端/服务端（C/S）架构的，通过可靠的链接（TCP）来交换信息，是一个无状态的请求/响应协议。\n无连接的：限制每次连接只处理一个请求，服务器处理完客户的请求并收到客户的应答后，即断开连接 无状态的：指的是协议对于事务没有记忆能力，若后面的处理需要前面的信息必须重传 媒体独立的：任何类型的数据都可以通过HTTP发送，只要客户端和服务端知道如何处理数据内容 HTTP消息结构 HTTP请求由客户端发出，客户端通常是一个应用程序（浏览器或者其他应用程序） HTTP的服务器同样是应用程序（通常是一个Web服务器），用于处理用户发出的请求，并向客户端发送响应 HTTP使用统一资源标识符（URL）来传输数据和建立连接 请求报文-请求行 请求行中包含以下内容\n请求方式：也称为动作，用于表明本次请求对指定资源的不同操作 URL：统一资源定位符，用于表示资源信息的位置 版本：HTTP请求的版本 请求方式 方法 描述 1 GET 请求指定的页面信息，并返回实体主体。 2 HEAD 类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头 3 POST 向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和/或已有资源的修改。 4 PUT 从客户端向服务器传送的数据取代指定的文档的内容。 5 DELETE 请求服务器删除指定的页面。 6 CONNECT HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。 7 OPTIONS 允许客户端查看服务器的性能。 8 TRACE 回显服务器收到的请求，主要用于测试或诊断。 9 PATCH 是对 PUT 方法的补充，用来对已知资源进行局部更新 。 上述的九种请求方法中现在常用的是REST风格中的四种请求方式：GET、POST、PUT、DELETE。\nURL URL完整的格式如下：\n其中不同字段的含义如下：\nscheme：协议\nhost：主机名，指定的域名或者IP地址\nport：端口号（一般会省略，每种常用的请求协议都有默认的端口号）\npath：路径，由零或多个/符号隔开的字符串，一般用来表示主机上的一个目录或文件地址\nquery：查询（可选），用于给动态网页（如使用CGI、ISAPI、PHP/JSP/ASP/ASP.NET等技术制作的网页）传递参数，可有多个参数，用\u0026符号隔开，每个参数的名和值用=符号隔开\nfragment：信息片断（字符串），用于指定网络资源中的片断。例如一个网页中有多个名词解释，可使用fragment直接定\n位到某一名词解释\nHTTP请求中的URL其实指代的是完整URL中的path部分。通常采用零个或者多个/符号进行分割，如下图所示：\n版本 常见的HTTP版本有：1.1、2.0、3.0，之后会单独写一篇博客对几个不同的版本进行比较。\n请求报文-请求头 请求头中的内容格式较为简单：字段名-字段值的方式按行分布，中间用空格分隔，下面讲述一些常用的首部字段：\nAccept 表示客户端期望服务器返回的媒体格式。客户端期望的资源类型服务器可能没有，所以客户端会期望多种类型，并且设置优先级，服务器根据优先级寻找相应的资源返回给客户端。\n1 2 # 注意：先逗号分割类型，再分号分割属性 Accept: audio/*; q=0.2, audio/basic 表示audio/basic类型的资源优先，如果没有，就随便其它什么格式的audio资源都可以。q的取值范围是(0-1]，其具体值并没有意义，它仅用来排序优先级，如果没有q，默认q=1，也就是最高优先级。\nAccept-Charset 表示客户端期望服务器返回的内容的编码格式。它同Accept头一样，也可以指定多个编码，以q值代表优先级。\n1 2 # 注意：先逗号分割类型，再分号分割属性 Accept-Charset: utf8, gbk; q=0.6 表示utf8编码优先，如果不行，就拿gbk编码返回。\nContent-Type Content-Type是服务器向客户端发送的头（也可以是客户端在发送请求时规定请求体的数据格式、编码等信息），代表内容的媒体类型和编码格式，是对Accept头和Accept-Charset头的统一应答。\n1 Content-Type: text/html; charset=utf8 表示返回的Body是个html文本，编码为utf8\nAccept-Language 表示客户端期望服务器返回的内容的语言。很多大型互联网公司是全球化的，它的技术文档一般有多种语言，通过这个字段可以实现文档的本地化，对国内用户呈现简体中文文档，对英语系用户呈现英文文档。\n1 Accept-Language: zh-CN, en-US; q=0.8, zh-TW; q=0.6 表示大陆简体中文优先，其次英语，再其次台湾繁体中文\nContent-Language 这个头字段内容是对Accept-Language的应答。服务器通过此字段告知客户端返回的Body信息的语言是什么。\nContent-Length 表示传输的请求／响应的Body的长度。GET请求因为没有Body（这里需要说明的是HTTP协议、Java后端是支持GET请求带有请求体的，但是WEB可能不支持带有请求体，前段代码还是要依托于浏览器的，所以尽可能不要在GET请求中使用请求体），所以不需要这个头。携带Body的并且可以提前知道Body长度的请求／响应必须带上这个字段，以便对方可以方便的分辨出报文的边界，也就是Body数据何时结束。如果Body太大，需要边计算边传输，不到最后计算结束是无法知道整个Body大小的，这个时候可以使用http分块传输，这个时候也是不需要Content-Length字段的。\nContent-Location 当客户端请求的资源在服务器有多个地址时，服务器可以通过Content-Location字段告知客户端其它的可选地址。这个字段比较少见。\nContent-MD5 在Header中提供这个信息是用来做Body内容校验。它表示Body信息被md5算法处理后的base64字符串。这个字段也比较少见。因为校验机制在TCP层已经有实现了，再来一层校验并没有多大意义。另外资源的md5值往往用来放在后面的ETag头信息中作为资源的唯一标识来使用。\nDate 如果服务器没有缓存，那么Date就是响应的即时生成时间。如果服务器设有缓存，那么Date就是响应内容被缓存的时间。它必须符合规范里定义的特定格式，这种格式叫着HTTP-Date，不支持随意定义自己的时间格式。\n1 Date: Tue, 15 Nov 1994 08:12:31 GMT Age 表示资源缓存的年龄，也就是资源自缓存以来到现在已经过去了多少时间，单位是秒。\n1 Age: 86400 Expires 服务器使用Expect头来告知对方资源何时失效。如果它的值等于Date头的值，就表示资源已经失效。\n1 Expires: Thu, 01 Dec 1994 16:00:00 GMT ETag 资源标签，每个资源可以提供多个标签信息。它一般用来和下面的If-Match和If-None-Match配合使用，用来判断缓存资源的有效性。比较常见的标签是资源的版本号，比如可以拿资源数据的md5校验码作为版本号。\nIf-Match If-Match的值一般是上面提到的ETag的值，它常用于HTTP的乐观锁。所谓HTTP乐观锁，是指客户端先GET这个资源得到ETag中的版本号，然后发起一个资源修改请求PUT|PATCH时通过If-Match头来指定资源的版本号，如果服务器资源满足If-Match中指定的版本号，请求就会被执行。如果不满足，说明资源被并发修改了，就需要返回状态码为412 Precondition failed 的错误。客户端可以选择放弃或者重试整个过程。\nIf-None-Match 类似于If-Match，只是条件相反。\nAllow 表示资源支持访问的HTTP Method类型。它是服务器对客户端的建议，告知对方请使用Allow中提到的Method来访问资源。\n1 Allow: GET, HEAD, PUT Connection 当客户端和服务器需要协商连接的属性时，可以使用Connection头部。比较常用的一个值是close，用来通知对方在当前请求结束后关闭连接。\n1 Connection: close Expect 用于请求发送之前向服务器询问许可。譬如要向服务器发送一个很大的文件而不确定是否超出限制，就可以在请求头里携带一个Expect头部\n1 Expect: 100-continue 如果服务器说不行，就会返回417 Expectation Failed错误告知客户端放弃。如果可以那就返回100 continue状态码告知客户端放马过来吧，于是客户端就会继续上传Body内容。如果服务器提前收到Body内容就会放弃返回100 continue响应。\nFrom 该字段一般用来标记请求发起者的邮件地址，相当于给请求赋予一个责任人。如果服务器发现请求存在问题，就会通过此字段联系到发起人进行处理。因为邮件地址涉及到隐私信息，所以请求携带From头需要征得用户的同意。RFC协议建议所有的机器人代理发起的请求应该携带此头部，以免遇到问题时可以找到责任人。不过如果是恶意的机器人，估计这样的建议也只是耳边风而已。\nHost RFC协议规定所有的HTTP请求必须携带Host头，即使Host没有值，也必须带上这个Host头附加一个空串，如果不满足，应用服务器应该抛出400 Bad Request。协议虽然这样规定，不过大部分网关或者服务器都比较仁慈，既然没有指定Host字段，那就给你默认加上一个。 网关代理可以根据不同的Host值转发到不同的upstream服务节点，它常用于虚拟主机服务业务。\nLast-Modified 标记资源的最近修改时间，它和Date比较类似，区别是Last-Modified代表修改时间，而Date是创建时间。\nIf-Modified-Since 浏览器向服务器请求静态资源时，如果浏览器本地已经有了缓存，就会携带If-Modified-Since头，值为资源的Last-Modified时间，询问服务器该资源自从这个Last-Modified时间之后有没有被修改。如果没有修改过，就会向浏览器返回304 Not Modified通知浏览器可以放心使用缓存内的资源。如果资源修改过，那就像正常的GET请求一样，携带资源的内容返回200 OK。\nIf-Unmodified-Since 类似于If-Modified-Since，意义相反。区别是当服务器资源条件不满足时，不是返回304 Not Modified，而是返回412 Precondition Failed。\nRange 支持断点续传的服务器必须处理Range头，它表示客户端请求资源的一部分时指定的请求字节范围。它是客户端向服务器发送的请求头。\n1 Range: bytes=500-999 Content-Range 针对上面的Range头，服务器响应客户端时也需提供相应的Content-Range头，表示传输的Body数据在整体资源块中的字节范围。比如下面的例子表示该资源总共有47022字节，当前响应的内容是21010-47021字节之间的内容。\n1 Content-Range: bytes 21010-47021/47022 之所以是47021而不是47022是因为offset是以0开始的，47021就是最后一个字节。\nIf-Range 在断点续传时，为确保连续2个请求之间服务器资源本身没有发生变化，需要If-Range头带上ETag的资源版本号。服务器资源根据这个版本号来判定资源是否改变了。如果没变，就返回206 Partial Content将部分资源返回。如果资源变了，那就相当于一个普通的GET请求，返回200 OK和整个资源内容。\nLocation 服务器向客户端发送302跳转的时候，总会携带Location头信息，它的值为目标URL。\n1 2 HTTP/1.1 302 Temporary Redirect Location: https://www-temp.example.org/ Max-Forwards 用来限定网关或者代理的层数，也就是最大转发次数。HTTP每经过一个网关或者代理层，Max-Forwards值就要减1。如果nginx接收到前端请求的时候Max-Forwards已经等于0，那么它就不应该再将请求转发到upstream指定的服务节点上。\nPragma 这个头是比较常见的，在前端开发模式下经常会加上这个头部。\n1 Pragma: no-cache 当网关收到一个带有这样请求的头部时，即使内部存在该请求资源的缓存并且有效也不可以直接发送给客户端，而必须转发给后面的upstream进行处理。 不过如果真的所有的网关都遵循这个协议的话，攻击是很容易构造的，所以它一般仅用于开发模式，防止静态资源修改后前端得不到即时更新。其它值的pragma值没有遇到过。\nReferer Referer是非常常用的头，它表示请求的发起来源URI，也就是当前页面资源的父页面。如果你从A页面跳转到B页面，那么请求B页面的请求头里面就会有Referer信息，它的值就是A页面的访问地址。通过追踪Referer，可得出资源页面之间复杂的跳转链，它非常适合用于网页的数据分析和路径优化。\nRetry-After 服务器升级时，来自客户端的请求会直接给予503(Service Unavailable)错误，通过在返回头里面加入Retry-After字段告知客户端何时服务可以恢复正常访问。Retry-After的头可以是HTTP-Date，也可以是整数，表示多少秒后服务可以恢复正常访问。浏览器在拿到这个值之后可以考虑增加一个定时器在未来的某个时间进行重试。\nServer 用于返回服务器相关的软件信息，来告知客户端当前的HTTP服务是由某某软件提供的，可以看成是一种软件广告。 RFC协议里对这个头信息做了警告：暴露出服务器信息可能会导致黑客更易于攻击你的服务，建议谨慎使用。\nUser-Agent 携带当前的用户代理信息，一般包含浏览器、浏览器内核和操作系统的版本型号信息。它和Server头是对应的，一个是表达服务器信息，一个是表达客户端信息。服务器可以根据用户代理信息统计出网页服务的浏览器、操作系统的使用占比情况，服务器也可以根据UA的信息来定制不一样的内容。\nTransfer-Encoding 传送Body信息时需要对Body数据采取何种变换。当HTTP对Body进行分块传送时，需要增加下面的头部信息才可以进行分块传送。其它类型目前没有遇到过。\n1 Transfer-Encoding: chunked Upgrade 服务器建议客户端升级传输协议。比如当客户端使用HTTP/1.0发送请求时，服务器就可以建议客户端升级到HTTP/1.1。 这个时候就可以使用Upgrade头。客户端收到这个Upgrade后就会将后续请求转成HTTP/1.1格式继续进行交流。可以支持多个参数，使用逗号分割即可。\n1 Upgrade: HTTP/1.1 当客户端要和服务器进行Websocket进行通讯时，在握手阶段服务器也会向客户端发送Upgrade头部信息，提示客户端将协议切换到Websocket。\n1 Upgrade: WebSocket Vary 该头部用于缓存控制。对于一些缓存服务器，我们在请求里加入Vary参数可以告知缓存服务器对不同的Vary参数的响应使用不同的缓存单元。比如Vary参数里放入编码参数，那么不同编码的网页就会有不同的缓存。Vary的值可以有多个，只要任意一个值不一样就会有不同的缓存。 比如下面的这个例子告知缓存服务器对不同语言和不同编码的网页响应使用不同的缓存单元。\n1 Vary: Accept-Encoding,Accept-Language Via 该字段用来标识一个请求经过的网关路由节点。如果这个请求经过了多个代理层，Via头部就会有多个网关信息。\nWarning 用于在响应中添加一些附加的警告信息，警告信息包含一个错误码和错误说明。通用的一些错误码在RFC协议中有具体规定。比如111号错误码表示缓存服务器的缓存项目已经过期，并且尝试reload资源，但是reload失败了，所以只好返回了旧的已经过期的内容，这个时候就需要通过warning头反馈客户端。\n1 Warning: 111 Revalidation failed WWW-Authenticate WWW-Authenticate是401 Unauthorized错误码返回时必须携带的头，该头会携带一个问题Challenge给客户端，告知客户端需要携带这个问题的答案来请求服务器才可以继续访问目标资源。这种问题Challenge可以自定义，比较常见的是Basic认证。\n1 WWW-Authenticate: Basic realm=xxx Basic指代base64加密算法(不安全)，realm指代认证范围/场合/情景名称。\nAuthorization 对于某些需要特殊权限才能访问的资源需要客户端在请求里提供用户名密码的认证信息。它是对WWW-Authenticate的应答。\n1 2 # value = base64(user_name:password) Authorization: Basic YWRtaW46YWRtaW4xMjM= Proxy-Authenticate 同WWW-Authorization头部，用于代理服务器认证。\nProxy-Authorization 同Authorization头部，用于代理服务器认证。\nETag vs Last-Modified vs Expires ETag一般携带的是资源的版本号，协议没有具体规定版本号是什么。它可以是资源的md5校验码，也可以是uuid，甚至可以是自增的数字，也可以是资源的修改时间。它的匹配方式是相等/不相等。因为服务器需要维护版本号，取决的版本号是什么，这可能是一个存储和计算的负担。\nLast-Modified携带的资源的修改时间。它的匹配方式是大于/小于。如果是静态资源文件，一般就是操作系统记录的文件修改时间。\nExpires是服务器告知客户端资源的过期时间。客户端缓存的资源在这个时间之后自动过期，而不需要非得向服务器确认一下是不是304 Not Modified才认为没过期。\nCache-Control 这可能是HTTP头里面最复杂的一个头了。这个头既可以用于请求，也可以用于响应。在请求和响应的取值不一样，分别代表了不同的意思。\nno-cache 如果no-cache没有指定值，那就表示不允许缓存。对于请求来说，服务器不得使用缓存内容直接返回。对于响应来说，客户端不得缓存响应的资源内容。如果no-cache指定了值，那就表示值对应的头信息不得使用缓存，其它的信息还是可以缓存的。告知对方我只要新鲜刚出浴的数据。 no-store 告知对方不要持久化请求/响应数据到其它地方，这种信息是敏感的，要保持它的易失性。告知对方记在心里(memory)就行，别写在纸上(disk)。 no-transform 告知对方不要转换数据。比如客户端上传了raw图像数据，服务器一般都会选择性压缩图像数据进行存储。no-transform告知对方保留原始数据信息，不要进行任何转换。告知对方不要乱动我发过来的东西。 only-if-cached 用于请求头，告知服务器只要那些已经缓存的内容，不要去reload。如果没有缓存内容就返回504 Gateway Timeout错误。表示客户端不想太麻烦服务器，有就给，没就算了。 max-age 用于请求头。限制缓存内容的年龄，如果超过max-age年龄的，需要服务器去reload内容资源。这叫客户端的年龄歧视。 max-stale 用于请求头。客户端允许服务器返回缓存已过期的资源内容，但是限定了最大过期时间。表示客户端虽然很宽容，那是也是有限度的。 min-fresh 用于请求头。客户端限制服务器不要那些即将过期的资源内容。就好比我们去超市买牛奶，如果牛奶快过期了虽然还在保质期内咱们也就不会考虑。 public 用于响应头。表示允许客户端缓存响应信息，并可以给别人使用。比如代理服务器缓存静态资源供所有代理用户使用。 private 用于响应头。表示仅允许客户端缓存响应信息给自己使用，不得分享给别人。这样是为了禁止代理服务器进行缓存，而允许客户端自己缓存资源内容。意思是你个人留着用就行，别借给别人用。 请求体 请求体部分就比较简单了，将需要的发送的数据放到请求体中即可，但是需要注意将请求体的格式、编码在字段Content-Type中指明，同时需要注意请求数据的长度，服务端是否支持这么长的请求数据等\n状态码 相较于请求行中的内容，在响应行中还有状态码，下面对常用的状态码进行介绍：\nHTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型。响应分为五类：\n分类 分类描述 1** 信息，服务器收到请求，需要请求者继续执行操作 2** 成功，操作被成功接收并处理 3** 重定向，需要进一步的操作以完成请求 4** 客户端错误，请求包含语法错误或无法完成请求 5** 服务器错误，服务器在处理请求的过程中发生了错误 HTTP状态码列表:\n状态码 状态码英文名称 中文描述 100 Continue 继续。客户端应继续其请求 101 Switching Protocols 切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议 200 OK 请求成功。一般用于GET与POST请求 201 Created 已创建。成功请求并创建了新的资源 202 Accepted 已接受。已经接受请求，但未处理完成 203 Non-Authoritative Information 非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本 204 No Content 无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档 205 Reset Content 重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域 206 Partial Content 部分内容。服务器成功处理了部分GET请求 300 Multiple Choices 多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择 301 Moved Permanently 永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替 302 Found 临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI 303 See Other 查看其它地址。与301类似。使用GET和POST请求查看 304 Not Modified 未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源 305 Use Proxy 使用代理。所请求的资源必须通过代理访问 306 Unused 已经被废弃的HTTP状态码 307 Temporary Redirect 临时重定向。与302类似。使用GET请求重定向 400 Bad Request 客户端请求的语法错误，服务器无法理解 401 Unauthorized 请求要求用户的身份认证 402 Payment Required 保留，将来使用 403 Forbidden 服务器理解请求客户端的请求，但是拒绝执行此请求 404 Not Found 服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置\"您所请求的资源无法找到\"的个性页面 405 Method Not Allowed 客户端请求中的方法被禁止 406 Not Acceptable 服务器无法根据客户端请求的内容特性完成请求 407 Proxy Authentication Required 请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权 408 Request Time-out 服务器等待客户端发送的请求时间过长，超时 409 Conflict 服务器完成客户端的 PUT 请求时可能返回此代码，服务器处理请求时发生了冲突 410 Gone 客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置 411 Length Required 服务器无法处理客户端发送的不带Content-Length的请求信息 412 Precondition Failed 客户端请求信息的先决条件错误 413 Request Entity Too Large 由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息 414 Request-URI Too Large 请求的URI过长（URI通常为网址），服务器无法处理 415 Unsupported Media Type 服务器无法处理请求附带的媒体格式 416 Requested range not satisfiable 客户端请求的范围无效 417 Expectation Failed 服务器无法满足Expect的请求头信息 500 Internal Server Error 服务器内部错误，无法完成请求 501 Not Implemented 服务器不支持请求的功能，无法完成请求 502 Bad Gateway 作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应 503 Service Unavailable 由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中 504 Gateway Time-out 充当网关或代理的服务器，未及时从远端服务器获取请求 505 HTTP Version not supported 服务器不支持请求的HTTP协议的版本，无法完成处理 ",
+  "wordCount" : "9182",
   "inLanguage": "en",
   "datePublished": "2023-04-05T00:18:23+08:00",
   "dateModified": "2023-04-05T00:18:23+08:00",
@@ -177,7 +177,7 @@
     <div class="post-description">
       Java基本语法
     </div>
-    <div class="post-meta"><span title='2023-04-05 00:18:23 +0800 CST'>2023-04-05</span>&nbsp;·&nbsp;2 min&nbsp;·&nbsp;King
+    <div class="post-meta"><span title='2023-04-05 00:18:23 +0800 CST'>2023-04-05</span>&nbsp;·&nbsp;19 min&nbsp;·&nbsp;King
 
 </div>
   </header> <div class="toc">
@@ -193,7 +193,111 @@
                     <a href="#%e4%b8%80http%e5%8d%8f%e8%ae%ae" aria-label="一、HTTP协议">一、HTTP协议</a><ul>
                         
                 <li>
-                    <a href="#http%e6%b6%88%e6%81%af%e7%bb%93%e6%9e%84" aria-label="HTTP消息结构">HTTP消息结构</a>
+                    <a href="#http%e6%b6%88%e6%81%af%e7%bb%93%e6%9e%84" aria-label="HTTP消息结构">HTTP消息结构</a></li>
+                <li>
+                    <a href="#%e8%af%b7%e6%b1%82%e6%8a%a5%e6%96%87-%e8%af%b7%e6%b1%82%e8%a1%8c" aria-label="请求报文-请求行">请求报文-请求行</a><ul>
+                        
+                <li>
+                    <a href="#%e8%af%b7%e6%b1%82%e6%96%b9%e5%bc%8f" aria-label="请求方式">请求方式</a></li>
+                <li>
+                    <a href="#url" aria-label="URL">URL</a></li>
+                <li>
+                    <a href="#%e7%89%88%e6%9c%ac" aria-label="版本">版本</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%af%b7%e6%b1%82%e6%8a%a5%e6%96%87-%e8%af%b7%e6%b1%82%e5%a4%b4" aria-label="请求报文-请求头">请求报文-请求头</a><ul>
+                        
+                <li>
+                    <a href="#accept" aria-label="Accept">Accept</a></li>
+                <li>
+                    <a href="#accept-charset" aria-label="Accept-Charset">Accept-Charset</a></li>
+                <li>
+                    <a href="#content-type" aria-label="Content-Type">Content-Type</a></li>
+                <li>
+                    <a href="#accept-language" aria-label="Accept-Language">Accept-Language</a></li>
+                <li>
+                    <a href="#content-language" aria-label="Content-Language">Content-Language</a></li>
+                <li>
+                    <a href="#content-length" aria-label="Content-Length">Content-Length</a></li>
+                <li>
+                    <a href="#content-location" aria-label="Content-Location">Content-Location</a></li>
+                <li>
+                    <a href="#content-md5" aria-label="Content-MD5">Content-MD5</a></li>
+                <li>
+                    <a href="#date" aria-label="Date">Date</a></li>
+                <li>
+                    <a href="#age" aria-label="Age">Age</a></li>
+                <li>
+                    <a href="#expires" aria-label="Expires">Expires</a></li>
+                <li>
+                    <a href="#etag" aria-label="ETag">ETag</a></li>
+                <li>
+                    <a href="#if-match" aria-label="If-Match">If-Match</a></li>
+                <li>
+                    <a href="#if-none-match" aria-label="If-None-Match">If-None-Match</a></li>
+                <li>
+                    <a href="#allow" aria-label="Allow">Allow</a></li>
+                <li>
+                    <a href="#connection" aria-label="Connection">Connection</a></li>
+                <li>
+                    <a href="#expect" aria-label="Expect">Expect</a></li>
+                <li>
+                    <a href="#from" aria-label="From">From</a></li>
+                <li>
+                    <a href="#host" aria-label="Host">Host</a></li>
+                <li>
+                    <a href="#last-modified" aria-label="Last-Modified">Last-Modified</a></li>
+                <li>
+                    <a href="#if-modified-since" aria-label="If-Modified-Since">If-Modified-Since</a></li>
+                <li>
+                    <a href="#if-unmodified-since" aria-label="If-Unmodified-Since">If-Unmodified-Since</a></li>
+                <li>
+                    <a href="#range" aria-label="Range">Range</a></li>
+                <li>
+                    <a href="#content-range" aria-label="Content-Range">Content-Range</a></li>
+                <li>
+                    <a href="#if-range" aria-label="If-Range">If-Range</a></li>
+                <li>
+                    <a href="#location" aria-label="Location">Location</a></li>
+                <li>
+                    <a href="#max-forwards" aria-label="Max-Forwards">Max-Forwards</a></li>
+                <li>
+                    <a href="#pragma" aria-label="Pragma">Pragma</a></li>
+                <li>
+                    <a href="#referer" aria-label="Referer">Referer</a></li>
+                <li>
+                    <a href="#retry-after" aria-label="Retry-After">Retry-After</a></li>
+                <li>
+                    <a href="#server" aria-label="Server">Server</a></li>
+                <li>
+                    <a href="#user-agent" aria-label="User-Agent">User-Agent</a></li>
+                <li>
+                    <a href="#transfer-encoding" aria-label="Transfer-Encoding">Transfer-Encoding</a></li>
+                <li>
+                    <a href="#upgrade" aria-label="Upgrade">Upgrade</a></li>
+                <li>
+                    <a href="#vary" aria-label="Vary">Vary</a></li>
+                <li>
+                    <a href="#via" aria-label="Via">Via</a></li>
+                <li>
+                    <a href="#warning" aria-label="Warning">Warning</a></li>
+                <li>
+                    <a href="#www-authenticate" aria-label="WWW-Authenticate">WWW-Authenticate</a></li>
+                <li>
+                    <a href="#authorization" aria-label="Authorization">Authorization</a></li>
+                <li>
+                    <a href="#proxy-authenticate" aria-label="Proxy-Authenticate">Proxy-Authenticate</a></li>
+                <li>
+                    <a href="#proxy-authorization" aria-label="Proxy-Authorization">Proxy-Authorization</a></li>
+                <li>
+                    <a href="#etag-vs-last-modified-vs-expires" aria-label="ETag vs Last-Modified vs Expires">ETag vs Last-Modified vs Expires</a></li>
+                <li>
+                    <a href="#cache-control" aria-label="Cache-Control">Cache-Control</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e8%af%b7%e6%b1%82%e4%bd%93" aria-label="请求体">请求体</a></li>
+                <li>
+                    <a href="#%e7%8a%b6%e6%80%81%e7%a0%81" aria-label="状态码">状态码</a>
                 </li>
             </ul>
             </li>
@@ -239,6 +343,665 @@
 </ul>
 <p><img loading="lazy" src="https://king-super.oss-cn-nanjing.aliyuncs.com/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c-HTTP%e6%a0%bc%e5%bc%8fv2.svg" alt=""  />
 </p>
+<h2 id="请求报文-请求行">请求报文-请求行<a hidden class="anchor" aria-hidden="true" href="#请求报文-请求行">#</a></h2>
+<p>请求行中包含以下内容</p>
+<ul>
+<li>请求方式：也称为动作，用于表明本次请求对指定资源的不同操作</li>
+<li>URL：统一资源定位符，用于表示资源信息的位置</li>
+<li>版本：HTTP请求的版本</li>
+</ul>
+<h3 id="请求方式">请求方式<a hidden class="anchor" aria-hidden="true" href="#请求方式">#</a></h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left"></th>
+<th style="text-align:left">方法</th>
+<th style="text-align:left">描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1</td>
+<td style="text-align:left">GET</td>
+<td style="text-align:left">请求指定的页面信息，并返回实体主体。</td>
+</tr>
+<tr>
+<td style="text-align:left">2</td>
+<td style="text-align:left">HEAD</td>
+<td style="text-align:left">类似于 GET 请求，只不过返回的响应中没有具体的内容，用于获取报头</td>
+</tr>
+<tr>
+<td style="text-align:left">3</td>
+<td style="text-align:left">POST</td>
+<td style="text-align:left">向指定资源提交数据进行处理请求（例如提交表单或者上传文件）。数据被包含在请求体中。POST 请求可能会导致新的资源的建立和/或已有资源的修改。</td>
+</tr>
+<tr>
+<td style="text-align:left">4</td>
+<td style="text-align:left">PUT</td>
+<td style="text-align:left">从客户端向服务器传送的数据取代指定的文档的内容。</td>
+</tr>
+<tr>
+<td style="text-align:left">5</td>
+<td style="text-align:left">DELETE</td>
+<td style="text-align:left">请求服务器删除指定的页面。</td>
+</tr>
+<tr>
+<td style="text-align:left">6</td>
+<td style="text-align:left">CONNECT</td>
+<td style="text-align:left">HTTP/1.1 协议中预留给能够将连接改为管道方式的代理服务器。</td>
+</tr>
+<tr>
+<td style="text-align:left">7</td>
+<td style="text-align:left">OPTIONS</td>
+<td style="text-align:left">允许客户端查看服务器的性能。</td>
+</tr>
+<tr>
+<td style="text-align:left">8</td>
+<td style="text-align:left">TRACE</td>
+<td style="text-align:left">回显服务器收到的请求，主要用于测试或诊断。</td>
+</tr>
+<tr>
+<td style="text-align:left">9</td>
+<td style="text-align:left">PATCH</td>
+<td style="text-align:left">是对 PUT 方法的补充，用来对已知资源进行局部更新 。</td>
+</tr>
+</tbody>
+</table>
+<p>上述的九种请求方法中现在常用的是<code>REST</code>风格中的四种请求方式：<code>GET</code>、<code>POST</code>、<code>PUT</code>、<code>DELETE</code>。</p>
+<h3 id="url">URL<a hidden class="anchor" aria-hidden="true" href="#url">#</a></h3>
+<p>URL完整的格式如下：</p>
+<p><img loading="lazy" src="https://king-super.oss-cn-nanjing.aliyuncs.com/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c-URL%e7%bb%93%e6%9e%84%e5%9b%beV2.svg" alt="URL结构"  />
+</p>
+<p>其中不同字段的含义如下：</p>
+<ul>
+<li>
+<p>scheme：协议</p>
+</li>
+<li>
+<p>host：主机名，指定的域名或者IP地址</p>
+</li>
+<li>
+<p>port：端口号（一般会省略，每种常用的请求协议都有默认的端口号）</p>
+</li>
+<li>
+<p>path：路径，由零或多个<code>/</code>符号隔开的字符串，一般用来表示主机上的一个目录或文件地址</p>
+</li>
+<li>
+<p>query：查询（可选），用于给动态网页（如使用CGI、ISAPI、PHP/JSP/ASP/ASP.NET等技术制作的网页）传递参数，可有多个参数，用<code>&amp;</code>符号隔开，每个参数的名和值用<code>=</code>符号隔开</p>
+</li>
+<li>
+<p>fragment：信息片断（字符串），用于指定网络资源中的片断。例如一个网页中有多个名词解释，可使用fragment直接定</p>
+<p>位到某一名词解释</p>
+</li>
+</ul>
+<p>HTTP请求中的<em><strong>URL</strong></em>其实指代的是<em><strong>完整URL</strong></em>中的path部分。通常采用零个或者多个<code>/</code>符号进行分割，如下图所示：</p>
+<p><img loading="lazy" src="https://king-super.oss-cn-nanjing.aliyuncs.com/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c-path%e8%a7%a3%e6%9e%90.svg" alt=""  />
+</p>
+<h3 id="版本">版本<a hidden class="anchor" aria-hidden="true" href="#版本">#</a></h3>
+<p>常见的HTTP版本有：1.1、2.0、3.0，之后会单独写一篇博客对几个不同的版本进行比较。</p>
+<h2 id="请求报文-请求头">请求报文-请求头<a hidden class="anchor" aria-hidden="true" href="#请求报文-请求头">#</a></h2>
+<p>请求头中的内容格式较为简单：<code>字段名-字段值</code>的方式按行分布，中间用空格分隔，下面讲述一些常用的首部字段：</p>
+<h3 id="accept">Accept<a hidden class="anchor" aria-hidden="true" href="#accept">#</a></h3>
+<p>表示客户端期望服务器返回的媒体格式。客户端期望的资源类型服务器可能没有，所以客户端会期望多种类型，并且设置优先级，服务器根据优先级寻找相应的资源返回给客户端。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># 注意：先逗号分割类型，再分号分割属性
+</span></span><span style="display:flex;"><span>Accept: audio/*; q=0.2, audio/basic
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>表示audio/basic类型的资源优先，如果没有，就随便其它什么格式的audio资源都可以。q的取值范围是(0-1]，其具体值并没有意义，它仅用来排序优先级，如果没有q，默认q=1，也就是最高优先级。</p>
+<h3 id="accept-charset">Accept-Charset<a hidden class="anchor" aria-hidden="true" href="#accept-charset">#</a></h3>
+<p>表示客户端期望服务器返回的内容的编码格式。它同Accept头一样，也可以指定多个编码，以q值代表优先级。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># 注意：先逗号分割类型，再分号分割属性
+</span></span><span style="display:flex;"><span>Accept-Charset: utf8, gbk; q=0.6
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>表示utf8编码优先，如果不行，就拿gbk编码返回。</p>
+<h3 id="content-type">Content-Type<a hidden class="anchor" aria-hidden="true" href="#content-type">#</a></h3>
+<p>Content-Type是服务器向客户端发送的头（也可以是客户端在发送请求时规定请求体的数据格式、编码等信息），代表内容的媒体类型和编码格式，是对Accept头和Accept-Charset头的统一应答。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Content-Type: text/html; charset=utf8
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>表示返回的Body是个html文本，编码为utf8</p>
+<h3 id="accept-language">Accept-Language<a hidden class="anchor" aria-hidden="true" href="#accept-language">#</a></h3>
+<p>表示客户端期望服务器返回的内容的语言。很多大型互联网公司是全球化的，它的技术文档一般有多种语言，通过这个字段可以实现文档的本地化，对国内用户呈现简体中文文档，对英语系用户呈现英文文档。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Accept-Language: zh-CN, en-US; q=0.8, zh-TW; q=0.6
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>表示大陆简体中文优先，其次英语，再其次台湾繁体中文</p>
+<h3 id="content-language">Content-Language<a hidden class="anchor" aria-hidden="true" href="#content-language">#</a></h3>
+<p>这个头字段内容是对Accept-Language的应答。服务器通过此字段告知客户端返回的Body信息的语言是什么。</p>
+<h3 id="content-length">Content-Length<a hidden class="anchor" aria-hidden="true" href="#content-length">#</a></h3>
+<p>表示传输的请求／响应的Body的长度。GET请求因为没有Body（这里需要说明的是HTTP协议、Java后端是支持GET请求带有请求体的，但是WEB可能不支持带有请求体，前段代码还是要依托于浏览器的，所以尽可能不要在GET请求中使用请求体），所以不需要这个头。携带Body的并且可以提前知道Body长度的请求／响应必须带上这个字段，以便对方可以方便的分辨出报文的边界，也就是Body数据何时结束。如果Body太大，需要边计算边传输，不到最后计算结束是无法知道整个Body大小的，这个时候可以使用http分块传输，这个时候也是不需要Content-Length字段的。</p>
+<h3 id="content-location">Content-Location<a hidden class="anchor" aria-hidden="true" href="#content-location">#</a></h3>
+<p>当客户端请求的资源在服务器有多个地址时，服务器可以通过Content-Location字段告知客户端其它的可选地址。这个字段比较少见。</p>
+<h3 id="content-md5">Content-MD5<a hidden class="anchor" aria-hidden="true" href="#content-md5">#</a></h3>
+<p>在Header中提供这个信息是用来做Body内容校验。它表示Body信息被md5算法处理后的base64字符串。这个字段也比较少见。因为校验机制在TCP层已经有实现了，再来一层校验并没有多大意义。另外资源的md5值往往用来放在后面的ETag头信息中作为资源的唯一标识来使用。</p>
+<h3 id="date">Date<a hidden class="anchor" aria-hidden="true" href="#date">#</a></h3>
+<p>如果服务器没有缓存，那么Date就是响应的即时生成时间。如果服务器设有缓存，那么Date就是响应内容被缓存的时间。它必须符合规范里定义的特定格式，这种格式叫着HTTP-Date，不支持随意定义自己的时间格式。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Date: Tue, 15 Nov 1994 08:12:31 GMT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="age">Age<a hidden class="anchor" aria-hidden="true" href="#age">#</a></h3>
+<p>表示资源缓存的年龄，也就是资源自缓存以来到现在已经过去了多少时间，单位是秒。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Age: 86400
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="expires">Expires<a hidden class="anchor" aria-hidden="true" href="#expires">#</a></h3>
+<p>服务器使用Expect头来告知对方资源何时失效。如果它的值等于Date头的值，就表示资源已经失效。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Expires: Thu, 01 Dec 1994 16:00:00 GMT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="etag">ETag<a hidden class="anchor" aria-hidden="true" href="#etag">#</a></h3>
+<p>资源标签，每个资源可以提供多个标签信息。它一般用来和下面的If-Match和If-None-Match配合使用，用来判断缓存资源的有效性。比较常见的标签是资源的版本号，比如可以拿资源数据的md5校验码作为版本号。</p>
+<h3 id="if-match">If-Match<a hidden class="anchor" aria-hidden="true" href="#if-match">#</a></h3>
+<p>If-Match的值一般是上面提到的ETag的值，它常用于HTTP的乐观锁。所谓HTTP乐观锁，是指客户端先GET这个资源得到ETag中的版本号，然后发起一个资源修改请求PUT|PATCH时通过If-Match头来指定资源的版本号，如果服务器资源满足If-Match中指定的版本号，请求就会被执行。如果不满足，说明资源被并发修改了，就需要返回状态码为412 Precondition failed 的错误。客户端可以选择放弃或者重试整个过程。</p>
+<h3 id="if-none-match">If-None-Match<a hidden class="anchor" aria-hidden="true" href="#if-none-match">#</a></h3>
+<p>类似于If-Match，只是条件相反。</p>
+<h3 id="allow">Allow<a hidden class="anchor" aria-hidden="true" href="#allow">#</a></h3>
+<p>表示资源支持访问的HTTP Method类型。它是服务器对客户端的建议，告知对方请使用Allow中提到的Method来访问资源。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Allow: GET, HEAD, PUT
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="connection">Connection<a hidden class="anchor" aria-hidden="true" href="#connection">#</a></h3>
+<p>当客户端和服务器需要协商连接的属性时，可以使用Connection头部。比较常用的一个值是close，用来通知对方在当前请求结束后关闭连接。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Connection: close
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="expect">Expect<a hidden class="anchor" aria-hidden="true" href="#expect">#</a></h3>
+<p>用于请求发送之前向服务器询问许可。譬如要向服务器发送一个很大的文件而不确定是否超出限制，就可以在请求头里携带一个Expect头部</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Expect: 100-continue
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>如果服务器说不行，就会返回417 Expectation Failed错误告知客户端放弃。如果可以那就返回100 continue状态码告知客户端放马过来吧，于是客户端就会继续上传Body内容。如果服务器提前收到Body内容就会放弃返回100 continue响应。</p>
+<h3 id="from">From<a hidden class="anchor" aria-hidden="true" href="#from">#</a></h3>
+<p>该字段一般用来标记请求发起者的邮件地址，相当于给请求赋予一个责任人。如果服务器发现请求存在问题，就会通过此字段联系到发起人进行处理。因为邮件地址涉及到隐私信息，所以请求携带From头需要征得用户的同意。RFC协议建议所有的机器人代理发起的请求应该携带此头部，以免遇到问题时可以找到责任人。不过如果是恶意的机器人，估计这样的建议也只是耳边风而已。</p>
+<h3 id="host">Host<a hidden class="anchor" aria-hidden="true" href="#host">#</a></h3>
+<p>RFC协议规定所有的HTTP请求必须携带Host头，即使Host没有值，也必须带上这个Host头附加一个空串，如果不满足，应用服务器应该抛出400 Bad Request。协议虽然这样规定，不过大部分网关或者服务器都比较仁慈，既然没有指定Host字段，那就给你默认加上一个。
+网关代理可以根据不同的Host值转发到不同的upstream服务节点，它常用于虚拟主机服务业务。</p>
+<h3 id="last-modified">Last-Modified<a hidden class="anchor" aria-hidden="true" href="#last-modified">#</a></h3>
+<p>标记资源的最近修改时间，它和Date比较类似，区别是Last-Modified代表修改时间，而Date是创建时间。</p>
+<h3 id="if-modified-since">If-Modified-Since<a hidden class="anchor" aria-hidden="true" href="#if-modified-since">#</a></h3>
+<p>浏览器向服务器请求静态资源时，如果浏览器本地已经有了缓存，就会携带If-Modified-Since头，值为资源的Last-Modified时间，询问服务器该资源自从这个Last-Modified时间之后有没有被修改。如果没有修改过，就会向浏览器返回304 Not Modified通知浏览器可以放心使用缓存内的资源。如果资源修改过，那就像正常的GET请求一样，携带资源的内容返回200 OK。</p>
+<h3 id="if-unmodified-since">If-Unmodified-Since<a hidden class="anchor" aria-hidden="true" href="#if-unmodified-since">#</a></h3>
+<p>类似于If-Modified-Since，意义相反。区别是当服务器资源条件不满足时，不是返回304 Not Modified，而是返回412 Precondition Failed。</p>
+<h3 id="range">Range<a hidden class="anchor" aria-hidden="true" href="#range">#</a></h3>
+<p>支持断点续传的服务器必须处理Range头，它表示客户端请求资源的一部分时指定的请求字节范围。它是客户端向服务器发送的请求头。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Range: bytes=500-999
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="content-range">Content-Range<a hidden class="anchor" aria-hidden="true" href="#content-range">#</a></h3>
+<p>针对上面的Range头，服务器响应客户端时也需提供相应的Content-Range头，表示传输的Body数据在整体资源块中的字节范围。比如下面的例子表示该资源总共有47022字节，当前响应的内容是21010-47021字节之间的内容。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Content-Range: bytes 21010-47021/47022
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>之所以是47021而不是47022是因为offset是以0开始的，47021就是最后一个字节。</p>
+<h3 id="if-range">If-Range<a hidden class="anchor" aria-hidden="true" href="#if-range">#</a></h3>
+<p>在断点续传时，为确保连续2个请求之间服务器资源本身没有发生变化，需要If-Range头带上ETag的资源版本号。服务器资源根据这个版本号来判定资源是否改变了。如果没变，就返回206 Partial Content将部分资源返回。如果资源变了，那就相当于一个普通的GET请求，返回200 OK和整个资源内容。</p>
+<h3 id="location">Location<a hidden class="anchor" aria-hidden="true" href="#location">#</a></h3>
+<p>服务器向客户端发送302跳转的时候，总会携带Location头信息，它的值为目标URL。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>HTTP/1.1 302 Temporary Redirect
+</span></span><span style="display:flex;"><span>Location: https://www-temp.example.org/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="max-forwards">Max-Forwards<a hidden class="anchor" aria-hidden="true" href="#max-forwards">#</a></h3>
+<p>用来限定网关或者代理的层数，也就是最大转发次数。HTTP每经过一个网关或者代理层，Max-Forwards值就要减1。如果nginx接收到前端请求的时候Max-Forwards已经等于0，那么它就不应该再将请求转发到upstream指定的服务节点上。</p>
+<h3 id="pragma">Pragma<a hidden class="anchor" aria-hidden="true" href="#pragma">#</a></h3>
+<p>这个头是比较常见的，在前端开发模式下经常会加上这个头部。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Pragma: no-cache
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当网关收到一个带有这样请求的头部时，即使内部存在该请求资源的缓存并且有效也不可以直接发送给客户端，而必须转发给后面的upstream进行处理。
+不过如果真的所有的网关都遵循这个协议的话，攻击是很容易构造的，所以它一般仅用于开发模式，防止静态资源修改后前端得不到即时更新。其它值的pragma值没有遇到过。</p>
+<h3 id="referer">Referer<a hidden class="anchor" aria-hidden="true" href="#referer">#</a></h3>
+<p>Referer是非常常用的头，它表示请求的发起来源URI，也就是当前页面资源的父页面。如果你从A页面跳转到B页面，那么请求B页面的请求头里面就会有Referer信息，它的值就是A页面的访问地址。通过追踪Referer，可得出资源页面之间复杂的跳转链，它非常适合用于网页的数据分析和路径优化。</p>
+<h3 id="retry-after">Retry-After<a hidden class="anchor" aria-hidden="true" href="#retry-after">#</a></h3>
+<p>服务器升级时，来自客户端的请求会直接给予503(Service Unavailable)错误，通过在返回头里面加入Retry-After字段告知客户端何时服务可以恢复正常访问。Retry-After的头可以是HTTP-Date，也可以是整数，表示多少秒后服务可以恢复正常访问。浏览器在拿到这个值之后可以考虑增加一个定时器在未来的某个时间进行重试。</p>
+<h3 id="server">Server<a hidden class="anchor" aria-hidden="true" href="#server">#</a></h3>
+<p>用于返回服务器相关的软件信息，来告知客户端当前的HTTP服务是由某某软件提供的，可以看成是一种软件广告。
+RFC协议里对这个头信息做了警告：暴露出服务器信息可能会导致黑客更易于攻击你的服务，建议谨慎使用。</p>
+<h3 id="user-agent">User-Agent<a hidden class="anchor" aria-hidden="true" href="#user-agent">#</a></h3>
+<p>携带当前的用户代理信息，一般包含浏览器、浏览器内核和操作系统的版本型号信息。它和Server头是对应的，一个是表达服务器信息，一个是表达客户端信息。服务器可以根据用户代理信息统计出网页服务的浏览器、操作系统的使用占比情况，服务器也可以根据UA的信息来定制不一样的内容。</p>
+<h3 id="transfer-encoding">Transfer-Encoding<a hidden class="anchor" aria-hidden="true" href="#transfer-encoding">#</a></h3>
+<p>传送Body信息时需要对Body数据采取何种变换。当HTTP对Body进行分块传送时，需要增加下面的头部信息才可以进行分块传送。其它类型目前没有遇到过。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Transfer-Encoding: chunked
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="upgrade">Upgrade<a hidden class="anchor" aria-hidden="true" href="#upgrade">#</a></h3>
+<p>服务器建议客户端升级传输协议。比如当客户端使用HTTP/1.0发送请求时，服务器就可以建议客户端升级到HTTP/1.1。
+这个时候就可以使用Upgrade头。客户端收到这个Upgrade后就会将后续请求转成HTTP/1.1格式继续进行交流。可以支持多个参数，使用逗号分割即可。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Upgrade: HTTP/1.1
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当客户端要和服务器进行Websocket进行通讯时，在握手阶段服务器也会向客户端发送Upgrade头部信息，提示客户端将协议切换到Websocket。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Upgrade: WebSocket
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="vary">Vary<a hidden class="anchor" aria-hidden="true" href="#vary">#</a></h3>
+<p>该头部用于缓存控制。对于一些缓存服务器，我们在请求里加入Vary参数可以告知缓存服务器对不同的Vary参数的响应使用不同的缓存单元。比如Vary参数里放入编码参数，那么不同编码的网页就会有不同的缓存。Vary的值可以有多个，只要任意一个值不一样就会有不同的缓存。
+比如下面的这个例子告知缓存服务器对不同语言和不同编码的网页响应使用不同的缓存单元。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Vary: Accept-Encoding,Accept-Language
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="via">Via<a hidden class="anchor" aria-hidden="true" href="#via">#</a></h3>
+<p>该字段用来标识一个请求经过的网关路由节点。如果这个请求经过了多个代理层，Via头部就会有多个网关信息。</p>
+<h3 id="warning">Warning<a hidden class="anchor" aria-hidden="true" href="#warning">#</a></h3>
+<p>用于在响应中添加一些附加的警告信息，警告信息包含一个错误码和错误说明。通用的一些错误码在RFC协议中有具体规定。比如111号错误码表示缓存服务器的缓存项目已经过期，并且尝试reload资源，但是reload失败了，所以只好返回了旧的已经过期的内容，这个时候就需要通过warning头反馈客户端。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Warning: 111 Revalidation failed
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="www-authenticate">WWW-Authenticate<a hidden class="anchor" aria-hidden="true" href="#www-authenticate">#</a></h3>
+<p>WWW-Authenticate是401 Unauthorized错误码返回时必须携带的头，该头会携带一个问题Challenge给客户端，告知客户端需要携带这个问题的答案来请求服务器才可以继续访问目标资源。这种问题Challenge可以自定义，比较常见的是Basic认证。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>WWW-Authenticate: Basic realm=xxx
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Basic指代base64加密算法(不安全)，realm指代认证范围/场合/情景名称。</p>
+<h3 id="authorization">Authorization<a hidden class="anchor" aria-hidden="true" href="#authorization">#</a></h3>
+<p>对于某些需要特殊权限才能访问的资源需要客户端在请求里提供用户名密码的认证信息。它是对WWW-Authenticate的应答。</p>
+<div class="highlight"><div style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;">
+<table style="border-spacing:0;padding:0;margin:0;border:0;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">1
+</span><span style="white-space:pre;user-select:none;margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#727272">2
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre tabindex="0" style="color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span># value = base64(user_name:password)
+</span></span><span style="display:flex;"><span>Authorization: Basic YWRtaW46YWRtaW4xMjM=
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="proxy-authenticate">Proxy-Authenticate<a hidden class="anchor" aria-hidden="true" href="#proxy-authenticate">#</a></h3>
+<p>同WWW-Authorization头部，用于代理服务器认证。</p>
+<h3 id="proxy-authorization">Proxy-Authorization<a hidden class="anchor" aria-hidden="true" href="#proxy-authorization">#</a></h3>
+<p>同Authorization头部，用于代理服务器认证。</p>
+<h3 id="etag-vs-last-modified-vs-expires">ETag vs Last-Modified vs Expires<a hidden class="anchor" aria-hidden="true" href="#etag-vs-last-modified-vs-expires">#</a></h3>
+<p>ETag一般携带的是资源的版本号，协议没有具体规定版本号是什么。它可以是资源的md5校验码，也可以是uuid，甚至可以是自增的数字，也可以是资源的修改时间。它的匹配方式是相等/不相等。因为服务器需要维护版本号，取决的版本号是什么，这可能是一个存储和计算的负担。</p>
+<p>Last-Modified携带的资源的修改时间。它的匹配方式是大于/小于。如果是静态资源文件，一般就是操作系统记录的文件修改时间。</p>
+<p>Expires是服务器告知客户端资源的过期时间。客户端缓存的资源在这个时间之后自动过期，而不需要非得向服务器确认一下是不是304 Not Modified才认为没过期。</p>
+<h3 id="cache-control">Cache-Control<a hidden class="anchor" aria-hidden="true" href="#cache-control">#</a></h3>
+<p>这可能是HTTP头里面最复杂的一个头了。这个头既可以用于请求，也可以用于响应。在请求和响应的取值不一样，分别代表了不同的意思。</p>
+<ol>
+<li>no-cache 如果no-cache没有指定值，那就表示不允许缓存。对于请求来说，服务器不得使用缓存内容直接返回。对于响应来说，客户端不得缓存响应的资源内容。如果no-cache指定了值，那就表示值对应的头信息不得使用缓存，其它的信息还是可以缓存的。告知对方我只要新鲜刚出浴的数据。</li>
+<li>no-store 告知对方不要持久化请求/响应数据到其它地方，这种信息是敏感的，要保持它的易失性。告知对方记在心里(memory)就行，别写在纸上(disk)。</li>
+<li>no-transform 告知对方不要转换数据。比如客户端上传了raw图像数据，服务器一般都会选择性压缩图像数据进行存储。no-transform告知对方保留原始数据信息，不要进行任何转换。告知对方不要乱动我发过来的东西。</li>
+<li>only-if-cached 用于请求头，告知服务器只要那些已经缓存的内容，不要去reload。如果没有缓存内容就返回504 Gateway Timeout错误。表示客户端不想太麻烦服务器，有就给，没就算了。</li>
+<li>max-age 用于请求头。限制缓存内容的年龄，如果超过max-age年龄的，需要服务器去reload内容资源。这叫客户端的年龄歧视。</li>
+<li>max-stale 用于请求头。客户端允许服务器返回缓存已过期的资源内容，但是限定了最大过期时间。表示客户端虽然很宽容，那是也是有限度的。</li>
+<li>min-fresh 用于请求头。客户端限制服务器不要那些即将过期的资源内容。就好比我们去超市买牛奶，如果牛奶快过期了虽然还在保质期内咱们也就不会考虑。</li>
+<li>public 用于响应头。表示允许客户端缓存响应信息，并可以给别人使用。比如代理服务器缓存静态资源供所有代理用户使用。</li>
+<li>private 用于响应头。表示仅允许客户端缓存响应信息给自己使用，不得分享给别人。这样是为了禁止代理服务器进行缓存，而允许客户端自己缓存资源内容。意思是你个人留着用就行，别借给别人用。</li>
+</ol>
+<h2 id="请求体">请求体<a hidden class="anchor" aria-hidden="true" href="#请求体">#</a></h2>
+<p>请求体部分就比较简单了，将需要的发送的数据放到请求体中即可，但是需要注意将请求体的格式、编码在字段<code>Content-Type</code>中指明，同时需要注意请求数据的长度，服务端是否支持这么长的请求数据等</p>
+<h2 id="状态码">状态码<a hidden class="anchor" aria-hidden="true" href="#状态码">#</a></h2>
+<p>相较于请求行中的内容，在响应行中还有状态码，下面对常用的状态码进行介绍：</p>
+<p>HTTP 状态码由三个十进制数字组成，第一个十进制数字定义了状态码的类型。响应分为五类：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">分类</th>
+<th style="text-align:left">分类描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">1**</td>
+<td style="text-align:left">信息，服务器收到请求，需要请求者继续执行操作</td>
+</tr>
+<tr>
+<td style="text-align:left">2**</td>
+<td style="text-align:left">成功，操作被成功接收并处理</td>
+</tr>
+<tr>
+<td style="text-align:left">3**</td>
+<td style="text-align:left">重定向，需要进一步的操作以完成请求</td>
+</tr>
+<tr>
+<td style="text-align:left">4**</td>
+<td style="text-align:left">客户端错误，请求包含语法错误或无法完成请求</td>
+</tr>
+<tr>
+<td style="text-align:left">5**</td>
+<td style="text-align:left">服务器错误，服务器在处理请求的过程中发生了错误</td>
+</tr>
+</tbody>
+</table>
+<p>HTTP状态码列表:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">状态码</th>
+<th style="text-align:left">状态码英文名称</th>
+<th style="text-align:left">中文描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">100</td>
+<td style="text-align:left">Continue</td>
+<td style="text-align:left">继续。客户端应继续其请求</td>
+</tr>
+<tr>
+<td style="text-align:left">101</td>
+<td style="text-align:left">Switching Protocols</td>
+<td style="text-align:left">切换协议。服务器根据客户端的请求切换协议。只能切换到更高级的协议，例如，切换到HTTP的新版本协议</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">200</td>
+<td style="text-align:left">OK</td>
+<td style="text-align:left">请求成功。一般用于GET与POST请求</td>
+</tr>
+<tr>
+<td style="text-align:left">201</td>
+<td style="text-align:left">Created</td>
+<td style="text-align:left">已创建。成功请求并创建了新的资源</td>
+</tr>
+<tr>
+<td style="text-align:left">202</td>
+<td style="text-align:left">Accepted</td>
+<td style="text-align:left">已接受。已经接受请求，但未处理完成</td>
+</tr>
+<tr>
+<td style="text-align:left">203</td>
+<td style="text-align:left">Non-Authoritative Information</td>
+<td style="text-align:left">非授权信息。请求成功。但返回的meta信息不在原始的服务器，而是一个副本</td>
+</tr>
+<tr>
+<td style="text-align:left">204</td>
+<td style="text-align:left">No Content</td>
+<td style="text-align:left">无内容。服务器成功处理，但未返回内容。在未更新网页的情况下，可确保浏览器继续显示当前文档</td>
+</tr>
+<tr>
+<td style="text-align:left">205</td>
+<td style="text-align:left">Reset Content</td>
+<td style="text-align:left">重置内容。服务器处理成功，用户终端（例如：浏览器）应重置文档视图。可通过此返回码清除浏览器的表单域</td>
+</tr>
+<tr>
+<td style="text-align:left">206</td>
+<td style="text-align:left">Partial Content</td>
+<td style="text-align:left">部分内容。服务器成功处理了部分GET请求</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">300</td>
+<td style="text-align:left">Multiple Choices</td>
+<td style="text-align:left">多种选择。请求的资源可包括多个位置，相应可返回一个资源特征与地址的列表用于用户终端（例如：浏览器）选择</td>
+</tr>
+<tr>
+<td style="text-align:left">301</td>
+<td style="text-align:left">Moved Permanently</td>
+<td style="text-align:left">永久移动。请求的资源已被永久的移动到新URI，返回信息会包括新的URI，浏览器会自动定向到新URI。今后任何新的请求都应使用新的URI代替</td>
+</tr>
+<tr>
+<td style="text-align:left">302</td>
+<td style="text-align:left">Found</td>
+<td style="text-align:left">临时移动。与301类似。但资源只是临时被移动。客户端应继续使用原有URI</td>
+</tr>
+<tr>
+<td style="text-align:left">303</td>
+<td style="text-align:left">See Other</td>
+<td style="text-align:left">查看其它地址。与301类似。使用GET和POST请求查看</td>
+</tr>
+<tr>
+<td style="text-align:left">304</td>
+<td style="text-align:left">Not Modified</td>
+<td style="text-align:left">未修改。所请求的资源未修改，服务器返回此状态码时，不会返回任何资源。客户端通常会缓存访问过的资源，通过提供一个头信息指出客户端希望只返回在指定日期之后修改的资源</td>
+</tr>
+<tr>
+<td style="text-align:left">305</td>
+<td style="text-align:left">Use Proxy</td>
+<td style="text-align:left">使用代理。所请求的资源必须通过代理访问</td>
+</tr>
+<tr>
+<td style="text-align:left">306</td>
+<td style="text-align:left">Unused</td>
+<td style="text-align:left">已经被废弃的HTTP状态码</td>
+</tr>
+<tr>
+<td style="text-align:left">307</td>
+<td style="text-align:left">Temporary Redirect</td>
+<td style="text-align:left">临时重定向。与302类似。使用GET请求重定向</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">400</td>
+<td style="text-align:left">Bad Request</td>
+<td style="text-align:left">客户端请求的语法错误，服务器无法理解</td>
+</tr>
+<tr>
+<td style="text-align:left">401</td>
+<td style="text-align:left">Unauthorized</td>
+<td style="text-align:left">请求要求用户的身份认证</td>
+</tr>
+<tr>
+<td style="text-align:left">402</td>
+<td style="text-align:left">Payment Required</td>
+<td style="text-align:left">保留，将来使用</td>
+</tr>
+<tr>
+<td style="text-align:left">403</td>
+<td style="text-align:left">Forbidden</td>
+<td style="text-align:left">服务器理解请求客户端的请求，但是拒绝执行此请求</td>
+</tr>
+<tr>
+<td style="text-align:left">404</td>
+<td style="text-align:left">Not Found</td>
+<td style="text-align:left">服务器无法根据客户端的请求找到资源（网页）。通过此代码，网站设计人员可设置&quot;您所请求的资源无法找到&quot;的个性页面</td>
+</tr>
+<tr>
+<td style="text-align:left">405</td>
+<td style="text-align:left">Method Not Allowed</td>
+<td style="text-align:left">客户端请求中的方法被禁止</td>
+</tr>
+<tr>
+<td style="text-align:left">406</td>
+<td style="text-align:left">Not Acceptable</td>
+<td style="text-align:left">服务器无法根据客户端请求的内容特性完成请求</td>
+</tr>
+<tr>
+<td style="text-align:left">407</td>
+<td style="text-align:left">Proxy Authentication Required</td>
+<td style="text-align:left">请求要求代理的身份认证，与401类似，但请求者应当使用代理进行授权</td>
+</tr>
+<tr>
+<td style="text-align:left">408</td>
+<td style="text-align:left">Request Time-out</td>
+<td style="text-align:left">服务器等待客户端发送的请求时间过长，超时</td>
+</tr>
+<tr>
+<td style="text-align:left">409</td>
+<td style="text-align:left">Conflict</td>
+<td style="text-align:left">服务器完成客户端的 PUT 请求时可能返回此代码，服务器处理请求时发生了冲突</td>
+</tr>
+<tr>
+<td style="text-align:left">410</td>
+<td style="text-align:left">Gone</td>
+<td style="text-align:left">客户端请求的资源已经不存在。410不同于404，如果资源以前有现在被永久删除了可使用410代码，网站设计人员可通过301代码指定资源的新位置</td>
+</tr>
+<tr>
+<td style="text-align:left">411</td>
+<td style="text-align:left">Length Required</td>
+<td style="text-align:left">服务器无法处理客户端发送的不带Content-Length的请求信息</td>
+</tr>
+<tr>
+<td style="text-align:left">412</td>
+<td style="text-align:left">Precondition Failed</td>
+<td style="text-align:left">客户端请求信息的先决条件错误</td>
+</tr>
+<tr>
+<td style="text-align:left">413</td>
+<td style="text-align:left">Request Entity Too Large</td>
+<td style="text-align:left">由于请求的实体过大，服务器无法处理，因此拒绝请求。为防止客户端的连续请求，服务器可能会关闭连接。如果只是服务器暂时无法处理，则会包含一个Retry-After的响应信息</td>
+</tr>
+<tr>
+<td style="text-align:left">414</td>
+<td style="text-align:left">Request-URI Too Large</td>
+<td style="text-align:left">请求的URI过长（URI通常为网址），服务器无法处理</td>
+</tr>
+<tr>
+<td style="text-align:left">415</td>
+<td style="text-align:left">Unsupported Media Type</td>
+<td style="text-align:left">服务器无法处理请求附带的媒体格式</td>
+</tr>
+<tr>
+<td style="text-align:left">416</td>
+<td style="text-align:left">Requested range not satisfiable</td>
+<td style="text-align:left">客户端请求的范围无效</td>
+</tr>
+<tr>
+<td style="text-align:left">417</td>
+<td style="text-align:left">Expectation Failed</td>
+<td style="text-align:left">服务器无法满足Expect的请求头信息</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+<td style="text-align:left"></td>
+</tr>
+<tr>
+<td style="text-align:left">500</td>
+<td style="text-align:left">Internal Server Error</td>
+<td style="text-align:left">服务器内部错误，无法完成请求</td>
+</tr>
+<tr>
+<td style="text-align:left">501</td>
+<td style="text-align:left">Not Implemented</td>
+<td style="text-align:left">服务器不支持请求的功能，无法完成请求</td>
+</tr>
+<tr>
+<td style="text-align:left">502</td>
+<td style="text-align:left">Bad Gateway</td>
+<td style="text-align:left">作为网关或者代理工作的服务器尝试执行请求时，从远程服务器接收到了一个无效的响应</td>
+</tr>
+<tr>
+<td style="text-align:left">503</td>
+<td style="text-align:left">Service Unavailable</td>
+<td style="text-align:left">由于超载或系统维护，服务器暂时的无法处理客户端的请求。延时的长度可包含在服务器的Retry-After头信息中</td>
+</tr>
+<tr>
+<td style="text-align:left">504</td>
+<td style="text-align:left">Gateway Time-out</td>
+<td style="text-align:left">充当网关或代理的服务器，未及时从远端服务器获取请求</td>
+</tr>
+<tr>
+<td style="text-align:left">505</td>
+<td style="text-align:left">HTTP Version not supported</td>
+<td style="text-align:left">服务器不支持请求的HTTP协议的版本，无法完成处理</td>
+</tr>
+</tbody>
+</table>
 
 
   </div>
