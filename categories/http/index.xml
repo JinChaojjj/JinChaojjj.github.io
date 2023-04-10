@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>HTTP on King&#39;s Blog</title>
+    <link>https://jinchaojjj.github.io/categories/http/</link>
+    <description>Recent content in HTTP on King&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>zh-cn</language>
+    <lastBuildDate>Mon, 10 Apr 2023 00:00:00 +0800</lastBuildDate><atom:link href="https://jinchaojjj.github.io/categories/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>HTTP详解</title>
+      <link>https://jinchaojjj.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/http%E8%AF%A6%E8%A7%A3/</link>
+      <pubDate>Mon, 10 Apr 2023 00:00:00 +0800</pubDate>
+      
+      <guid>https://jinchaojjj.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/http%E8%AF%A6%E8%A7%A3/</guid>
+      <description>计算机网络-HTTP</description>
+    </item>
+    
+  </channel>
+</rss>

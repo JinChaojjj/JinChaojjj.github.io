@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en" dir="auto">
+
+<head><meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="robots" content="index, follow">
+<title>加密算法 | King&#39;s Blog</title>
+<meta name="keywords" content="计算机基础">
+<meta name="description" content="加密算法">
+<meta name="author" content="King">
+<link rel="canonical" href="https://jinchaojjj.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/">
+<link crossorigin="anonymous" href="/assets/css/stylesheet.3613efbd0b1772781e8f49935e973cae632a7f61471c05b17be155505ccf87b5.css" integrity="sha256-NhPvvQsXcngej0mTXpc8rmMqf2FHHAWxe&#43;FVUFzPh7U=" rel="preload stylesheet" as="style">
+<script defer crossorigin="anonymous" src="/assets/js/highlight.f413e19d0714851f6474e7ee9632408e58ac146fbdbe62747134bea2fa3415e0.js" integrity="sha256-9BPhnQcUhR9kdOfuljJAjlisFG&#43;9vmJ0cTS&#43;ovo0FeA="
+    onload="hljs.initHighlightingOnLoad();"></script>
+<link rel="icon" href="https://jinchaojjj.github.io/img/a.jpeg">
+<link rel="icon" type="image/png" sizes="16x16" href="https://jinchaojjj.github.io/img/a.jpeg">
+<link rel="icon" type="image/png" sizes="32x32" href="https://jinchaojjj.github.io/img/a.jpeg">
+<link rel="apple-touch-icon" href="https://jinchaojjj.github.io/a.jpeg">
+<link rel="mask-icon" href="https://jinchaojjj.github.io/a.jpeg">
+<meta name="theme-color" content="#2e2e33">
+<meta name="msapplication-TileColor" content="#2e2e33">
+<noscript>
+    <style>
+        #theme-toggle,
+        .top-link {
+            display: none;
+        }
+
+    </style>
+</noscript><meta property="og:title" content="加密算法" />
+<meta property="og:description" content="加密算法" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://jinchaojjj.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-04-05T00:18:23+08:00" />
+<meta property="article:modified_time" content="2023-04-05T00:18:23+08:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="加密算法"/>
+<meta name="twitter:description" content="加密算法"/>
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [, 
+    {
+      "@type": "ListItem",
+      "position":  2 ,
+      "name": "📚文章",
+      "item": "https://jinchaojjj.github.io/posts/"
+    }, 
+    {
+      "@type": "ListItem",
+      "position":  4 ,
+      "name": "加密算法",
+      "item": "https://jinchaojjj.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"
+    }
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": "加密算法",
+  "name": "加密算法",
+  "description": "加密算法",
+  "keywords": [
+    "计算机基础"
+  ],
+  "articleBody": "加密算法 一、编码算法 编码算法是将二进制（bit）转化为字符（例如a、中等）的过程，这种编码称为字符编码。\n常见的字符编码有：ASCII、UTF、GBK等。其中ASCII中只能有128个字符，通常只用来显示英文字符，与汉子相关使用较多的是UTF-8与GBK，这里需要注意的是产生二进制bit使用的编码是什么时，在显示字符时所用的也要是对应的编码。\nURL编码 是浏览器发送数据给服务器时所用的编码，通常附加在URL后面的参数部分，使用编码的原因是为了提高兼容性，很多服务器只能使用ASCII字符.\nURL编码的方式如下：\n字符是A～ Z、a～z、0~9以及-、_、.、*保持不变 字符的每个字节以%XX表示（十六进制） 因为本质上编码是将bit解释为正确的信息（用户正确的目的传达给服务器），只要前后端商量好使用的编码方式即可（可以直接通过js对字符进行编码，但通常来说还是使用URL编码较为广泛，没必要自己特立独行的使用奇怪的编码方式）\nBase64 Base64编码可以把任意长度的二进制数据变为纯文本，且只包含A～Z、a～z、0~9、+、/、=这些字符。\nBase64编码的方式：\n将3字节的二进制数据按6bit为一组，分为四组 四组分别用四个int整数来表示 然后查表，把int整数用对应的字符进行表示 得到编码后的字符串 因为6位整数的范围总是0～63，所以，能用64个字符表示：字符A～Z对应索引0～25，字符a～z对应索引26～51，字符0～9对应索引52~61，最后两个索引62、63分别用字符+和/表示。\n如果编码的时候不是3的整数倍，那就在最后补0x00，补了一个0x00就在最后添加一个=，补了两个就添加两个==\n二、Hash算法 hash算法的本质是通过hash函数直接将数据（可以是任意格式的数据，只要函数支持）计算后得到一串规定好的字符串（通常是计算得到一串固定长度的bit数据，用十六进制对应的字符串表示）\nhash函数需要保证是幂等的，不管数据的经过多少次运算得到的hash值应该是相等的。\n同时hash函数应该保证hash碰撞的概率尽可能低、不能猜测输出（输入稍加改变，结果就将完全不同，不能有规律的被猜测输入是什么）。\n常见的hash函数有一下几种：\n算法 输出长度（位） 输出长度（字节） MD5 128 bits 16 bytes SHA-1 160 bits 20 bytes RipeMD-160 160 bits 20 bytes SHA-256 256 bits 32 bytes SHA-512 512 bits 64 bytes MD5在短时间内是可以破解的，现在已经不安全了，用于文件校验是没有问题的，但是用来加密已经不够安全。\n用处 常见的用处是对计算文件、软件等信息的hash码，较为常见的是使用MD5，在下载到软件后使用对应的hash算法计算其hash值和官网提供的hash值进行比对就知道下载到的数据是否有被篡改了。 另一个重要用途是存储用户口令。如果直接将用户的原始口令存放到数据库中，会产生极大的安全风险： 数据库管理员能够看到用户明文口令； 数据库数据一旦泄漏，黑客即可获取用户明文口令。 使用hash口令的时候需要防止彩虹表攻击，因为黑客在得到hash值后很难倒推原文，但是他们提前有一张表里面记录了常见口令的hash码，所以如果使用了常见口令时可以很快的匹配到结果，因此不要使用较为简单的密码。\n此外还有一个方法就是加盐（salt），在用户口令的后添加随机数，使得用户的密码变得复杂，使得黑客无法使用彩虹表进行倒推。\nHmac Hmac算法是一种基于密钥的消息认证码算法，全称是Hash-based Message Authentication Code，是一种更安全的消息摘要算法。\nHmac算法总是和某种哈希算法配合起来用的。例如，我们使用MD5算法，对应的就是HmacMD5算法，它相当于“加盐”的MD5。因此，HmacMD5可以看作带有一个安全的key的MD5。使用HmacMD5而不是用MD5加salt，有如下好处：\nHmacMD5使用的key长度是64字节，更安全； Hmac是标准算法，同样适用于SHA-1等其他哈希算法； Hmac输出和原有的哈希算法长度一致。 Hmac算法定义：关于Hmac算法的更多内容可以参看这篇博客\nHMAC(k,m)=H(k’⊕opad,H(k’⊕ipad,m))\n其中：\nH 为密码Hash函数（如MD5或SHA-2），能够对明文进行分组循环压缩； k 为密钥（secret key）； m 为要认证的消息； k’ 是从原始密钥 k 导出的另一个密钥（如果 k 短于散列函数的输入块大小，则向右填充零；如果比该块大小更长，则对 k 进行散列） ipad 内部填充（0x5C5C5C…5C5C，一段十六进制常量）； opad 外部填充（0x363636…3636，一段十六进制常量） 步骤如上图所示（引用了博客中的图片），具体步骤如下：\n在密钥k后面添加0，或者对密钥k用H（Hash函数）进行处理，创建一个字长为B的字符串（B为Hash函数的明文分组长度）； 将上一步生成的B字长的字符串ipad做异或运算； 将数据流m填充至第二步的结果字符串中； 用H作用于第三步生成的数据流； 将第一步生成的B字长字符串与opad做异或运算； 再将第四步的结果填充进第五步的结果中； 用H作用于第六步生成的数据流，输出最终结果。 密匙问题：如何在使用认证方法的双方确认密匙的可靠性（不被第三者攻击或者得到），可以使用非对称加密进行密匙的传输（在数学上被验证可靠的、不会被攻击的）。\n三、对称加密 对称加密就是使用密匙然后利用算法直接对内容进行加密和解密，常见的对称加密方式有这几种：\n算法 密钥长度 工作模式 填充模式 DES 56/64 ECB/CBC/PCBC/CTR/… NoPadding/PKCS5Padding/… AES 128/192/256 ECB/CBC/PCBC/CTR/… NoPadding/PKCS5Padding/PKCS7Padding/… IDEA 128 ECB PKCS5Padding/PKCS7Padding/… 对称加密的特点：\n运算速度快 密钥必须保密 无法做到安全的密钥交换 密码强度取决于密匙的长度 四、非对称加密 密匙交换算法 在不安全的信道上传递加密文件是没有问题的，因为黑客拿到加密文件没有用。但是，如何如何在不安全的信道上安全地传输密钥？要解决这个问题，密钥交换算法即DH算法：Diffie-Hellman算法应运而生。\nDH算法交换密钥过程：\n甲首先选择一个素数p，例如97，底数g是p的一个原根，例如5；随机数a，例如123；然后计算A = g ^ a mod p，结果是34，然后，甲发送p＝97，g=5，A=34给乙（隐藏了a的值）； 乙方收到后，也选择一个随机数b，例如456；然后计算B = g ^ b mod p，结果是75，乙再同时计算s = A ^ b mod p，结果是22； 乙把计算的B=75发给甲，甲计算s ＝ B ^ a mod p，计算结果与乙算出的结果一样，都是22。 结果数学计算验证得到的S，在甲和乙中计算出的结果是相同的，并且在现实使用中使用的素数是非常大的，虽然S的计算公式中g、p、A、B是已知的，但是仍然无法倒推出S的。\na为甲的私钥，A为甲的共钥。b为乙的私钥，B为乙的共钥。\n素数P、底数g是提前约定好的，共钥与私钥是成对的，使用提前约定好的P确定自己的私钥后就可以计算出自己的共钥给别人；别人用同样的方法计算出共钥和私钥，现在只要拿着别人的共钥和自己的私钥进行计算就可以得到真正的密钥，别人拿着你的共钥也可以计算得到和你一样的密钥，此时你俩就可以进行机密通话了\n非对称加密 非对称加密就是使用DH算法的方式，非对称加密的一个最大问题是：速度慢。\n为了解决这一问题方法是通过非对称加密传递对称加密的密匙，然后双方使用对称加密进行消息的传递。\n五、签名算法 签名算法是非对称加密算法的逆运用，通常是使用共钥对数据进行加密，然后可以通过私钥进行解密。\n但是签名算法是用私钥对数据加密，那这时候所有人都可以使用公钥进行解密，签名算法的目的就是使所有人都拿到这个用户想要公开的东西，并且确保这个东西的正确性。\n通常的运用常见是对传输文件（原始消息）的hash值进行签名，对签名进行解密就是用共钥解密，然后把解密后的hash与原始消息的hash值进行对比。如果有人对消息进行更改的时候两次的hash值是对不上的（破坏者改变了原始数据，并且更新hash，但是没有原始发送者的私钥无法再次进行加密，接受者使用发送者的公钥进行解密得到的与得到数据的hash是对不上的，那么数据就被修改了）\n六、数字证书 摘要算法用来确保数据没有被篡改，非对称加密算法可以对数据进行加解密，签名算法可以确保数据完整性和抗否认性，把这些算法集合到一起，并搞一套完善的标准，这就是数字证书。\n因此，数字证书就是集合了多种密码学算法，用于实现数据加解密、身份认证、签名等多种功能的一种安全标准。\n数字证书可以防止中间人攻击，因为它采用链式签名认证，即通过根证书（Root CA）去签名下一级证书，这样层层签名，直到最终的用户证书。而Root CA证书内置于操作系统中，所以，任何经过CA认证的数字证书都可以对其本身进行校验，确保证书本身不是伪造的。\n我们在上网时常用的HTTPS协议就是数字证书的应用。浏览器会自动验证证书的有效性。\n",
+  "wordCount" : "3519",
+  "inLanguage": "en",
+  "datePublished": "2023-04-05T00:18:23+08:00",
+  "dateModified": "2023-04-05T00:18:23+08:00",
+  "author":[{
+    "@type": "Person",
+    "name": "King"
+  }],
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://jinchaojjj.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/%E5%8A%A0%E5%AF%86%E7%AE%97%E6%B3%95/"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "King's Blog",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://jinchaojjj.github.io/img/a.jpeg"
+    }
+  }
+}
+</script>
+</head>
+
+<body class=" dark" id="top">
+<script>
+    if (localStorage.getItem("pref-theme") === "light") {
+        document.body.classList.remove('dark')
+    }
+
+</script>
+
+<header class="header">
+    <nav class="nav">
+        <div class="logo">
+            <a href="https://jinchaojjj.github.io" accesskey="h" title="King&#39;s Blog (Alt + H)">
+                <img src="https:/jinchaojjj.github.io/a.jpeg" alt="" aria-label="logo"
+                    height="35">King&#39;s Blog</a>
+            <div class="logo-switches">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                    <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                    </svg>
+                    <svg id="sun" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
+                        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="5"></circle>
+                        <line x1="12" y1="1" x2="12" y2="3"></line>
+                        <line x1="12" y1="21" x2="12" y2="23"></line>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                        <line x1="1" y1="12" x2="3" y2="12"></line>
+                        <line x1="21" y1="12" x2="23" y2="12"></line>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        <ul id="menu">
+            <li>
+                <a href="https://jinchaojjj.github.io/search" title="🔍搜索 (Alt &#43; /)" accesskey=/>
+                    <span>🔍搜索</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/" title="🏠主页">
+                    <span>🏠主页</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/posts" title="📚文章">
+                    <span>📚文章</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/archives/" title="⏱时间轴">
+                    <span>⏱时间轴</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/tags" title="🔖标签">
+                    <span>🔖标签</span>
+                </a>
+            </li>
+            <li>
+                <a href="https://jinchaojjj.github.io/about" title="🙋🏻‍♂️关于">
+                    <span>🙋🏻‍♂️关于</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<main class="main">
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="https://jinchaojjj.github.io">Home</a>&nbsp;»&nbsp;<a href="https://jinchaojjj.github.io/posts/">📚文章</a></div>
+    <h1 class="post-title">
+      加密算法
+    </h1>
+    <div class="post-description">
+      加密算法
+    </div>
+    <div class="post-meta"><span title='2023-04-05 00:18:23 +0800 CST'>2023-04-05</span>&nbsp;·&nbsp;8 min&nbsp;·&nbsp;King
+
+</div>
+  </header> <div class="toc">
+    <details  open>
+        <summary accesskey="c" title="(Alt + C)">
+            <span class="details">Table of Contents</span>
+        </summary>
+
+        <div class="inner"><ul>
+                <li>
+                    <a href="#%e5%8a%a0%e5%af%86%e7%ae%97%e6%b3%95" aria-label="加密算法">加密算法</a><ul>
+                        
+                <li>
+                    <a href="#%e4%b8%80%e7%bc%96%e7%a0%81%e7%ae%97%e6%b3%95" aria-label="一、编码算法">一、编码算法</a><ul>
+                        
+                <li>
+                    <a href="#url%e7%bc%96%e7%a0%81" aria-label="URL编码">URL编码</a></li>
+                <li>
+                    <a href="#base64" aria-label="Base64">Base64</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%8chash%e7%ae%97%e6%b3%95" aria-label="二、Hash算法">二、Hash算法</a><ul>
+                        
+                <li>
+                    <a href="#%e7%94%a8%e5%a4%84" aria-label="用处">用处</a></li>
+                <li>
+                    <a href="#hmac" aria-label="Hmac">Hmac</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%b8%89%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86" aria-label="三、对称加密">三、对称加密</a></li>
+                <li>
+                    <a href="#%e5%9b%9b%e9%9d%9e%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86" aria-label="四、非对称加密">四、非对称加密</a><ul>
+                        
+                <li>
+                    <a href="#%e5%af%86%e5%8c%99%e4%ba%a4%e6%8d%a2%e7%ae%97%e6%b3%95" aria-label="密匙交换算法">密匙交换算法</a></li>
+                <li>
+                    <a href="#%e9%9d%9e%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86" aria-label="非对称加密">非对称加密</a></li></ul>
+                </li>
+                <li>
+                    <a href="#%e4%ba%94%e7%ad%be%e5%90%8d%e7%ae%97%e6%b3%95" aria-label="五、签名算法">五、签名算法</a></li>
+                <li>
+                    <a href="#%e5%85%ad%e6%95%b0%e5%ad%97%e8%af%81%e4%b9%a6" aria-label="六、数字证书">六、数字证书</a>
+                </li>
+            </ul>
+            </li>
+            </ul>
+        </div>
+    </details>
+</div>
+
+  <div class="post-content"><h1 id="加密算法">加密算法<a hidden class="anchor" aria-hidden="true" href="#加密算法">#</a></h1>
+<h2 id="一编码算法">一、编码算法<a hidden class="anchor" aria-hidden="true" href="#一编码算法">#</a></h2>
+<p>编码算法是将二进制（bit）转化为字符（例如a、中等）的过程，这种编码称为字符编码。</p>
+<p>常见的字符编码有：ASCII、UTF、GBK等。其中ASCII中只能有128个字符，通常只用来显示英文字符，与汉子相关使用较多的是UTF-8与GBK，这里需要注意的是产生二进制bit使用的编码是什么时，在显示字符时所用的也要是对应的编码。</p>
+<h3 id="url编码">URL编码<a hidden class="anchor" aria-hidden="true" href="#url编码">#</a></h3>
+<p>是浏览器发送数据给服务器时所用的编码，通常附加在URL后面的参数部分，使用编码的原因是为了提高兼容性，很多服务器只能使用ASCII字符.</p>
+<p>URL编码的方式如下：</p>
+<ul>
+<li>字符是<code>A</code>～ <code>Z</code>、<code>a</code>～<code>z</code>、<code>0</code>~<code>9</code>以及<code>-</code>、<code>_</code>、<code>.</code>、<code>*</code>保持不变</li>
+<li>字符的每个字节以<code>%XX</code>表示（十六进制）</li>
+</ul>
+<p>因为本质上编码是将bit解释为正确的信息（用户正确的目的传达给服务器），只要前后端商量好使用的编码方式即可（可以直接通过js对字符进行编码，但通常来说还是使用URL编码较为广泛，没必要自己特立独行的使用奇怪的编码方式）</p>
+<h3 id="base64">Base64<a hidden class="anchor" aria-hidden="true" href="#base64">#</a></h3>
+<p>Base64编码可以把任意长度的二进制数据变为纯文本，且只包含<code>A</code>～<code>Z</code>、<code>a</code>～<code>z</code>、<code>0</code>~<code>9</code>、<code>+</code>、<code>/</code>、<code>=</code>这些字符。</p>
+<p>Base64编码的方式：</p>
+<ul>
+<li>将3字节的二进制数据按6bit为一组，分为四组</li>
+<li>四组分别用四个int整数来表示</li>
+<li>然后查表，把int整数用对应的字符进行表示</li>
+<li>得到编码后的字符串</li>
+</ul>
+<p>因为6位整数的范围总是<code>0</code>～<code>63</code>，所以，能用64个字符表示：字符<code>A</code>～<code>Z</code>对应索引<code>0</code>～<code>25</code>，字符<code>a</code>～<code>z</code>对应索引<code>26</code>～<code>51</code>，字符<code>0</code>～<code>9</code>对应索引<code>52</code>~<code>61</code>，最后两个索引<code>62</code>、<code>63</code>分别用字符<code>+</code>和<code>/</code>表示。</p>
+<p>如果编码的时候不是3的整数倍，那就在最后补<code>0x00</code>，补了一个<code>0x00</code>就在最后添加一个=，补了两个就添加两个==</p>
+<h2 id="二hash算法">二、Hash算法<a hidden class="anchor" aria-hidden="true" href="#二hash算法">#</a></h2>
+<p>hash算法的本质是通过<strong>hash函数</strong>直接将数据（可以是任意格式的数据，只要函数支持）计算后得到一串规定好的字符串（通常是计算得到一串固定长度的bit数据，用十六进制对应的字符串表示）</p>
+<p>hash函数需要保证是幂等的，不管数据的经过多少次运算得到的hash值应该是相等的。</p>
+<p>同时hash函数应该保证hash碰撞的概率尽可能低、不能猜测输出（输入稍加改变，结果就将完全不同，不能有规律的被猜测输入是什么）。</p>
+<p>常见的hash函数有一下几种：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">算法</th>
+<th style="text-align:left">输出长度（位）</th>
+<th style="text-align:left">输出长度（字节）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">MD5</td>
+<td style="text-align:left">128 bits</td>
+<td style="text-align:left">16 bytes</td>
+</tr>
+<tr>
+<td style="text-align:left">SHA-1</td>
+<td style="text-align:left">160 bits</td>
+<td style="text-align:left">20 bytes</td>
+</tr>
+<tr>
+<td style="text-align:left">RipeMD-160</td>
+<td style="text-align:left">160 bits</td>
+<td style="text-align:left">20 bytes</td>
+</tr>
+<tr>
+<td style="text-align:left">SHA-256</td>
+<td style="text-align:left">256 bits</td>
+<td style="text-align:left">32 bytes</td>
+</tr>
+<tr>
+<td style="text-align:left">SHA-512</td>
+<td style="text-align:left">512 bits</td>
+<td style="text-align:left">64 bytes</td>
+</tr>
+</tbody>
+</table>
+<p>MD5在短时间内是可以破解的，现在已经不安全了，用于文件校验是没有问题的，但是用来加密已经不够安全。</p>
+<h3 id="用处">用处<a hidden class="anchor" aria-hidden="true" href="#用处">#</a></h3>
+<ol>
+<li>常见的用处是对计算文件、软件等信息的hash码，较为常见的是使用MD5，在下载到软件后使用对应的hash算法计算其hash值和官网提供的hash值进行比对就知道下载到的数据是否有被篡改了。</li>
+<li>另一个重要用途是存储用户口令。如果直接将用户的原始口令存放到数据库中，会产生极大的安全风险：
+<ul>
+<li>数据库管理员能够看到用户明文口令；</li>
+<li>数据库数据一旦泄漏，黑客即可获取用户明文口令。</li>
+</ul>
+</li>
+</ol>
+<p>使用hash口令的时候需要防止彩虹表攻击，因为黑客在得到hash值后很难倒推原文，但是他们提前有一张表里面记录了常见口令的hash码，所以如果使用了常见口令时可以很快的匹配到结果，因此不要使用较为简单的密码。</p>
+<p>此外还有一个方法就是加盐（salt），在用户口令的后添加随机数，使得用户的密码变得复杂，使得黑客无法使用彩虹表进行倒推。</p>
+<h3 id="hmac">Hmac<a hidden class="anchor" aria-hidden="true" href="#hmac">#</a></h3>
+<p>Hmac算法是一种基于密钥的消息认证码算法，全称是Hash-based Message Authentication Code，是一种更安全的消息摘要算法。</p>
+<p>Hmac算法总是和某种哈希算法配合起来用的。例如，我们使用MD5算法，对应的就是HmacMD5算法，它相当于“加盐”的MD5。因此，HmacMD5可以看作带有一个安全的key的MD5。使用HmacMD5而不是用MD5加salt，有如下好处：</p>
+<ul>
+<li>HmacMD5使用的key长度是64字节，更安全；</li>
+<li>Hmac是标准算法，同样适用于SHA-1等其他哈希算法；</li>
+<li>Hmac输出和原有的哈希算法长度一致。</li>
+</ul>
+<p>Hmac算法定义：关于Hmac算法的更多内容可以参看<a href="https://blog.csdn.net/sdnyqfyqf/article/details/105534376">这篇博客</a></p>
+<p><code>HMAC(k,m)=H(k’⊕opad,H(k’⊕ipad,m))</code></p>
+<p>其中：</p>
+<ul>
+<li>H 为密码Hash函数（如MD5或SHA-2），能够对明文进行分组循环压缩；</li>
+<li>k 为密钥（secret key）；</li>
+<li>m 为要认证的消息；</li>
+<li>k’ 是从原始密钥 k 导出的另一个密钥（如果 k 短于散列函数的输入块大小，则向右填充零；如果比该块大小更长，则对 k 进行散列）</li>
+<li>ipad 内部填充（0x5C5C5C…5C5C，一段十六进制常量）；</li>
+<li>opad 外部填充（0x363636…3636，一段十六进制常量）</li>
+</ul>
+<p><img loading="lazy" src="https://img-blog.csdnimg.cn/20200415142836191.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L3NkbnlxZnlxZg==,size_16,color_FFFFFF,t_70#pic_center" alt=""  />
+</p>
+<p>步骤如上图所示（引用了博客中的图片），具体步骤如下：</p>
+<ol>
+<li>在密钥k后面添加0，或者对密钥k用H（Hash函数）进行处理，创建一个字长为B的字符串（B为Hash函数的明文分组长度）；</li>
+<li>将上一步生成的B字长的字符串ipad做异或运算；</li>
+<li>将数据流m填充至第二步的结果字符串中；</li>
+<li>用H作用于第三步生成的数据流；</li>
+<li>将第一步生成的B字长字符串与opad做异或运算；</li>
+<li>再将第四步的结果填充进第五步的结果中；</li>
+<li>用H作用于第六步生成的数据流，输出最终结果。</li>
+</ol>
+<p>密匙问题：如何在使用认证方法的双方确认密匙的可靠性（不被第三者攻击或者得到），可以使用非对称加密进行密匙的传输（在数学上被验证可靠的、不会被攻击的）。</p>
+<h2 id="三对称加密">三、对称加密<a hidden class="anchor" aria-hidden="true" href="#三对称加密">#</a></h2>
+<p>对称加密就是使用密匙然后利用算法直接对内容进行加密和解密，常见的对称加密方式有这几种：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">算法</th>
+<th style="text-align:left">密钥长度</th>
+<th style="text-align:left">工作模式</th>
+<th style="text-align:left">填充模式</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">DES</td>
+<td style="text-align:left">56/64</td>
+<td style="text-align:left">ECB/CBC/PCBC/CTR/&hellip;</td>
+<td style="text-align:left">NoPadding/PKCS5Padding/&hellip;</td>
+</tr>
+<tr>
+<td style="text-align:left">AES</td>
+<td style="text-align:left">128/192/256</td>
+<td style="text-align:left">ECB/CBC/PCBC/CTR/&hellip;</td>
+<td style="text-align:left">NoPadding/PKCS5Padding/PKCS7Padding/&hellip;</td>
+</tr>
+<tr>
+<td style="text-align:left">IDEA</td>
+<td style="text-align:left">128</td>
+<td style="text-align:left">ECB</td>
+<td style="text-align:left">PKCS5Padding/PKCS7Padding/&hellip;</td>
+</tr>
+</tbody>
+</table>
+<p>对称加密的特点：</p>
+<ul>
+<li>运算速度快</li>
+<li>密钥必须保密</li>
+<li>无法做到安全的密钥交换</li>
+<li>密码强度取决于密匙的长度</li>
+</ul>
+<h2 id="四非对称加密">四、非对称加密<a hidden class="anchor" aria-hidden="true" href="#四非对称加密">#</a></h2>
+<h3 id="密匙交换算法">密匙交换算法<a hidden class="anchor" aria-hidden="true" href="#密匙交换算法">#</a></h3>
+<p>在不安全的信道上传递加密文件是没有问题的，因为黑客拿到加密文件没有用。但是，如何如何在不安全的信道上安全地传输密钥？要解决这个问题，密钥交换算法即DH算法：Diffie-Hellman算法应运而生。</p>
+<p>DH算法交换密钥过程：</p>
+<ol>
+<li>甲首先选择一个素数<code>p</code>，例如97，底数<code>g</code>是<code>p</code>的一个原根，例如5；随机数<code>a</code>，例如123；然后计算<code>A = g ^ a mod p</code>，结果是34，然后，甲发送<code>p＝97</code>，<code>g=5</code>，<code>A=34</code>给乙（隐藏了a的值）；</li>
+<li>乙方收到后，也选择一个随机数<code>b</code>，例如456；然后计算<code>B = g ^ b mod p</code>，结果是75，乙再同时计算<code>s = A ^ b mod p</code>，结果是22；</li>
+<li>乙把计算的<code>B=75</code>发给甲，甲计算<code>s ＝ B ^ a mod p</code>，计算结果与乙算出的结果一样，都是22。</li>
+</ol>
+<p><img loading="lazy" src="https://king-super.oss-cn-nanjing.aliyuncs.com/%e8%ae%a1%e7%ae%97%e6%9c%ba%e7%bd%91%e7%bb%9c-%e9%9d%9e%e5%af%b9%e7%a7%b0%e5%8a%a0%e5%af%86.svg" alt=""  />
+</p>
+<p>结果数学计算验证得到的S，在甲和乙中计算出的结果是相同的，并且在现实使用中使用的素数是非常大的，虽然S的计算公式中g、p、A、B是已知的，但是仍然无法倒推出S的。</p>
+<p>a为甲的私钥，A为甲的共钥。b为乙的私钥，B为乙的共钥。</p>
+<p>素数P、底数g是提前约定好的，共钥与私钥是成对的，使用提前约定好的P确定自己的私钥后就可以计算出自己的共钥给别人；别人用同样的方法计算出共钥和私钥，现在只要拿着别人的共钥和自己的私钥进行计算就可以得到真正的密钥，别人拿着你的共钥也可以计算得到和你一样的密钥，此时你俩就可以进行机密通话了</p>
+<h3 id="非对称加密">非对称加密<a hidden class="anchor" aria-hidden="true" href="#非对称加密">#</a></h3>
+<p>非对称加密就是使用DH算法的方式，非对称加密的一个最大问题是：速度慢。</p>
+<p>为了解决这一问题方法是通过非对称加密传递对称加密的密匙，然后双方使用对称加密进行消息的传递。</p>
+<h2 id="五签名算法">五、签名算法<a hidden class="anchor" aria-hidden="true" href="#五签名算法">#</a></h2>
+<p>签名算法是非对称加密算法的逆运用，通常是使用共钥对数据进行加密，然后可以通过私钥进行解密。</p>
+<p>但是签名算法是用私钥对数据加密，那这时候所有人都可以使用公钥进行解密，签名算法的目的就是使所有人都拿到这个用户想要公开的东西，并且确保这个东西的正确性。</p>
+<p>通常的运用常见是对传输文件（原始消息）的hash值进行签名，对签名进行解密就是用共钥解密，然后把解密后的hash与原始消息的hash值进行对比。如果有人对消息进行更改的时候两次的hash值是对不上的（破坏者改变了原始数据，并且更新hash，但是没有原始发送者的私钥无法再次进行加密，接受者使用发送者的公钥进行解密得到的与得到数据的hash是对不上的，那么数据就被修改了）</p>
+<h2 id="六数字证书">六、数字证书<a hidden class="anchor" aria-hidden="true" href="#六数字证书">#</a></h2>
+<p>摘要算法用来确保数据没有被篡改，非对称加密算法可以对数据进行加解密，签名算法可以确保数据完整性和抗否认性，把这些算法集合到一起，并搞一套完善的标准，这就是数字证书。</p>
+<p>因此，数字证书就是集合了多种密码学算法，用于实现数据加解密、身份认证、签名等多种功能的一种安全标准。</p>
+<p>数字证书可以防止中间人攻击，因为它采用链式签名认证，即通过根证书（Root CA）去签名下一级证书，这样层层签名，直到最终的用户证书。而Root CA证书内置于操作系统中，所以，任何经过CA认证的数字证书都可以对其本身进行校验，确保证书本身不是伪造的。</p>
+<p>我们在上网时常用的HTTPS协议就是数字证书的应用。浏览器会自动验证证书的有效性。</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="https://jinchaojjj.github.io/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="https://jinchaojjj.github.io/posts/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/http%E8%AF%A6%E8%A7%A3/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>HTTP详解</span>
+  </a>
+  <a class="next" href="https://jinchaojjj.github.io/posts/%E8%AF%AD%E8%A8%80%E5%9F%BA%E7%A1%80/java%E5%9F%BA%E7%A1%80%E8%AF%AD%E6%B3%95/">
+    <span class="title">Next »</span>
+    <br>
+    <span>Java基本语法</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
+    </main>
+    
+<footer class="footer">
+    <span>&copy; 2023 <a href="https://jinchaojjj.github.io">King&#39;s Blog</a></span>
+    <span>
+        Powered by
+        <a href="https://gohugo.io/" rel="noopener noreferrer" target="_blank">Hugo</a> &
+        <a href="https://github.com/adityatelange/hugo-PaperMod/" rel="noopener" target="_blank">PaperMod</a>
+    </span>
+</footer>
+<a href="#top" aria-label="go to top" title="Go to Top (Alt + G)" class="top-link" id="top-link" accesskey="g">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6" fill="currentColor">
+        <path d="M12 6H0l6-6z" />
+    </svg>
+</a>
+
+<script>
+    let menu = document.getElementById('menu')
+    if (menu) {
+        menu.scrollLeft = localStorage.getItem("menu-scroll-position");
+        menu.onscroll = function () {
+            localStorage.setItem("menu-scroll-position", menu.scrollLeft);
+        }
+    }
+
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            var id = this.getAttribute("href").substr(1);
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView({
+                    behavior: "smooth"
+                });
+            } else {
+                document.querySelector(`[id='${decodeURIComponent(id)}']`).scrollIntoView();
+            }
+            if (id === "top") {
+                history.replaceState(null, null, " ");
+            } else {
+                history.pushState(null, null, `#${id}`);
+            }
+        });
+    });
+
+</script>
+<script>
+    var mybutton = document.getElementById("top-link");
+    window.onscroll = function () {
+        if (document.body.scrollTop > 800 || document.documentElement.scrollTop > 800) {
+            mybutton.style.visibility = "visible";
+            mybutton.style.opacity = "1";
+        } else {
+            mybutton.style.visibility = "hidden";
+            mybutton.style.opacity = "0";
+        }
+    };
+
+</script>
+<script>
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+        if (document.body.className.includes("dark")) {
+            document.body.classList.remove('dark');
+            localStorage.setItem("pref-theme", 'light');
+        } else {
+            document.body.classList.add('dark');
+            localStorage.setItem("pref-theme", 'dark');
+        }
+    })
+
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
+</script>
+</body>
+
+</html>
